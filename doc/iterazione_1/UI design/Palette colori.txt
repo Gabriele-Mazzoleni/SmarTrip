@@ -1,0 +1,2 @@
+#CC2936 Persian red
+#B8B8D1 French Gray
