@@ -24,5 +24,10 @@ public class UtenteRepository implements GestoreUtente {
 		if (u.getCodice().equals(codice)) return u;
 		return null;
 	}
+
+	@Override
+	public List<Utente> getAll() {
+		return lista;
+	}
 	
 }
