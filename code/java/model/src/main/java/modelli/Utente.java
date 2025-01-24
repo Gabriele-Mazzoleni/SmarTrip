@@ -1,5 +1,8 @@
 package modelli;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Classe modello dell'utente
  */
@@ -9,9 +12,11 @@ public class Utente {
 	private String username;
 	private String password;
 	
-	public Utente(String c, String u, String s) {
+    @JsonCreator
+	public Utente(@JsonProperty("codice") String c, @JsonProperty("username") String u, 
+			@JsonProperty("password") String s) {
 		this.setCodice(c);
-		this.setUsername(s);
+		this.setUsername(u);
 		this.setPassword(s);
 	}
 	

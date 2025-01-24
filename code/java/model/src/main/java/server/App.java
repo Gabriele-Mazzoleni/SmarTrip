@@ -1,21 +1,19 @@
 package server;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.context.ApplicationListener;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import modelli.Utente;
 
@@ -40,6 +38,9 @@ public class App {
 		this.port = port;
 	}
 
+    
+    //DA METTERE IN CLIENT
+    /*
 	@Bean
 	 RestTemplate restTemplate(RestTemplateBuilder builder) {
 		return builder.build();
@@ -61,7 +62,7 @@ public class App {
 	 }
 	
 	 
-	 
+	 */
 }
 
 
