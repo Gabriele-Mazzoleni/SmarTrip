@@ -20,6 +20,14 @@ public class GrafoAPI {
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         return R * c; // distanza in metri
     }
+    
+    public static String convertSecondsToTime(int seconds) {
+        int hours = seconds / 3600;
+        int minutes = (seconds % 3600) / 60;
+        int remainingSeconds = seconds % 60;
+        
+        return String.format("%02d:%02d:%02d", hours, minutes, remainingSeconds);
+    }
 
     public static Map<Integer, List<String>> calcolaTabelleDiMarcia(
             double latA, double lonA, double pausa, double tempoVisita, int giorni, List<Luogo> luoghi) {
@@ -34,11 +42,14 @@ public class GrafoAPI {
         // Mappa per mantenere le coordinate dei luoghi
         Map<String, double[]> coordinate = new HashMap<>();
         coordinate.put(nodoA, new double[]{latA, lonA});
+        Map<String, Double> tempi_di_visita = new HashMap<>();
+        tempi_di_visita.put(nodoA, 0.0);
 
         // Aggiungi i luoghi come nodi nel grafo
         for (Luogo luogo : luoghi) {
             grafo.addVertex(luogo.getNome());
             coordinate.put(luogo.getNome(), new double[]{luogo.getLatitudine(), luogo.getLongitudine()});
+            tempi_di_visita.put(luogo.getNome(), luogo.getTempoDiVisita());
         }
 
         // Aggiungi archi con pesi calcolati in base al tempo di percorrenza
@@ -48,7 +59,7 @@ public class GrafoAPI {
                     double[] coord1 = coordinate.get(nodo1);
                     double[] coord2 = coordinate.get(nodo2);
                     double distanza = calcolaDistanza(coord1[0], coord1[1], coord2[0], coord2[1]);
-                    double tempoPercorrenza = distanza / VELOCITA_MEDIA;
+                    int tempoPercorrenza = (int)(distanza / VELOCITA_MEDIA);
 
                     // Verifica se l'arco esiste già
                     DefaultWeightedEdge edge = grafo.getEdge(nodo1, nodo2);
@@ -80,17 +91,17 @@ public class GrafoAPI {
                 // Trova il nodo più vicino rispettando i vincoli
                 Optional<String> prossimoNodo = grafo.vertexSet().stream()
                         .filter(nodo -> !percorso.contains(nodo))
-                        .min(Comparator.comparingDouble(nodo -> grafo.getEdgeWeight(grafo.getEdge(nodoCorrente[0], nodo))));
+                        .min(Comparator.comparingDouble(nodo -> grafo.getEdgeWeight(grafo.getEdge(nodoCorrente[0], nodo))+tempi_di_visita.get(nodo)));
 
                 if (prossimoNodo.isEmpty()) break;
 
                 String nodoScelto = prossimoNodo.get();
                 double tempoPercorrenza = grafo.getEdgeWeight(grafo.getEdge(nodoCorrente[0], nodoScelto));
 
-                if (tempoTotale + tempoPercorrenza + pausa > tempoVisita) break;
-
+                if (tempoTotale + tempoPercorrenza + tempi_di_visita.get(nodoScelto)> tempoVisita) break;
+                System.out.println("tempoTotale: " + convertSecondsToTime((int)tempoTotale) + " tempoPercorrenza: " + convertSecondsToTime((int)tempoPercorrenza));
                 percorso.add(nodoScelto);
-                tempoTotale += tempoPercorrenza + pausa;
+                tempoTotale += tempoPercorrenza + tempi_di_visita.get(nodoScelto);
                 nodoCorrente[0] = nodoScelto; // Aggiornamento del riferimento
             }
 
@@ -150,15 +161,15 @@ public class GrafoAPI {
 
         // Parametri
         double pausa = 1800; // 30 minuti in secondi
-        double tempoVisita = 5400; // 1,5 ore in secondi
-        int giorni = 2;
+        double tempoVisita = 10000; // 1,5 ore in secondi
+        int giorni = 1;
 
         // Lista dei luoghi
         List<Luogo> luoghi = new ArrayList<>();
         luoghi.add(new Luogo("Duomo di Milano", 45.4641, 9.1919, 3600));
-        luoghi.add(new Luogo("Castello Sforzesco", 45.4705, 9.1796, 3600));
-        luoghi.add(new Luogo("Teatro alla Scala", 45.4672, 9.1895, 3600));
-        luoghi.add(new Luogo("Parco Sempione", 45.4722, 9.1732, 3600));
+        luoghi.add(new Luogo("Castello Sforzesco", 45.4705, 9.1796, 1000));
+        luoghi.add(new Luogo("Teatro alla Scala", 45.4672, 9.1895, 5600));
+        luoghi.add(new Luogo("Parco Sempione", 45.4722, 9.1732, 1800));
 
         // Calcola le tabelle di marcia
         Map<Integer, List<String>> tabelleDiMarcia = calcolaTabelleDiMarcia(latA, lonA, pausa, tempoVisita, giorni, luoghi);
