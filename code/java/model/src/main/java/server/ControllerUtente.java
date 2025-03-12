@@ -21,18 +21,33 @@ public class ControllerUtente {
 	@Autowired
 	private UtenteServices service;
 	
-	@GetMapping("/utenti/{codice}")
+	@GetMapping("/{codice}")
 	public Utente getUtente(@PathVariable String codice) {
-		return service.getUtente(codice);
+		Utente u = service.getUtente(codice);
+		if(u != null)
+			System.out.println("Utente trovato");
+		else
+			System.out.println("Utente non trovato");
+		return u;
 	}
 	
 	@GetMapping
 	public List<Utente> getAllUtenti() {
+		List<Utente> lista = service.getAllUtenti();
+		if(lista.size() != 0)
+			System.out.println("Utenti trovati");
+		else
+			System.out.println("Utenti non trovati");
 	    return service.getAllUtenti();
 	}
 	
 	@PostMapping("/add")
 	public Utente addUtente(@RequestBody Utente u) { 
-		return service.creaUtente(u.getCodice(), u.getUsername(), u.getPassword());
+		Utente utente = service.creaUtente(u.getCodice(), u.getUsername(), u.getPassword());
+		if(utente != null)
+			System.out.println("Utente inserito");
+		else
+			System.out.println("Utente non inserito");
+		return utente;
 	}
 }
