@@ -1,0 +1,20 @@
+Scambi da fare:
+
+1-SIGN-IN
+Client invia nome e password
+Server fa hash della password e, se nome utente e password non sono già presenti, salva i dati nel DB
+Server invia esito dell'operazione
+
+2-LOG-IN
+Client invia nome e password
+Server fa hash della password e, se nome utente e password sono presenti, da ok
+Server invia esito dell'operazione
+
+3-RECUPERO MAPPE 
+
+4-SCELTA Città
+
+5-SCELTA LUOGHI+ REQUISITI DI VIAGGIO
+
+6-RECUPERO TABELLA DI MARCIA
+

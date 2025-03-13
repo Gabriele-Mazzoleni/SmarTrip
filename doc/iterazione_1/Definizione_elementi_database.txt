@@ -1,0 +1,20 @@
+UTENTE -> serve per gestire la parte del login
+nome -> primary key
+password
+
+LUOGO -> serve per l'utilizzo delle funzioni
+latitudine, longitudine, nome (di Google maps) ->primary key
+città
+indirizzo
+
+Città non è necessario modellarla in un DB a sé
+
+MAPPE -> salva per ogni utente (SQL o noSQL??)
+se SQL
+nomeUtente, idMappa ->primary key
+datiMappa (stringa lunghissima con tutti i dati del caso)
+
+se noSQL
+nomeUtente ->primary key
+mappe -> lista di oggetti mappa->lista di Luoghi con orarioArrivo e durata visita
+
