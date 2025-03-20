@@ -11,6 +11,7 @@ Server fa hash della password e, se nome utente e password sono presenti, da ok
 Server invia esito dell'operazione
 
 3-RECUPERO MAPPE 
+Quando l'utente si logga si apre una pagina con le sue mappe create in precedenza con la possibilità di recuperare quelle vecchie o inserire una nuova. Le mappe hanno un nome univoco per lo stesso utente (e può cercarle).
 
 4-SCELTA Città
 

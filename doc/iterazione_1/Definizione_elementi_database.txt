@@ -11,8 +11,8 @@ Città non è necessario modellarla in un DB a sé
 
 MAPPE -> salva per ogni utente (SQL o noSQL??)
 se SQL
-nomeUtente, idMappa ->primary key
-datiMappa (stringa lunghissima con tutti i dati del caso)
+nomeUtente, nomeMappa, giorno ->primary key
+nomeLuogo, 
 
 se noSQL
 nomeUtente ->primary key
