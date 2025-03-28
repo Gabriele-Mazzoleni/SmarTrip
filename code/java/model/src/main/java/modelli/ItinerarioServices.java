@@ -5,7 +5,9 @@ import java.util.*;
 import org.jgrapht.Graph;
 import org.jgrapht.graph.DefaultWeightedEdge;
 import org.jgrapht.graph.SimpleWeightedGraph;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ItinerarioServices {
 
 	private ItinerarioRepository repo = new ItinerarioRepository();

@@ -2,8 +2,11 @@ package modelli;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import interfacce.ServiziLuogo;
 
+@Service
 public class LuogoServices implements ServiziLuogo {
 
 

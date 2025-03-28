@@ -23,6 +23,7 @@ public class Itinerario {
   		"pausa": 1.5,
   		"tempoVisita": 2.0,
   		"giorni": 3,
+  		"velocitaMedia": 1,
   		"luoghi": [
 	    		{
 	      			"nome": "Duomo di Milano",
