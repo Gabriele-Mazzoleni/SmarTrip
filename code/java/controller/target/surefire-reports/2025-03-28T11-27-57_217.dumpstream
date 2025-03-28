@@ -1,0 +1,5 @@
+# Created at 2025-03-28T11:27:58.388
+Boot Manifest-JAR contains absolute paths in classpath 'D:\Uni\GitProgetto\SmarTrip\code\java\controller\target\test-classes'
+Hint: <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
+'other' has different root
+

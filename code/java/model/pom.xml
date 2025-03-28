@@ -37,11 +37,6 @@
 
   <dependencies>
 	<dependency>
-	  <groupId>smartrip</groupId>
-  	  <artifactId>database</artifactId>
-  	  <version>0.0.1-SNAPSHOT</version>
-  	</dependency>
-    <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
       <scope>test</scope>
@@ -60,6 +55,11 @@
 	  <artifactId>spring-boot-starter-test</artifactId>
 	  <scope>test</scope>
 	</dependency>
+	<dependency>
+      <groupId>org.jgrapht</groupId>
+      <artifactId>jgrapht-core</artifactId>
+      <version>1.5.1</version>
+    </dependency>
   </dependencies>
 
   <build>

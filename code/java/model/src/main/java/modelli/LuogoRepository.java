@@ -17,4 +17,5 @@ public class LuogoRepository implements GestoreLuogo {
 	@Override
 	public List<Luogo> getAll() {
 		return lista;
+	}
 }
