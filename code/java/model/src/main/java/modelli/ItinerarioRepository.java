@@ -8,7 +8,7 @@ public class ItinerarioRepository {
 
 	public Map<Integer, List<String>> salva(Map<Integer, List<String>> m){
 		this.tabelleDiMarcia=m;
-		return this.tabelleDiMarcia;
+		return tabelleDiMarcia;
 	}
 
 	public Map<Integer, List<String>> getAll() {
