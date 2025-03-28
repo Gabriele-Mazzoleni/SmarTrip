@@ -1,4 +1,4 @@
-package modelli;
+package api;
 
 import java.util.*;
 
@@ -6,6 +6,10 @@ import org.jgrapht.Graph;
 import org.jgrapht.graph.DefaultWeightedEdge;
 import org.jgrapht.graph.SimpleWeightedGraph;
 import org.springframework.stereotype.Service;
+
+import modelli.Itinerario;
+import modelli.ItinerarioRepository;
+import modelli.Luogo;
 
 @Service
 public class ItinerarioServices {

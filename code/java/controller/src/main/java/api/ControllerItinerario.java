@@ -1,4 +1,4 @@
-package server;
+package api;
 
 import java.util.List;
 import java.util.Map;
@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import modelli.Itinerario;
-import modelli.ItinerarioServices;
 
 @RestController
 @RequestMapping("/itinerari")
