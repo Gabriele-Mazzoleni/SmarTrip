@@ -7,15 +7,18 @@ Server invia esito dell'operazione
 
 2-LOG-IN
 Client invia nome e password
-Server fa hash della password e, se nome utente e password sono presenti, da ok
+Server fa hash della password e, se nome utente e password sono presenti, restituisce successo
 Server invia esito dell'operazione
 
 3-RECUPERO MAPPE 
 Quando l'utente si logga si apre una pagina con le sue mappe create in precedenza con la possibilità di recuperare quelle vecchie o inserire una nuova. Le mappe hanno un nome univoco per lo stesso utente (e può cercarle).
 
 4-SCELTA Città
+La scelta della città da parte dell'utente viene fatta tramite una query sul database dei luoghi; l'utente seleziona la città di suo interesse, il server riceve la città ed esegue un'altra query, per restituire tutti i luoghi di tale città
 
 5-SCELTA LUOGHI+ REQUISITI DI VIAGGIO
+L'utente seleziona una sequenza di luoghi che è interessato a visitare; dopo aver fatto ciò inserisce i vari requisiti di viaggio (giorni/luogo di partenza/soste/rapidità del passo/orari di partenza-ritorno in albergo). Tutti questi dati sono poi inviati al server.
 
 6-RECUPERO TABELLA DI MARCIA
+Il server riceve i dati dal client e calcola il percorso migliore per visitare più luoghi possibili dato il tempo a disposizione; la tabella di marcia è salvata su un database per riferimento futuro e viene restituita al client, per visione dell'utente.
 
