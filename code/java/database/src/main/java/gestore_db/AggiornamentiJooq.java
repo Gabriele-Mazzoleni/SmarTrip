@@ -13,7 +13,7 @@ import jooq_db.jooq.generated.tables.Utente;
 /**
  * Classe contenente i metodi per le modifiche dei dati nelle tuple all'interno dei database utilizzando JOOQ
  * ogni metodo apporta modifiche alla tabella omonima
- * non tutte le tabelle ammettono modifiche
+ * non tutte le tabelle ammettono modifiche aaaaa
  */
 public class AggiornamentiJooq implements Aggiornamenti{
 	
