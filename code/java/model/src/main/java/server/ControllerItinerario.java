@@ -24,9 +24,9 @@ public class ControllerItinerario {
 	public Map<Integer, List<String>> addItinerario(@RequestBody Itinerario i) { 
 		Map<Integer, List<String>> mappa = service.creaTabelleDiMarcia(i);
 		if(mappa != null)
-			System.out.println("Utente inserito");
+			System.out.println("Itinerario inserito");
 		else
-			System.out.println("Utente non inserito");
+			System.out.println("Itinerario non inserito");
 		return mappa;
 	}
 	
@@ -34,9 +34,9 @@ public class ControllerItinerario {
 	public Map<Integer, List<String>> getAllItinarari() {
 		Map<Integer, List<String>> mappa = service.getAllItinerari();
 		if(mappa.size() != 0)
-			System.out.println("Utenti trovati");
+			System.out.println("Itinerari trovati");
 		else
-			System.out.println("Utenti non trovati");
+			System.out.println("Itinierari non trovati");
 	    return service.getAllItinerari();
 	}
 }
