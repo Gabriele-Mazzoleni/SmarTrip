@@ -6,6 +6,7 @@ import org.jgrapht.graph.DefaultWeightedEdge;
 import org.jgrapht.graph.SimpleWeightedGraph;
 import org.springframework.stereotype.Service;
 
+import modelli.GiornoVisita;
 import modelli.Itinerario;
 import modelli.ItinerarioRepository;
 import modelli.Luogo;
@@ -17,11 +18,13 @@ public class ItinerarioServices {
 	private ItinerarioRepository repo = new ItinerarioRepository();
 	
 	public Map<Integer, List<LuogoEsteso>> creaTabelleDiMarcia(Itinerario i) {
-	      // Creazione del grafo
+		//tempo medio modificabile in futuro o in caso aggiungibile al Jason
+		String tempoMedioPerPranzare = "01:45";
+		// Creazione del grafo
 	      Graph<Luogo, DefaultWeightedEdge> grafo = new SimpleWeightedGraph<>(DefaultWeightedEdge.class);
 	  
 	      // Nodo iniziale (A)
-	      Luogo nodoA = new Luogo("A", i.getLatA(), i.getLonA(), 0);
+	      Luogo nodoA = new Luogo("Soggiorno", i.getLatA(), i.getLonA(), 0);
 	      grafo.addVertex(nodoA);
 	  
 	      // Aggiungi i luoghi come nodi nel grafo
@@ -47,14 +50,15 @@ public class ItinerarioServices {
 	          }
 	      }
 	  
-	      // Converti ora di inizio in secondi
-	      int tempoInizio = convertTimeToSeconds(i.getorarioDiInizioVisita());
-	  
 	      // Output: Tabelle di marcia per ogni giorno
 	      Map<Integer, List<LuogoEsteso>> tabelleDiMarcia = new HashMap<>();
 	  
 	      // Algoritmo per calcolare il percorso ottimale
-	      for (int giorno = 1; giorno <= i.getGiorni(); giorno++) {
+	      for (int giorno = 1; giorno <= i.getNumeroGiorni(); giorno++) {
+	    	  GiornoVisita giornoAttuale = i.getGiorno(giorno-1);
+	    	  boolean devoPranzare = giornoAttuale.getDevoPranzare();
+		      // Converti ora di inizio in secondi
+		      int tempoInizio = convertTimeToSeconds(giornoAttuale.getOrarioDiInizioVisita());
 	          if (grafo.vertexSet().size() <= 1) break; // Solo il nodo A rimasto
 	  
 	          List<LuogoEsteso> percorso = new ArrayList<>();
@@ -73,8 +77,12 @@ public class ItinerarioServices {
 	  
 	              Luogo luogoScelto = prossimoLuogo.get();
 	              double tempoPercorrenza = grafo.getEdgeWeight(grafo.getEdge(nodoCorrente[0], luogoScelto));
-	              if (tempoTotale + tempoPercorrenza + luogoScelto.getTempoDiVisita() > (i.getTempoVisita()+tempoInizio)) break;
-	  
+	              if(tempoTotale >= convertTimeToSeconds(giornoAttuale.getOrarioPranzo()) && devoPranzare) {
+	            	  devoPranzare = false;
+	            	  percorso.add(new LuogoEsteso(new Luogo("Ricerca risotrante",nodoCorrente[0].getLatitudine(),nodoCorrente[0].getLongitudine(),convertTimeToSeconds(tempoMedioPerPranzare)), convertSecondsToTime(tempoTotale)));
+	            	  tempoTotale+= convertTimeToSeconds(tempoMedioPerPranzare);
+	              }
+	              if (tempoTotale + tempoPercorrenza + luogoScelto.getTempoDiVisita() > (giornoAttuale.getTempoVisita()+tempoInizio)) break;
 	              tempoTotale += tempoPercorrenza;
 	              percorso.add(new LuogoEsteso(luogoScelto, convertSecondsToTime(tempoTotale)));
 	              tempoTotale += luogoScelto.getTempoDiVisita();
