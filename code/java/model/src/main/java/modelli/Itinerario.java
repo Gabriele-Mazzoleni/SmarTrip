@@ -5,6 +5,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+
 public class Itinerario {
 	
 	private double latA;
@@ -12,6 +13,7 @@ public class Itinerario {
     private double pausa;
     private double tempoVisita;
     private int giorni;
+    private String orarioDiInizioVisita;
     private List<Luogo> luoghi;
     private double velocitaMedia;
 	
@@ -23,6 +25,7 @@ public class Itinerario {
   		"pausa": 1.5,
   		"tempoVisita": 2.0,
   		"giorni": 3,
+  		"orarioDiInizioVisita": "08:00",
   		"velocitaMedia": 1,
   		"luoghi": [
 	    		{
@@ -48,6 +51,7 @@ public class Itinerario {
             @JsonProperty("pausa") double pausa,
             @JsonProperty("tempoVisita") double tempoVisita,
             @JsonProperty("giorni") int giorni,
+            @JsonProperty("orarioDiInizioVisita") String orarioDiInizioVisita,
             @JsonProperty("velocitaMedia") double velocitaMedia,
             @JsonProperty("luoghi") List<Luogo> luoghi) {
 		this.latA = latA;
@@ -55,12 +59,15 @@ public class Itinerario {
         this.pausa = pausa;
         this.tempoVisita = tempoVisita;
         this.giorni = giorni;
+        this.orarioDiInizioVisita = orarioDiInizioVisita;
         this.velocitaMedia = velocitaMedia;
         this.luoghi = luoghi;
     }
 
     // Getters
     public double getLatA() { return latA; }
+    
+    public String getorarioDiInizioVisita() { return orarioDiInizioVisita; }
     
     public double getLonA() { return lonA; }
     

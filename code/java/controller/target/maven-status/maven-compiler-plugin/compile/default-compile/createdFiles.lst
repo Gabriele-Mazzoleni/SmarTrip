@@ -1,0 +1,9 @@
+interfacce\ServiziLuogo.class
+interfacce\ServiziUtente.class
+api\ControllerUtente.class
+api\ControllerItinerario.class
+api\ControllerLuogo.class
+api\LuogoServices.class
+server\AppProva.class
+api\ItinerarioServices.class
+api\UtenteServices.class

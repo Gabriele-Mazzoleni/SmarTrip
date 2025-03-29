@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import modelli.Itinerario;
+import modelli.Luogo;
+import modelli.LuogoEsteso;
 
 @RestController
 @RequestMapping("/itinerari")
@@ -20,8 +22,8 @@ public class ControllerItinerario {
 	private ItinerarioServices service;
 	
 	@PostMapping("/add")
-	public Map<Integer, List<String>> addItinerario(@RequestBody Itinerario i) { 
-		Map<Integer, List<String>> mappa = service.creaTabelleDiMarcia(i);
+	public Map<Integer, List<LuogoEsteso>> addItinerario(@RequestBody Itinerario i) { 
+		Map<Integer, List<LuogoEsteso>> mappa = service.creaTabelleDiMarcia(i);
 		if(mappa != null)
 			System.out.println("Itinerario inserito");
 		else
@@ -30,8 +32,8 @@ public class ControllerItinerario {
 	}
 	
 	@GetMapping
-	public Map<Integer, List<String>> getAllItinarari() {
-		Map<Integer, List<String>> mappa = service.getAllItinerari();
+	public Map<Integer, List<LuogoEsteso>> getAllItinarari() {
+		Map<Integer, List<LuogoEsteso>> mappa = service.getAllItinerari();
 		if(mappa.size() != 0)
 			System.out.println("Itinerari trovati");
 		else
