@@ -25,16 +25,22 @@ public class TestRimozioni {
     public void setUp() {
         rimozioniJooq = RimozioniJooq.getIstanza();
     }
-
+    
     @Test
-    public void test04RimozioneUtente() {
-        int result = rimozioniJooq.utente("t0");
-        assertEquals(1, result, "La rimozione dell'utente dovrebbe restituire 1.");
+    public void test201RimozioneMappa() {
+        int result = rimozioniJooq.mappa("Mappa di Test", "Tester");
+        assertEquals(1, result);
     }
 
     @Test
-    public void test05RimozioneLuogo() {
-        int result = rimozioniJooq.luogo("Lougo di Test", 0.0, 0.0);
-        assertEquals(1, result, "La rimozione del luogo dovrebbe restituire 1.");
+    public void test202RimozioneUtente() {
+        int result = rimozioniJooq.utente("Tester");
+        assertEquals(1, result);
+    }
+
+    @Test
+    public void test203RimozioneLuogo() {
+        int result = rimozioniJooq.luogo("Luogo di Test", 0.0, 0.0);
+        assertEquals(1, result);
     }
 }

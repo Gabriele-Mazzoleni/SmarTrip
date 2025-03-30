@@ -54,20 +54,21 @@ public class TestCrea {
     }
 
     @Test
-    public void testDatabaseCreation() throws IOException, SQLException {
+    public void test001DatabaseCreation() throws IOException, SQLException {
         creaDB.creaDB();
         File dbFile = new File(DB_TEST_FILE);
         assertTrue(dbFile.exists(), "Il database non è stato creato correttamente.");
     }
 
     @Test
-    public void testTableCreation() throws IOException, SQLException {
+    public void test002TableCreation() throws IOException, SQLException {
 
         creaDB.creaDB();
 
         try (Connection conn = DriverManager.getConnection(DB_TEST_URL)) {
             assertTrue(isTableExists(conn, "UTENTE"), "La tabella UTENTE non è stata creata.");
             assertTrue(isTableExists(conn, "LUOGO"), "La tabella LUOGO non è stata creata.");
+            assertTrue(isTableExists(conn, "MAPPA"), "La tabella LUOGO non è stata creata.");
         }
     }
 

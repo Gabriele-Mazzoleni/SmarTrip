@@ -27,8 +27,8 @@ public class TestAggiornamenti {
     }
 
     @Test
-    public void test03cambiaPassword() {
-        int result = aggiornamentiJooq.cambiaPassword("t0", "TTTT");
-        assertEquals(1, result, "Il metodo cambiaPassword dovrebbe restituire 1.");
+    public void test201cambiaPassword() {
+        int result = aggiornamentiJooq.cambiaPassword("Tester", "TTTT");
+        assertEquals(1, result);
     }
 }

@@ -12,11 +12,11 @@ import jooq_db.jooq.generated.tables.records.LuogoRecord;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
-import org.jooq.Function7;
+import org.jooq.Function8;
 import org.jooq.Name;
 import org.jooq.Record;
 import org.jooq.Records;
-import org.jooq.Row7;
+import org.jooq.Row8;
 import org.jooq.Schema;
 import org.jooq.SelectField;
 import org.jooq.Table;
@@ -80,9 +80,20 @@ public class Luogo extends TableImpl<LuogoRecord> {
     public final TableField<LuogoRecord, String> TIPO = createField(DSL.name("TIPO"), SQLDataType.CLOB, this, "");
 
     /**
-     * The column <code>LUOGO.TEMPO</code>.
+     * The column <code>LUOGO.TEMPOVISITA</code>.
      */
-    public final TableField<LuogoRecord, Integer> TEMPO = createField(DSL.name("TEMPO"), SQLDataType.INTEGER, this, "");
+    public final TableField<LuogoRecord, Integer> TEMPOVISITA = createField(DSL.name("TEMPOVISITA"), SQLDataType.INTEGER, this, "");
+
+    /**
+     * @deprecated Unknown data type. If this is a qualified, user-defined type,
+     * it may have been excluded from code generation. If this is a built-in
+     * type, you can define an explicit {@link org.jooq.Binding} to specify how
+     * this type should be handled. Deprecation can be turned off using
+     * {@literal <deprecationOnUnknownTypes/>} in your code generator
+     * configuration.
+     */
+    @Deprecated
+    public final TableField<LuogoRecord, Object> IMMAGINE = createField(DSL.name("IMMAGINE"), org.jooq.impl.DefaultDataType.getDefaultDataType("\"STRING\""), this, "");
 
     private Luogo(Name alias, Table<LuogoRecord> aliased) {
         this(alias, aliased, null);
@@ -167,18 +178,18 @@ public class Luogo extends TableImpl<LuogoRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row7 type methods
+    // Row8 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row7<String, Double, Double, String, String, String, Integer> fieldsRow() {
-        return (Row7) super.fieldsRow();
+    public Row8<String, Double, Double, String, String, String, Integer, Object> fieldsRow() {
+        return (Row8) super.fieldsRow();
     }
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
-    public <U> SelectField<U> mapping(Function7<? super String, ? super Double, ? super Double, ? super String, ? super String, ? super String, ? super Integer, ? extends U> from) {
+    public <U> SelectField<U> mapping(Function8<? super String, ? super Double, ? super Double, ? super String, ? super String, ? super String, ? super Integer, ? super Object, ? extends U> from) {
         return convertFrom(Records.mapping(from));
     }
 
@@ -186,7 +197,7 @@ public class Luogo extends TableImpl<LuogoRecord> {
      * Convenience mapping calling {@link SelectField#convertFrom(Class,
      * Function)}.
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function7<? super String, ? super Double, ? super Double, ? super String, ? super String, ? super String, ? super Integer, ? extends U> from) {
+    public <U> SelectField<U> mapping(Class<U> toType, Function8<? super String, ? super Double, ? super Double, ? super String, ? super String, ? super String, ? super Integer, ? super Object, ? extends U> from) {
         return convertFrom(toType, Records.mapping(from));
     }
 }

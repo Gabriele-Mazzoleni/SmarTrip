@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import jooq_db.jooq.generated.tables.Luogo;
+import jooq_db.jooq.generated.tables.Mappa;
 import jooq_db.jooq.generated.tables.Utente;
 
 import org.jooq.Catalog;
@@ -34,6 +35,11 @@ public class DefaultSchema extends SchemaImpl {
     public final Luogo LUOGO = Luogo.LUOGO;
 
     /**
+     * The table <code>MAPPA</code>.
+     */
+    public final Mappa MAPPA = Mappa.MAPPA;
+
+    /**
      * The table <code>UTENTE</code>.
      */
     public final Utente UTENTE = Utente.UTENTE;
@@ -55,6 +61,7 @@ public class DefaultSchema extends SchemaImpl {
     public final List<Table<?>> getTables() {
         return Arrays.asList(
             Luogo.LUOGO,
+            Mappa.MAPPA,
             Utente.UTENTE
         );
     }

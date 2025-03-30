@@ -46,17 +46,20 @@ public class CreaDB {
 		if (conn != null) {
 			Statement stmt = conn.createStatement();
 			String tabellaUtente = "CREATE TABLE UTENTE "
-					+ "(CODICE TEXT, USERNAME TEXT, PASSWORD TEXT, PRIMARY KEY(PASSWORD))";
+					+ "(USERNAME TEXT, PASSWORD TEXT, PRIMARY KEY(USERNAME))";
 			String tabellaLuogo = "CREATE TABLE LUOGO "
-					+ "(NOME TEXT, LATITUDINE DOUBLE, LONGITUDINE DOUBLE, CITTA TEXT, INDIRIZZO TEXT, TIPO TEXT, TEMPO INT, "
-					+ "PRIMARY KEY (NOME, LATITUDINE, LONGITUDINE))";
+					+ "(NOME TEXT, LATITUDINE DOUBLE, LONGITUDINE DOUBLE, CITTA TEXT, INDIRIZZO TEXT, TIPO TEXT, "
+					+ "TEMPOVISITA INT, IMMAGINE STRING, PRIMARY KEY (NOME, LATITUDINE, LONGITUDINE))";
+			String tabellaMappa = "CREATE TABLE MAPPA "
+					+ "(NOMEMAPPA TEXT, NOMEUTENTE TEXT, GIORNO INT, LISTANOME TEXT, LISTALATITUDINE TEXT, "
+					+ "LISTALONGITUDINE TEXT, LISTATEMPOVISITA TEXT, LISTAORAARRIVO TEXT, PRIMARY KEY(NOMEMAPPA, NOMEUTENTE, GIORNO))";
 			stmt.executeUpdate(tabellaUtente);
 			stmt.executeUpdate(tabellaLuogo);
+			stmt.executeUpdate(tabellaMappa);
 			stmt.close();
 			conn.close();
 			System.out.println("Tabelle create");
 		}
-
 	}
 
 	public static void main(String[] args) throws IOException, SQLException {

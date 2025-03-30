@@ -5,6 +5,7 @@ package jooq_db.jooq.generated;
 
 
 import jooq_db.jooq.generated.tables.Luogo;
+import jooq_db.jooq.generated.tables.Mappa;
 import jooq_db.jooq.generated.tables.Utente;
 
 
@@ -18,6 +19,11 @@ public class Tables {
      * The table <code>LUOGO</code>.
      */
     public static final Luogo LUOGO = Luogo.LUOGO;
+
+    /**
+     * The table <code>MAPPA</code>.
+     */
+    public static final Mappa MAPPA = Mappa.MAPPA;
 
     /**
      * The table <code>UTENTE</code>.

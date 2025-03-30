@@ -12,11 +12,11 @@ import jooq_db.jooq.generated.tables.records.UtenteRecord;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
-import org.jooq.Function3;
+import org.jooq.Function2;
 import org.jooq.Name;
 import org.jooq.Record;
 import org.jooq.Records;
-import org.jooq.Row3;
+import org.jooq.Row2;
 import org.jooq.Schema;
 import org.jooq.SelectField;
 import org.jooq.Table;
@@ -48,11 +48,6 @@ public class Utente extends TableImpl<UtenteRecord> {
     public Class<UtenteRecord> getRecordType() {
         return UtenteRecord.class;
     }
-
-    /**
-     * The column <code>UTENTE.CODICE</code>.
-     */
-    public final TableField<UtenteRecord, String> CODICE = createField(DSL.name("CODICE"), SQLDataType.CLOB, this, "");
 
     /**
      * The column <code>UTENTE.USERNAME</code>.
@@ -147,18 +142,18 @@ public class Utente extends TableImpl<UtenteRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row3 type methods
+    // Row2 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row3<String, String, String> fieldsRow() {
-        return (Row3) super.fieldsRow();
+    public Row2<String, String> fieldsRow() {
+        return (Row2) super.fieldsRow();
     }
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
-    public <U> SelectField<U> mapping(Function3<? super String, ? super String, ? super String, ? extends U> from) {
+    public <U> SelectField<U> mapping(Function2<? super String, ? super String, ? extends U> from) {
         return convertFrom(Records.mapping(from));
     }
 
@@ -166,7 +161,7 @@ public class Utente extends TableImpl<UtenteRecord> {
      * Convenience mapping calling {@link SelectField#convertFrom(Class,
      * Function)}.
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function3<? super String, ? super String, ? super String, ? extends U> from) {
+    public <U> SelectField<U> mapping(Class<U> toType, Function2<? super String, ? super String, ? extends U> from) {
         return convertFrom(toType, Records.mapping(from));
     }
 }

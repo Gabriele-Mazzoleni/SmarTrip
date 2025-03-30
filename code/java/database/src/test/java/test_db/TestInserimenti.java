@@ -28,15 +28,42 @@ public class TestInserimenti {
     }
 
     @Test
-    public void test01InserimentoUtente() {
-        int result = inserimentoJooq.utente("t0", "Tester", "tttt");
-        assertEquals(1, result, "Il metodo inserimento utente dovrebbe restituire 1.");
+    public void test101InserimentoUtente() {
+        int result = inserimentoJooq.utente("Tester", "tttt");
+        assertEquals(1, result);
+    }
+    
+    @Test
+    public void test101InserimentoUtenteDuplicato() {
+        int result = inserimentoJooq.utente("Tester", "tttt");
+        assertEquals(0, result);
     }
 
     @Test
-    public void test02InserimentoLuogo() {
-        int result = inserimentoJooq.luogo("Lougo di Test", 0.0, 0.0,
-                "Città Test", "Indirizzo Test", "Test", 1000);
-        assertEquals(1, result, "Il metodo inserimento luogo dovrebbe restituire 1.");
+    public void test102InserimentoLuogo() {
+        int result = inserimentoJooq.luogo("Luogo di Test", 0.0, 0.0,
+                "Città Test", "Indirizzo Test", "Test", 1000, "url");
+        assertEquals(1, result);
+    }
+    
+    @Test
+    public void test102InserimentoDuplicato() {
+        int result = inserimentoJooq.luogo("Luogo di Test", 0.0, 0.0,
+                "Città Test", "Indirizzo Test", "Test", 1000, "url");
+        assertEquals(0, result);
+    }
+    
+    @Test
+    public void test103InserimentoMappa() {
+        int result = inserimentoJooq.mappa("Mappa di Test", "Tester", 1,
+                "Nomi", "Latitudini", "Longitudini", "Tempi di visita", "Orari di arrivo");
+        assertEquals(1, result);
+    }
+    
+    @Test
+    public void test103InserimentoMappaDuplicato() {
+        int result = inserimentoJooq.mappa("Mappa di Test", "Tester", 1,
+                "Nomi", "Latitudini", "Longitudini", "Tempi di visita", "Orari di arrivo");
+        assertEquals(0, result);
     }
 }

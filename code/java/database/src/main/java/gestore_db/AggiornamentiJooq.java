@@ -18,28 +18,32 @@ import jooq_db.jooq.generated.tables.Utente;
 public class AggiornamentiJooq implements Aggiornamenti{
 	
 	//Pattern singleton
-	private static AggiornamentiJooq istanza = new AggiornamentiJooq();
+	private static AggiornamentiJooq istanza;
 	
 	private AggiornamentiJooq() {};
 	
-	public static AggiornamentiJooq getIstanza() {
+	public static synchronized AggiornamentiJooq getIstanza() {
+		if (istanza == null) {
+            istanza = new AggiornamentiJooq();
+        }
 		return istanza;
 	}
 
 	/**
-	 * @param codice dell'utente a cui fare modifiche
-	 * @param newP nuovo valore della password, unico attributo modificabile
+	 * Permette di cambiare password
+	 * @param utente dell'utente a cui fare modifiche
+	 * @param newPassword nuovo valore della password, unico attributo modificabile
 	 * @return 1 se la modifica ha avuto successo, 0 altrimenti
 	 */
 	@Override
-	public int cambiaPassword(String codice, String newP) {
+	public int cambiaPassword(String utente, String newPassword) {
 		int result = 0;
 		try {
 			Connection conn = DriverManager.getConnection(CreaDB.DB_URL);
 			if (conn != null) {
 				DSLContext cambiaPW = DSL.using(conn, SQLDialect.SQLITE);
-				result = cambiaPW.update(Utente.UTENTE).set(Utente.UTENTE.PASSWORD, newP).
-						where(Utente.UTENTE.CODICE.eq(codice)).execute();
+				result = cambiaPW.update(Utente.UTENTE).set(Utente.UTENTE.PASSWORD, newPassword).
+						where(Utente.UTENTE.USERNAME.eq(utente)).execute();
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
