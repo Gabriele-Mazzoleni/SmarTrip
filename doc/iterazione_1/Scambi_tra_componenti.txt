@@ -1,4 +1,4 @@
-Scambi da fare:
+Descrizione delle operazioni principali di scambio dati tra client e server:
 
 1-SIGN-IN
 Client invia nome e password
@@ -11,7 +11,7 @@ Server fa hash della password e, se nome utente e password sono presenti, restit
 Server invia esito dell'operazione
 
 3-RECUPERO MAPPE 
-Quando l'utente si logga si apre una pagina con le sue mappe create in precedenza con la possibilità di recuperare quelle vecchie o inserire una nuova. Le mappe hanno un nome univoco per lo stesso utente (e può cercarle).
+Quando l'utente esegue log-in si apre una pagina con le sue mappe create in precedenza con la possibilità di recuperare quelle vecchie o inserire una nuova. Le mappe hanno un nome univoco per lo stesso utente (e può cercarle).
 
 4-SCELTA Città
 La scelta della città da parte dell'utente viene fatta tramite una query sul database dei luoghi; l'utente seleziona la città di suo interesse, il server riceve la città ed esegue un'altra query, per restituire tutti i luoghi di tale città
