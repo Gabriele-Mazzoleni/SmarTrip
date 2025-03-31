@@ -11,12 +11,12 @@ import modelli.Utente;
  */
 @SpringBootApplication
 @ComponentScan(basePackages = {"api", "server"})
-public class AppProva {
+public class App {
 	
 	private String port = "8083";
 	
 	public static void main(String[] args) {
-		 SpringApplication.run(AppProva.class, args);
+		 SpringApplication.run(App.class, args);
 	}
 	
 	public String getPort() {
