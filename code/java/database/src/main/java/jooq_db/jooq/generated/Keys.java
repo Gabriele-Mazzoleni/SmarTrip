@@ -5,8 +5,10 @@ package jooq_db.jooq.generated;
 
 
 import jooq_db.jooq.generated.tables.Luogo;
+import jooq_db.jooq.generated.tables.Mappa;
 import jooq_db.jooq.generated.tables.Utente;
 import jooq_db.jooq.generated.tables.records.LuogoRecord;
+import jooq_db.jooq.generated.tables.records.MappaRecord;
 import jooq_db.jooq.generated.tables.records.UtenteRecord;
 
 import org.jooq.TableField;
@@ -27,5 +29,6 @@ public class Keys {
     // -------------------------------------------------------------------------
 
     public static final UniqueKey<LuogoRecord> LUOGO__PK_LUOGO = Internal.createUniqueKey(Luogo.LUOGO, DSL.name("pk_LUOGO"), new TableField[] { Luogo.LUOGO.NOME, Luogo.LUOGO.LATITUDINE, Luogo.LUOGO.LONGITUDINE }, true);
-    public static final UniqueKey<UtenteRecord> UTENTE__PK_UTENTE = Internal.createUniqueKey(Utente.UTENTE, DSL.name("pk_UTENTE"), new TableField[] { Utente.UTENTE.PASSWORD }, true);
+    public static final UniqueKey<MappaRecord> MAPPA__PK_MAPPA = Internal.createUniqueKey(Mappa.MAPPA, DSL.name("pk_MAPPA"), new TableField[] { Mappa.MAPPA.NOMEMAPPA, Mappa.MAPPA.NOMEUTENTE, Mappa.MAPPA.GIORNO }, true);
+    public static final UniqueKey<UtenteRecord> UTENTE__PK_UTENTE = Internal.createUniqueKey(Utente.UTENTE, DSL.name("pk_UTENTE"), new TableField[] { Utente.UTENTE.USERNAME }, true);
 }

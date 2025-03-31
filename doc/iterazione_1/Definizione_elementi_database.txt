@@ -6,6 +6,9 @@ LUOGO -> serve per l'utilizzo delle funzioni
 latitudine, longitudine, nome (di Google maps) ->primary key
 città
 indirizzo
+foto
+tipo
+tempovisita (double)
 
 Città non è necessario modellarla in un DB a sé
 

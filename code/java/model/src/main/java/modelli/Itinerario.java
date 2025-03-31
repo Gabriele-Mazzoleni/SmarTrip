@@ -1,19 +1,17 @@
 package modelli;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 public class Itinerario {
 	
 	private double latA;
     private double lonA;
-    private double pausa;
-    private double tempoVisita;
-    private int giorni;
+    private int nGiorni;
+    private List<GiornoVisita> giorni;
     private List<Luogo> luoghi;
     private double velocitaMedia;
 	
@@ -22,21 +20,36 @@ public class Itinerario {
 	 * {
   		"latA": 45.4642,
   		"lonA": 9.1900,
-  		"pausa": 1.5,
-  		"tempoVisita": 2.0,
-  		"giorni": 3,
+  		"nGiorni": 2,
+  		"velocitaMedia": 1.4,
+  		"giorni": [
+	    		{
+	      			"orarioDiInizioVisita": "09:00",
+  					"devoPranzare" : true,
+  					"orarioPranzo": "12:00",
+	      			"pausa": 1800,
+	      			"tempoVisita": 3600
+	    		},
+	    		{
+	      			"orarioDiInizioVisita": "18:00",
+  					"devoPranzare" : false,
+  					"orarioPranzo": "00:00",
+	      			"pausa": 1800,
+	      			"tempoVisita": 3600
+	    		}
+	  		],
   		"luoghi": [
 	    		{
 	      			"nome": "Duomo di Milano",
 	      			"latitudine": 45.4641,
 	      			"longitudine": 9.1919,
-	      			"tempoDiVisita": 2.5
+	      			"tempoDiVisita": 2600
 	    		},
 	    		{
 	      			"nome": "Castello Sforzesco",
 	      			"latitudine": 45.4672,
 	      			"longitudine": 9.1798,
-	      			"tempoDiVisita": 1.5
+	      			"tempoDiVisita": 1000
 	    		}
 	  		]
 		}
@@ -46,30 +59,27 @@ public class Itinerario {
     public Itinerario(
             @JsonProperty("latA") double latA,
             @JsonProperty("lonA") double lonA,
-            @JsonProperty("pausa") double pausa,
-            @JsonProperty("tempoVisita") double tempoVisita,
-            @JsonProperty("giorni") int giorni,
+            @JsonProperty("nGiorni") int nGiorni,
             @JsonProperty("velocitaMedia") double velocitaMedia,
+            @JsonProperty("giorni") List<GiornoVisita> giorni,
             @JsonProperty("luoghi") List<Luogo> luoghi) {
 		this.latA = latA;
         this.lonA = lonA;
-        this.pausa = pausa;
-        this.tempoVisita = tempoVisita;
-        this.giorni = giorni;
+        this.nGiorni = nGiorni;
         this.velocitaMedia = velocitaMedia;
+        this.giorni = giorni;
         this.luoghi = luoghi;
     }
 
     // Getters
+	
+	public GiornoVisita getGiorno(int numeroGiorno) { return giorni.get(numeroGiorno); }
+	
     public double getLatA() { return latA; }
     
     public double getLonA() { return lonA; }
     
-    public double getPausa() { return pausa; }
-    
-    public double getTempoVisita() { return tempoVisita; }
-    
-    public int getGiorni() { return giorni; }
+    public int getNumeroGiorni() { return nGiorni; }
     
     public List<Luogo> getLuoghi() { return luoghi; }
     

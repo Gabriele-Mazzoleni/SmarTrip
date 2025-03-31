@@ -1,4 +1,4 @@
-package server;
+package api;
 
 import java.util.List;
 import java.util.Map;
@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import modelli.Itinerario;
-import modelli.ItinerarioServices;
+import modelli.Luogo;
+import modelli.LuogoEsteso;
 
 @RestController
 @RequestMapping("/itinerari")
@@ -21,22 +22,22 @@ public class ControllerItinerario {
 	private ItinerarioServices service;
 	
 	@PostMapping("/add")
-	public Map<Integer, List<String>> addItinerario(@RequestBody Itinerario i) { 
-		Map<Integer, List<String>> mappa = service.creaTabelleDiMarcia(i);
+	public Map<Integer, List<LuogoEsteso>> addItinerario(@RequestBody Itinerario i) { 
+		Map<Integer, List<LuogoEsteso>> mappa = service.creaTabelleDiMarcia(i);
 		if(mappa != null)
-			System.out.println("Utente inserito");
+			System.out.println("Itinerario inserito");
 		else
-			System.out.println("Utente non inserito");
+			System.out.println("Itinerario non inserito");
 		return mappa;
 	}
 	
 	@GetMapping
-	public Map<Integer, List<String>> getAllItinarari() {
-		Map<Integer, List<String>> mappa = service.getAllItinerari();
+	public Map<Integer, List<LuogoEsteso>> getAllItinarari() {
+		Map<Integer, List<LuogoEsteso>> mappa = service.getAllItinerari();
 		if(mappa.size() != 0)
-			System.out.println("Utenti trovati");
+			System.out.println("Itinerari trovati");
 		else
-			System.out.println("Utenti non trovati");
+			System.out.println("Itinierari non trovati");
 	    return service.getAllItinerari();
 	}
 }

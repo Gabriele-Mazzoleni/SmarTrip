@@ -1,10 +1,13 @@
-package modelli;
+package api;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import interfacce.ServiziUtente;
+import modelli.Utente;
+import modelli.UtenteRepository;
+
 
 @Service
 public class UtenteServices implements ServiziUtente {
@@ -27,3 +30,5 @@ public class UtenteServices implements ServiziUtente {
 	}
 
 }
+
+
