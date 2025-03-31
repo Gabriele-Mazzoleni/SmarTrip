@@ -3,28 +3,40 @@ package modelli;
 import java.util.ArrayList;
 import java.util.List;
 
+import gestore_db.InserimentiJooq;
 import interfacce.GestoreUtente;
 
 /**
- * INVECE CHE LISTA ATTACCARE QUI DB!!!
+ * Permette di usare le funzioni nel progetto database
  */
 public class UtenteRepository implements GestoreUtente {
 
 	List<Utente> lista = new ArrayList<>();
 
+	/**
+	 * Salva nel database utente
+	 */
 	@Override
-	public Utente salva(Utente u) {
-		lista.add(u);
-		return u;
+	public Utente salvaUtente(Utente u) {
+		if(InserimentiJooq.getIstanza().utente(u.getUsername(), u.getPassword()) == 1) {
+			return u;
+		}
+		else return null;
 	}
 
+	/**
+	 * Cerca nel database l'utente
+	 */
 	@Override
-	public Utente cercaPerCodice(String codice) {
+	public Utente cercaPerUsername(String username) {
 		for(Utente u : lista)
-		if (u.getCodice().equals(codice)) return u;
+			if (u.getUsername().equals(username)) return u;
 		return null;
 	}
 
+	/**
+	 * Restituisce tutti gli utenti del database
+	 */
 	@Override
 	public List<Utente> getAll() {
 		return lista;

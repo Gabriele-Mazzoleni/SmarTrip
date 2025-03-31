@@ -8,24 +8,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class Utente {
 	
-	private String codice;
 	private String username;
 	private String password;
 	
     @JsonCreator
-	public Utente(@JsonProperty("codice") String c, @JsonProperty("username") String u, 
-			@JsonProperty("password") String s) {
-		this.setCodice(c);
+	public Utente(@JsonProperty("username") String u, @JsonProperty("password") String s) {
 		this.setUsername(u);
 		this.setPassword(s);
-	}
-	
-	public String getCodice() {
-		return codice;
-	}
-	
-	public void setCodice(String codice) {
-		this.codice = codice;
 	}
 	
 	public String getUsername() {

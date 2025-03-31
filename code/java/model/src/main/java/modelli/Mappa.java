@@ -1,5 +1,5 @@
 package modelli;
 
-public class mappa {
+public class Mappa {
 
 }

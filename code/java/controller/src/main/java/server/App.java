@@ -12,19 +12,9 @@ import modelli.Utente;
 @SpringBootApplication
 @ComponentScan(basePackages = {"api", "server"})
 public class App {
-	
-	private String port = "8083";
-	
+
 	public static void main(String[] args) {
 		 SpringApplication.run(App.class, args);
-	}
-	
-	public String getPort() {
-		return port;
-	}
-
-	public void setPort(String port) {
-		this.port = port;
 	}
 
 }

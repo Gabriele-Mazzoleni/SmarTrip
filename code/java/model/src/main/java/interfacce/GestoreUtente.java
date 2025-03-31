@@ -6,8 +6,25 @@ import modelli.Utente;
 
 public interface GestoreUtente {
 	
-	public Utente salva(Utente u);
-	public Utente cercaPerCodice(String codice);
+	
+	/**
+	 * Salva il nuovo utente 
+	 * @param u
+	 * @return utente
+	 */
+	public Utente salvaUtente(Utente u);
+	
+	/**
+	 * Restituisce utente dato l'username
+	 * @param username
+	 * @return utente 
+	 */
+	public Utente cercaPerUsername(String username);
+	
+	/**
+	 * Visualizza tutti gli utenti
+	 * @return lista utenti salvati
+	 */
 	public List<Utente> getAll();
 
 }

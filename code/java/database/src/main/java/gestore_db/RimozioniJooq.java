@@ -46,7 +46,7 @@ public class RimozioniJooq implements Rimozioni {
 				result = delete.deleteFrom(Utente.UTENTE).where(Utente.UTENTE.USERNAME.eq(username)).execute();
 			}
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			System.out.println("Errore eliminazione utente nel database");
 		}
 		return result;
 	}
@@ -70,7 +70,7 @@ public class RimozioniJooq implements Rimozioni {
 						and(Luogo.LUOGO.LONGITUDINE.eq(longitudine))).execute();
 			}
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			System.out.println("Errore eliminazione luogo nel database");
 		}
 		return result;
 	}
@@ -92,7 +92,7 @@ public class RimozioniJooq implements Rimozioni {
 						and(Mappa.MAPPA.NOMEUTENTE.eq(nomeUtente))).execute();
 			}
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			System.out.println("Errore eliminazione mappa nel database");
 		}
 		return result;
 	}

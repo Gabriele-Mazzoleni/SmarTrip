@@ -46,7 +46,7 @@ public class AggiornamentiJooq implements Aggiornamenti{
 						where(Utente.UTENTE.USERNAME.eq(utente)).execute();
 			}
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			System.out.println("Errore aggiornamento password nel database");
 		}
 		return result;
 	}

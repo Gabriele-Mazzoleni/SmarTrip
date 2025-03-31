@@ -60,6 +60,11 @@
       <artifactId>jgrapht-core</artifactId>
       <version>1.5.1</version>
     </dependency>
+        <dependency>
+    	<groupId>smartrip</groupId>
+    	<artifactId>database</artifactId>
+    	<version>0.0.1-SNAPSHOT</version>
+    </dependency>
   </dependencies>
 
   <build>

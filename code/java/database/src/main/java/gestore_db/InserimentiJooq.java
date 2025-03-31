@@ -37,6 +37,7 @@ public class InserimentiJooq implements Inserimenti{
 	 * Inserisce nuovo utente
 	 * @param username identificativo dell'utente
 	 * @param password
+	 * @param dbPath
 	 * @return 1 se l'inserimento ha avuto successo, 0 altrimenti
 	 */
 	@Override
@@ -50,7 +51,7 @@ public class InserimentiJooq implements Inserimenti{
 				result = create.insertInto(Utente.UTENTE).set(utente).execute();
 			}
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			System.out.println("Errore inserimento utente nel database");
 		}
 		
 		return result;
@@ -80,7 +81,7 @@ public class InserimentiJooq implements Inserimenti{
 				result = create.insertInto(Luogo.LUOGO).set(luogo).execute();
 			}
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			System.out.println("Errore inserimento luogo nel database");
 		}
 		
 		return result;
@@ -111,7 +112,7 @@ public class InserimentiJooq implements Inserimenti{
 				result = create.insertInto(Mappa.MAPPA).set(mappa).execute();
 			}
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			System.out.println("Errore inserimento mappa nel database");
 		}
 		
 		return result;
