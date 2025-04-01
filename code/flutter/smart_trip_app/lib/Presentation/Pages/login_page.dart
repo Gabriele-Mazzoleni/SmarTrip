@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:smart_trip_app/Domain/user.dart'; //USATO PER DEBUGGING
+import 'package:smart_trip_app/Presentation/Controllers/login_page_controller.dart';
+import 'package:smart_trip_app/Presentation/Pages/map_selection_page.dart';
 import 'package:smart_trip_app/Presentation/Styles/app_colors.dart';
 import 'package:smart_trip_app/Presentation/Styles/font_styles.dart';
 import 'package:smart_trip_app/Presentation/Styles/sizes.dart';
@@ -26,24 +29,15 @@ class _LoginPageState extends State<LoginPage> {
   bool isLoading = false;
   bool isSignInLoading = false;
 
-/*
-   void navigateToCareerProposalPage(user) {
+
+   void navigateToMapSelectionPage(user, ip) {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => CareerProposalPage(userLogInData: user),
+        builder: (context) => MapSelectionPage(user: user, ip:ip),
       ),
     );
   }
-
-void navigateToInsertDataPage(user){
-  Navigator.push(
-      context,
-      MaterialPageRoute(
-       builder: (context) => InsertDataPage(userLogInData: user),
-      ),
-    );
-}
 
 
 Future<void> login() async {
@@ -56,9 +50,9 @@ Future<void> login() async {
       final user = await userSearcher(
         _userNameController.text,
         _passwordController.text,
+        widget.ip,
       );
-      //navigateToInsertDataPage(user);
-      navigateToCareerProposalPage(user); 
+      navigateToMapSelectionPage(user,widget.ip); 
     } catch (e) {
       setState(() {
         errorMessage = 'Invalid credentials. Please try again.';
@@ -73,23 +67,22 @@ Future<void> login() async {
   Future<void> signin(StateSetter setState) async {
     try {
       final user = await userAdder(
-        _signInMailController.text,
         _signInUsernameController.text,
         _signInPasswordController.text,
+        widget.ip,
       );
       Navigator.of(context).pop();
-      navigateToInsertDataPage(user); 
+      navigateToMapSelectionPage(user,widget.ip);
     } catch (e) {
       setState(() {
         signInErrorMessage = 'Error during sign-in. Please try again.';
         isSignInLoading = false;
-        _signInMailController.clear();
         _signInUsernameController.clear();
         _signInPasswordController.clear();
       });
     }
   }
-  */
+  
   
    void _showSignInModal(BuildContext context) {
     showDialog(
@@ -163,6 +156,15 @@ Future<void> login() async {
                       isSignInLoading = true;
                       signInErrorMessage = '';
                     });
+                    //PER DEBUGGING GRAFICO, DA RIMUOVERE!!!!
+                    var user= User(
+                        username: 'Debugger',
+                        password: 'PW',
+                      );
+                      isSignInLoading=false;
+                      navigateToMapSelectionPage(user,widget.ip);
+                    
+                    //DA TESTARE
                     //signin(setState);
                   },
                   child: isSignInLoading
@@ -235,6 +237,14 @@ Future<void> login() async {
                   const SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: () {
+                      // TEMPORANEO, SOLO PER DEBUGGING!!!
+                      var user= User(
+                        username: 'Debugger',
+                        password: 'PW',
+                      );
+                      navigateToMapSelectionPage(user,widget.ip);
+
+                      //DA TESTARE!!
                       //login();
                     },
                     style: ElevatedButton.styleFrom(
