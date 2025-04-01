@@ -10,9 +10,9 @@ import org.junit.platform.suite.api.Suite;
 @Suite
 @SelectClasses({
 	TestCrea.class, 
-	TestInserimenti.class, 
-	TestAggiornamenti.class, 
-	TestRimozioni.class
+	TestUtente.class, 
+	TestLuogo.class, 
+	TestMappa.class
 })
 public class DaTestare {
 

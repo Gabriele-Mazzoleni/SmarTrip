@@ -12,12 +12,16 @@ import org.jooq.meta.jaxb.Target;
  */
 public class GeneraJooq {
 
-	public static void main(String[] args) throws Exception {
+	public void generaJooq() throws Exception {
 		Jdbc JDBC = new Jdbc().withDriver("org.sqlite.JDBC").withUrl(CreaDB.DB_URL);
 		Database database = new Database().withName("org.jooq.meta.sqlite.SQLiteDatabase").withIncludes(".*").withExcludes("");
 		Target target = new Target().withPackageName("jooq_db.jooq.generated").withDirectory("src/main/java");
 		Generator generator = new Generator().withDatabase(database).withTarget(target);
 		Configuration configuration = new Configuration().withJdbc(JDBC).withGenerator(generator);
 		GenerationTool.generate(configuration);			
+	}
+	
+	public static void main(String[] args) throws Exception {
+		DatabaseManager.getIstanza().getGeneraJooq().generaJooq();
 	}
 }

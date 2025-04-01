@@ -3,7 +3,7 @@ package modelli;
 import java.util.ArrayList;
 import java.util.List;
 
-import gestore_db.InserimentiJooq;
+import gestore_db.DatabaseManager;
 import interfacce.GestoreUtente;
 
 /**
@@ -18,7 +18,7 @@ public class UtenteRepository implements GestoreUtente {
 	 */
 	@Override
 	public Utente salvaUtente(Utente u) {
-		if(InserimentiJooq.getIstanza().utente(u.getUsername(), u.getPassword()) == 1) {
+		if(DatabaseManager.getIstanza().getQueryUtente().inserisciUtente(u.getUsername(), u.getPassword()) == 1) {
 			return u;
 		}
 		else return null;

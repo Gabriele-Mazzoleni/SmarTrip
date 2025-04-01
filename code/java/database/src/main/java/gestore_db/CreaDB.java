@@ -9,16 +9,8 @@ import java.sql.*;
  */
 public class CreaDB {
 	
-	//Pattern singleton
-	private static CreaDB istanza = new CreaDB();
 	public static String DB_PATH = "../database/db/db.db3";
 	public static String DB_URL = "jdbc:sqlite:" + DB_PATH;
-	
-	private CreaDB() {}
-	
-	public synchronized static CreaDB getIstanza() {
-		return istanza;
-	}
 
 	/**
 	 * Genera il database, se non è già presente
@@ -63,7 +55,7 @@ public class CreaDB {
 	}
 
 	public static void main(String[] args) throws IOException, SQLException {
-		getIstanza().creaDB();
+		DatabaseManager.getIstanza().getCreaDB().creaDB();
 	}
 	
 }
