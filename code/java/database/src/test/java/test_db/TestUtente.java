@@ -36,23 +36,21 @@ public class TestUtente {
     }
     
     @Test
-    public void test102CambiaPassword() {
+    public void test102ControllaPassword() {
+        int result = DatabaseManager.getIstanza().getQueryUtente().controllaPassword("Tester", "tttt");
+        assertEquals(1, result);
+    }
+    
+    @Test
+    public void test103CambiaPassword() {
         int result = DatabaseManager.getIstanza().getQueryUtente().cambiaPassword("Tester", "TTTT");
         assertEquals(1, result);
     }
     
-    
     @Test
-    public void test103RimozioneUtente() {
+    public void test110RimozioneUtente() {
         int result = DatabaseManager.getIstanza().getQueryUtente().eliminaUtente("Tester");
         assertEquals(1, result);
     }
-    
-    @Test
-    public void test105InserimentoUtente() {
-        int result = DatabaseManager.getIstanza().getQueryUtente().inserisciUtente("Tester", "tttt");
-        assertEquals(1, result);
-    }
-    
 
 }

@@ -8,22 +8,16 @@ public interface FunzioniUtente {
 	
 	/**
 	 * SignIn utente
-	 * @param u 
+	 * @param u utente
 	 * @return utente se registrato, altrimenti errore
 	 */
 	public ResponseEntity<?> signInUtente(Utente u);
 	
 	/**
-	 * Restituisce utente dato username
-	 * @param  username
-	 * @return utente se registrato, altrimenti errore
+	 * LogIn utente
+	 * @param u utente
+	 * @return true se password corretta, altrimenti errore
 	 */
-	public ResponseEntity<?> getUtente(String username);
-	
-	/**
-	 * Restituisce gli utenti registrati
-	 * @return utente se registrato, altrimenti errore
-	 */
-	public ResponseEntity<?> getAllUtenti();
+	public ResponseEntity<?> logInUtente(Utente u);
 	
 }

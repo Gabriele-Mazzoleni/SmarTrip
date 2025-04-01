@@ -1,30 +1,22 @@
 package interfacce;
 
-import java.util.List;
-
 import modelli.Utente;
 
 public interface GestoreUtente {
 	
-	
 	/**
 	 * Salva il nuovo utente 
 	 * @param u
-	 * @return utente
+	 * @return true se successo
 	 */
-	public Utente salvaUtente(Utente u);
+	public boolean salvaUtente(Utente u);
 	
 	/**
-	 * Restituisce utente dato l'username
+	 * Controlla la password inserita dall'utente 
 	 * @param username
-	 * @return utente 
+	 * @param password
+	 * @return true se successo
 	 */
-	public Utente cercaPerUsername(String username);
-	
-	/**
-	 * Visualizza tutti gli utenti
-	 * @return lista utenti salvati
-	 */
-	public List<Utente> getAll();
+	public boolean controllaPassword(String username, String password);
 
 }

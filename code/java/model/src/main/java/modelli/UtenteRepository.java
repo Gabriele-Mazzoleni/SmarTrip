@@ -1,8 +1,5 @@
 package modelli;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import gestore_db.DatabaseManager;
 import interfacce.GestoreUtente;
 
@@ -11,35 +8,28 @@ import interfacce.GestoreUtente;
  */
 public class UtenteRepository implements GestoreUtente {
 
-	List<Utente> lista = new ArrayList<>();
-
 	/**
 	 * Salva nel database utente
 	 */
 	@Override
-	public Utente salvaUtente(Utente u) {
+	public boolean salvaUtente(Utente u) {
 		if(DatabaseManager.getIstanza().getQueryUtente().inserisciUtente(u.getUsername(), u.getPassword()) == 1) {
-			return u;
+			return true;
 		}
-		else return null;
+		else return false;
 	}
 
 	/**
-	 * Cerca nel database l'utente
+	 * Controlla se la password inserita è corretta
 	 */
 	@Override
-	public Utente cercaPerUsername(String username) {
-		for(Utente u : lista)
-			if (u.getUsername().equals(username)) return u;
-		return null;
+	public boolean controllaPassword(String username, String password) {
+		if(DatabaseManager.getIstanza().getQueryUtente().controllaPassword(username, password) == 1) {
+			return true;
+		}
+		else return false;
 	}
 
-	/**
-	 * Restituisce tutti gli utenti del database
-	 */
-	@Override
-	public List<Utente> getAll() {
-		return lista;
-	}
+
 	
 }

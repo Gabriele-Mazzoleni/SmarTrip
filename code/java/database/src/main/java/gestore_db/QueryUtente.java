@@ -63,20 +63,46 @@ public class QueryUtente implements UtenteDB {
 	}
 	
 	/**
+	 * Controlla se la password inserita è corretta
+	 * @param username 
+	 * @param password valore da controllare
+	 * @return 1 se corretta, 0 altrimenti
+	 */
+	@Override
+	public int controllaPassword(String username, String password) {
+		int result = 0;
+	    try (Connection conn = DriverManager.getConnection(DatabaseManager.getIstanza().getUrl())) {
+	        if (conn != null) {
+	            DSLContext db = DSL.using(conn, SQLDialect.SQLITE);
+	            String storedPassword = db.select(Utente.UTENTE.PASSWORD)
+	                                      .from(Utente.UTENTE)
+	                                      .where(Utente.UTENTE.USERNAME.eq(username))
+	                                      .fetchOneInto(String.class);
+	            if (storedPassword != null && storedPassword.equals(password)) {
+	                result = 1;
+	            }
+	        }
+	    } catch (SQLException e) {
+	        System.out.println("Errore controllo password nel database");
+	    }
+	    return result;
+	}
+	
+	/**
 	 * Permette di cambiare password
-	 * @param utente dell'utente a cui fare modifiche
+	 * @param username dell'utente a cui fare modifiche
 	 * @param newPassword nuovo valore della password, unico attributo modificabile
 	 * @return 1 se la modifica ha avuto successo, 0 altrimenti
 	 */
 	@Override
-	public synchronized int cambiaPassword(String utente, String newPassword) {
+	public synchronized int cambiaPassword(String username, String newPassword) {
 		int result = 0;
 		try {
 			Connection conn = DriverManager.getConnection(DatabaseManager.getIstanza().getUrl());
 			if (conn != null) {
 				DSLContext cambiaPW = DSL.using(conn, SQLDialect.SQLITE);
 				result = cambiaPW.update(Utente.UTENTE).set(Utente.UTENTE.PASSWORD, newPassword).
-						where(Utente.UTENTE.USERNAME.eq(utente)).execute();
+						where(Utente.UTENTE.USERNAME.eq(username)).execute();
 			}
 		} catch (SQLException e) {
 			System.out.println("Errore aggiornamento password nel database");

@@ -1,10 +1,6 @@
 package api;
 
-import java.util.List;
-
 import org.springframework.stereotype.Service;
-
-import interfacce.FunzioniUtente;
 import modelli.Utente;
 import modelli.UtenteRepository;
 
@@ -20,27 +16,20 @@ public class UtenteServices {
 	 * Registra utente chiamando funzione del model
 	 * @param username
 	 * @param password
-	 * @return
+	 * @return true se è possibile inserire utente, altrimenti errore
 	 */
-	public Utente registraUtente(String username, String password) {
+	public boolean registraUtente(String username, String password) {
 		return repo.salvaUtente(new Utente(username, password));
 	}
-
+	
 	/**
-	 * Ritorna utente chiamando funzione del model
+	 * Controlla password chiamando funzione del model
 	 * @param username
-	 * @return
+	 * @param password
+	 * @return true se password corretta, altrimenti errore
 	 */
-	public Utente getUtente(String username) {
-		return repo.cercaPerUsername(username);
-	}
-
-	/**
-	 * Ritorna tutti gli utenti chiamando funzione del model
-	 * @return
-	 */
-	public List<Utente> getAllUtenti() {
-		return repo.getAll();
+	public boolean accediUtente(String username, String password) {
+		return repo.controllaPassword(username, password);
 	}
 
 }
