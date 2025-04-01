@@ -17,7 +17,9 @@ import org.jooq.meta.jaxb.Database;
 import org.jooq.meta.jaxb.Generator;
 import org.jooq.meta.jaxb.Jdbc;
 import org.jooq.meta.jaxb.Target;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
@@ -33,20 +35,31 @@ import gestore_db.PopolaDB;
 @TestMethodOrder(MethodOrderer.MethodName.class)
 public class TestCrea {
 
-    private static final String DB_TEST_FILE = "../database/db/test_db.db3";
-    public static final String DB_TEST_URL = "jdbc:sqlite:" + DB_TEST_FILE;
+    @BeforeAll
+    public static void setUp() {
+        DatabaseManager.getIstanza().setTestMode(true);
+    }
 
+    @AfterAll
+    public static void tearDown() throws IOException, SQLException {
+        DatabaseManager.getIstanza().setTestMode(false);
+    }	
+	
     @Test
     public void test001CreazioneDB() throws IOException, SQLException {
+    	//Rimuovo database se già esistente
+        File dbFile = new File(DatabaseManager.getIstanza().getPath());
+    	if (dbFile.exists()) {
+            dbFile.delete();
+        }
     	DatabaseManager.getIstanza().getCreaDB().creaDB();
-        File dbFile = new File(DB_TEST_URL);
-        assertTrue(dbFile.exists());
+        File newDbFile = new File(DatabaseManager.getIstanza().getPath());
+        assertTrue(newDbFile.exists());
     }
 
     @Test
     public void test002CreazioneTabelle() throws IOException, SQLException {
-    	DatabaseManager.getIstanza().getCreaDB().creaDB();
-        try (Connection conn = DriverManager.getConnection(DB_TEST_URL)) {
+        try (Connection conn = DriverManager.getConnection(DatabaseManager.getIstanza().getUrl())) {
             assertTrue(isTableExists(conn, "UTENTE"));
             assertTrue(isTableExists(conn, "LUOGO"));
             assertTrue(isTableExists(conn, "MAPPA"));
@@ -56,7 +69,7 @@ public class TestCrea {
     @Test
     public void test003PopolaTabelle() throws IOException, SQLException {
     	DatabaseManager.getIstanza().getPopolaDB().inserisciDati();
-        Connection conn = DriverManager.getConnection(DB_TEST_URL);
+        Connection conn = DriverManager.getConnection(DatabaseManager.getIstanza().getUrl());
         Statement stmt = conn.createStatement();
         
         //Controlla se gli utenti sono stati inseriti

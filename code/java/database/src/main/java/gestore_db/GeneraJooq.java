@@ -11,9 +11,9 @@ import org.jooq.meta.jaxb.Target;
  * Classe per la generazione dei codici JOOQ per gestire il database con java
  */
 public class GeneraJooq {
-
+	
 	public void generaJooq() throws Exception {
-		Jdbc JDBC = new Jdbc().withDriver("org.sqlite.JDBC").withUrl(CreaDB.DB_URL);
+		Jdbc JDBC = new Jdbc().withDriver("org.sqlite.JDBC").withUrl(DatabaseManager.getIstanza().getUrl());
 		Database database = new Database().withName("org.jooq.meta.sqlite.SQLiteDatabase").withIncludes(".*").withExcludes("");
 		Target target = new Target().withPackageName("jooq_db.jooq.generated").withDirectory("src/main/java");
 		Generator generator = new Generator().withDatabase(database).withTarget(target);

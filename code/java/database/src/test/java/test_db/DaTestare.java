@@ -1,5 +1,6 @@
 package test_db;
 
+
 import org.junit.platform.suite.api.SelectClasses;
 import org.junit.platform.suite.api.Suite;
 
@@ -9,11 +10,10 @@ import org.junit.platform.suite.api.Suite;
  */
 @Suite
 @SelectClasses({
+	DaTestare.class,
 	TestCrea.class, 
 	TestUtente.class, 
 	TestLuogo.class, 
 	TestMappa.class
 })
-public class DaTestare {
-
-}
+public class DaTestare {}

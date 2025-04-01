@@ -34,7 +34,7 @@ public class QueryLuogo implements LuogoDB{
 			String indirizzo, String tipo, int tempoVisita, String immagine) {
 		int result = 0;
 		try {
-			Connection conn = DriverManager.getConnection(CreaDB.DB_URL);
+			Connection conn = DriverManager.getConnection(DatabaseManager.getIstanza().getUrl());
 			if (conn != null) {
 				DSLContext create = DSL.using(conn, SQLDialect.SQLITE);
 				LuogoRecord luogo = new LuogoRecord(nome, latitudine, longitudine, citta, indirizzo, tipo, tempoVisita, immagine);
@@ -58,7 +58,7 @@ public class QueryLuogo implements LuogoDB{
 	public synchronized int eliminaLuogo(String nome, double latitudine, double longitudine) {
 		int result = 0;
 		try {
-			Connection conn = DriverManager.getConnection(CreaDB.DB_URL);
+			Connection conn = DriverManager.getConnection(DatabaseManager.getIstanza().getUrl());
 			if (conn != null) {
 				DSLContext delete = DSL.using(conn, SQLDialect.SQLITE);
 				result = delete.deleteFrom(Luogo.LUOGO).where(Luogo.LUOGO.NOME.eq(nome).

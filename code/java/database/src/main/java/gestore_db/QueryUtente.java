@@ -28,7 +28,7 @@ public class QueryUtente implements UtenteDB {
 	public synchronized int inserisciUtente(String username, String password) {
 		int result = 0;
 		try {
-			Connection conn = DriverManager.getConnection(CreaDB.DB_URL);
+			Connection conn = DriverManager.getConnection(DatabaseManager.getIstanza().getUrl());
 			if (conn != null) {
 				DSLContext create = DSL.using(conn, SQLDialect.SQLITE);
 				UtenteRecord utente = new UtenteRecord(username, password);
@@ -51,7 +51,7 @@ public class QueryUtente implements UtenteDB {
 	public synchronized int eliminaUtente(String username) {
 		int result = 0;
 		try {
-			Connection conn = DriverManager.getConnection(CreaDB.DB_URL);
+			Connection conn = DriverManager.getConnection(DatabaseManager.getIstanza().getUrl());
 			if (conn != null) {
 				DSLContext delete = DSL.using(conn, SQLDialect.SQLITE);
 				result = delete.deleteFrom(Utente.UTENTE).where(Utente.UTENTE.USERNAME.eq(username)).execute();
@@ -72,7 +72,7 @@ public class QueryUtente implements UtenteDB {
 	public synchronized int cambiaPassword(String utente, String newPassword) {
 		int result = 0;
 		try {
-			Connection conn = DriverManager.getConnection(CreaDB.DB_URL);
+			Connection conn = DriverManager.getConnection(DatabaseManager.getIstanza().getUrl());
 			if (conn != null) {
 				DSLContext cambiaPW = DSL.using(conn, SQLDialect.SQLITE);
 				result = cambiaPW.update(Utente.UTENTE).set(Utente.UTENTE.PASSWORD, newPassword).

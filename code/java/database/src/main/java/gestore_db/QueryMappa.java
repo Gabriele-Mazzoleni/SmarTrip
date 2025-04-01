@@ -31,7 +31,7 @@ public class QueryMappa implements MappaDB{
 			String stringaLongitudine, String stringaTempoVisita, String stringaOraArrivo) {
 		int result = 0;
 		try {
-			Connection conn = DriverManager.getConnection(CreaDB.DB_URL);
+			Connection conn = DriverManager.getConnection(DatabaseManager.getIstanza().getUrl());
 			if (conn != null) {
 				DSLContext create = DSL.using(conn, SQLDialect.SQLITE);
 				MappaRecord mappa = new MappaRecord(nomeMappa, nomeUtente, giorno, stringaNome, stringaLatitudine,
@@ -55,7 +55,7 @@ public class QueryMappa implements MappaDB{
 	public synchronized int eliminaMappa(String nomeMappa, String nomeUtente) {
 		int result = 0;
 		try {
-			Connection conn = DriverManager.getConnection(CreaDB.DB_URL);
+			Connection conn = DriverManager.getConnection(DatabaseManager.getIstanza().getUrl());
 			if (conn != null) {
 				DSLContext delete = DSL.using(conn, SQLDialect.SQLITE);
 				result = delete.deleteFrom(Mappa.MAPPA).where(Mappa.MAPPA.NOMEMAPPA.eq(nomeMappa).

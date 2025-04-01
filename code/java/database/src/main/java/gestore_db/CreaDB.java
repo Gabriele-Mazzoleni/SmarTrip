@@ -9,19 +9,16 @@ import java.sql.*;
  */
 public class CreaDB {
 	
-	public static String DB_PATH = "../database/db/db.db3";
-	public static String DB_URL = "jdbc:sqlite:" + DB_PATH;
-
 	/**
 	 * Genera il database, se non è già presente
 	 * @throws IOException
 	 * @throws SQLException
 	 */
 	public void creaDB() throws IOException, SQLException {
-		if (new File(DB_PATH).exists()) {
+		if (new File(DatabaseManager.getIstanza().getPath()).exists()) {
 			System.out.println("DB gia' esistente");
 		} else {
-			DriverManager.getConnection(DB_URL);
+			DriverManager.getConnection(DatabaseManager.getIstanza().getUrl());
 			creaTabella();
 			System.out.println("DB creato");
 
@@ -34,7 +31,7 @@ public class CreaDB {
 	 * @throws SQLException
 	 */
 	public void creaTabella() throws IOException, SQLException {
-		Connection conn = DriverManager.getConnection(DB_URL);
+		Connection conn = DriverManager.getConnection(DatabaseManager.getIstanza().getUrl());
 		if (conn != null) {
 			Statement stmt = conn.createStatement();
 			String tabellaUtente = "CREATE TABLE UTENTE "
@@ -54,8 +51,6 @@ public class CreaDB {
 		}
 	}
 
-	public static void main(String[] args) throws IOException, SQLException {
-		DatabaseManager.getIstanza().getCreaDB().creaDB();
-	}
+	
 	
 }
