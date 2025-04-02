@@ -26,20 +26,28 @@ public class QueryUtente implements UtenteDB {
 	 */
 	@Override
 	public synchronized int inserisciUtente(String username, String password) {
-		int result = 0;
-		try {
-			Connection conn = DriverManager.getConnection(DatabaseManager.getIstanza().getUrl());
-			if (conn != null) {
-				DSLContext create = DSL.using(conn, SQLDialect.SQLITE);
-				UtenteRecord utente = new UtenteRecord(username, password);
-				result = create.insertInto(Utente.UTENTE).set(utente).execute();
-			}
-		} catch (SQLException e) {
-			System.out.println("Errore inserimento utente nel database");
-		}
-		
-		return result;
+	    int result = 0;
+	    try {
+	        Connection conn = DriverManager.getConnection(DatabaseManager.getIstanza().getUrl());
+	        if (conn != null) {
+	            DSLContext create = DSL.using(conn, SQLDialect.SQLITE);
+	            // Controllo se l'utente esiste già
+	            int count = create.selectCount()
+	                              .from(Utente.UTENTE)
+	                              .where(Utente.UTENTE.USERNAME.eq(username))
+	                              .fetchOne(0, int.class);       
+	            if (count == 0) { // Se l'utente non esiste, procedi con l'inserimento
+	                UtenteRecord utente = new UtenteRecord(username, password);
+	                result = create.insertInto(Utente.UTENTE).set(utente).execute();
+	            }
+	        }
+	    } catch (SQLException e) {
+	        System.out.println("Errore inserimento utente nel database");
+	    }
+	    
+	    return result;
 	}
+
 	
 	/**
 	 * Elimina utente

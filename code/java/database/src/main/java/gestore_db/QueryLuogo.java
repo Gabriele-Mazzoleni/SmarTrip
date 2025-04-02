@@ -35,11 +35,20 @@ public class QueryLuogo implements LuogoDB{
 		int result = 0;
 		try {
 			Connection conn = DriverManager.getConnection(DatabaseManager.getIstanza().getUrl());
-			if (conn != null) {
-				DSLContext create = DSL.using(conn, SQLDialect.SQLITE);
-				LuogoRecord luogo = new LuogoRecord(nome, latitudine, longitudine, citta, indirizzo, tipo, tempoVisita, immagine);
-				result = create.insertInto(Luogo.LUOGO).set(luogo).execute();
-			}
+	        if (conn != null) {
+	            DSLContext create = DSL.using(conn, SQLDialect.SQLITE);
+	            // Controllo se il luogo esiste già per lo stesso nome, latitudine e longitudine
+	            int count = create.selectCount()
+	                              .from(Luogo.LUOGO)
+	                              .where(Luogo.LUOGO.NOME.eq(nome)
+	                              .and(Luogo.LUOGO.LATITUDINE.eq(latitudine))
+	                              .and(Luogo.LUOGO.LONGITUDINE.eq(longitudine)))
+	                              .fetchOne(0, int.class);
+	            if (count == 0) { // Se il luogo non esiste, procedi con l'inserimento
+	                LuogoRecord luogo = new LuogoRecord(nome, latitudine, longitudine, citta, indirizzo, tipo, tempoVisita, immagine);
+	                result = create.insertInto(Luogo.LUOGO).set(luogo).execute();
+	            }
+	        }
 		} catch (SQLException e) {
 			System.out.println("Errore inserimento luogo nel database");
 		}

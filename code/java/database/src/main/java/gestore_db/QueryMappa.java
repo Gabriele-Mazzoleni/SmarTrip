@@ -32,12 +32,21 @@ public class QueryMappa implements MappaDB{
 		int result = 0;
 		try {
 			Connection conn = DriverManager.getConnection(DatabaseManager.getIstanza().getUrl());
-			if (conn != null) {
-				DSLContext create = DSL.using(conn, SQLDialect.SQLITE);
-				MappaRecord mappa = new MappaRecord(nomeMappa, nomeUtente, giorno, stringaNome, stringaLatitudine,
-						stringaLongitudine, stringaTempoVisita, stringaOraArrivo);
-				result = create.insertInto(Mappa.MAPPA).set(mappa).execute();
-			}
+		    if (conn != null) {
+		    	DSLContext create = DSL.using(conn, SQLDialect.SQLITE);    
+		        // Controllo se la mappa esiste già per lo stesso nome e utente
+		        int count = create.selectCount()
+		                          .from(Mappa.MAPPA)
+		                          .where(Mappa.MAPPA.NOMEMAPPA.eq(nomeMappa)
+		                          .and(Mappa.MAPPA.NOMEUTENTE.eq(nomeUtente)))
+		                          .fetchOne(0, int.class);    
+		         if (count == 0) { // Se la mappa non esiste, procedi con l'inserimento
+		        	 MappaRecord mappa = new MappaRecord(nomeMappa, nomeUtente, giorno, stringaNome, 
+		                                                    stringaLatitudine, stringaLongitudine, 
+		                                                    stringaTempoVisita, stringaOraArrivo);
+		             result = create.insertInto(Mappa.MAPPA).set(mappa).execute();
+		         }
+		     }
 		} catch (SQLException e) {
 			System.out.println("Errore inserimento mappa nel database");
 		}
