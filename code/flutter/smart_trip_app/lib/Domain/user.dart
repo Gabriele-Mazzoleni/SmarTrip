@@ -1,5 +1,5 @@
 class User{
-  String username;
+  final String username;
   final String password;
 
  User({
@@ -11,7 +11,5 @@ class User{
     username = (jsonMap['Username'] ?? ""),
     password = (jsonMap['Password'] ?? "");
 
-  void updateUsername(String value) {
-    username=value;
-  }
+
 }

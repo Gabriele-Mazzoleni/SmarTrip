@@ -52,7 +52,7 @@ class _SplashPageState extends State<SplashPage> {
                         style: FontStyles.signinText,
                         controller: _idController,
                         decoration: const InputDecoration(
-                          hintText: 'indirizzo IP server',
+                          hintText: 'indirizzo IP:porta',
                           hintStyle: FontStyles.signinText,
                           focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: AppColors.black),

@@ -157,6 +157,7 @@ Future<void> login() async {
                       signInErrorMessage = '';
                     });
                     //PER DEBUGGING GRAFICO, DA RIMUOVERE!!!!
+                    
                     var user= User(
                         username: 'Debugger',
                         password: 'PW',
@@ -238,11 +239,14 @@ Future<void> login() async {
                   ElevatedButton(
                     onPressed: () {
                       // TEMPORANEO, SOLO PER DEBUGGING!!!
+                      
                       var user= User(
                         username: 'Debugger',
                         password: 'PW',
                       );
                       navigateToMapSelectionPage(user,widget.ip);
+                      
+
 
                       //DA TESTARE!!
                       //login();
@@ -266,7 +270,7 @@ Future<void> login() async {
                             padding: const EdgeInsets.only(top: Sizes.smallPaddingSpace),
                             child: Text(
                               errorMessage,
-                              style: const TextStyle(color: AppColors.white),
+                              style: const TextStyle(color: AppColors.red),
                             ),
                           ),
                   const SizedBox(height:Sizes.stdPaddingSpace),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smart_trip_app/Domain/mappa.dart';
 import 'package:smart_trip_app/Domain/user.dart';
 import 'package:smart_trip_app/Presentation/Pages/login_page.dart';
 //import 'package:smart_trip_app/Presentation/Controllers/map_selection_page_controller.dart';
@@ -19,6 +20,25 @@ class MapSelectionPage extends StatefulWidget {
 class _MapSelectionPageState extends State<MapSelectionPage>{
 
   bool isLoading=false;
+  late List<Mappa> mappeUtente;
+
+    @override
+  void initState() {
+    super.initState();
+    _caricaMappe(widget.user.username);
+  }
+
+  Future<void> _caricaMappe(String mail) async {
+    setState(() {
+      isLoading = true;
+    });
+
+    //mappeUtente = await retrieveUserMaps(widget.user.username,widget.ip);
+
+    setState(() {
+      isLoading = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +76,19 @@ class _MapSelectionPageState extends State<MapSelectionPage>{
           ),
         ),
         //corpo della pagina
-
+        Expanded(
+          child: isLoading
+            ? const Center(
+                        child: CircularProgressIndicator(
+                          color: AppColors.red,
+                        ),
+                    )
+            : ListView.builder(
+                itemBuilder: (BuildContext context, int index) {  
+                  //qui compare la lista di mappe, da implementare una volta realizzata l'API adatta
+                },
+              ),
+        ),
         //footer della pagina
         Container(
           decoration: const BoxDecoration(

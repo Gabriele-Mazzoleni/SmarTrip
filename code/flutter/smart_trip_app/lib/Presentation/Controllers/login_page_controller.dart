@@ -13,7 +13,8 @@ String hashPassword(String password) {
 
 //metodo per la ricerca dei dati durante il login
 Future<User> userSearcher(String username, String password, String indirizzo) async {
-  var url = Uri.parse(indirizzo);
+  String apiUrl='http://$indirizzo/utenti/login';
+  var url = Uri.parse(apiUrl);
   String psw= hashPassword(password); //convertiamo la password in stringa hash
 
   final http.Response response = await http.post(
@@ -26,9 +27,6 @@ Future<User> userSearcher(String username, String password, String indirizzo) as
       'password': psw,
     }),
   );
-
-  //print('Response status: ${response.statusCode}');
-  //print('Response body: ${response.body}');  
   
   if (response.statusCode == 200) { //se tutto va bene accedo all'app con i dati che ho inserito
     var user= User(
@@ -44,7 +42,8 @@ Future<User> userSearcher(String username, String password, String indirizzo) as
 
 //metodo per l'inserimento dei dati durante il signin
 Future<User> userAdder(String username, String password, String indirizzo) async {
-  var url = Uri.parse(indirizzo);
+  String apiUrl='http://$indirizzo/utenti/signin';
+  var url = Uri.parse(apiUrl);  
   String psw= hashPassword(password); //convertiamo la password in stringa hash
 
    final http.Response response = await http.post(
@@ -58,9 +57,6 @@ Future<User> userAdder(String username, String password, String indirizzo) async
       'password': psw,
     }),
   );
-
-  //print('Response status: ${response.statusCode}');
-  //print('Response body: ${response.body}');  
 
   if (response.statusCode >= 200 && response.statusCode<300) {
     var user= User(
