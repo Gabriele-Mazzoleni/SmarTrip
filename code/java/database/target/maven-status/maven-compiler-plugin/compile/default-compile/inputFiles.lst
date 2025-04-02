@@ -1,19 +1,20 @@
-C:\Users\Asus\Documents\Università magistrale\1o anno - Semestre 1\Progettazione, algoritmi e computabilità\Progetto\Git\code\java\database\src\main\java\gestore_db\AggiornamentiJooq.java
-C:\Users\Asus\Documents\Università magistrale\1o anno - Semestre 1\Progettazione, algoritmi e computabilità\Progetto\Git\code\java\database\src\main\java\gestore_db\CreaDB.java
-C:\Users\Asus\Documents\Università magistrale\1o anno - Semestre 1\Progettazione, algoritmi e computabilità\Progetto\Git\code\java\database\src\main\java\gestore_db\GeneraJooq.java
-C:\Users\Asus\Documents\Università magistrale\1o anno - Semestre 1\Progettazione, algoritmi e computabilità\Progetto\Git\code\java\database\src\main\java\gestore_db\InserimentiJooq.java
-C:\Users\Asus\Documents\Università magistrale\1o anno - Semestre 1\Progettazione, algoritmi e computabilità\Progetto\Git\code\java\database\src\main\java\gestore_db\PopolaDB.java
-C:\Users\Asus\Documents\Università magistrale\1o anno - Semestre 1\Progettazione, algoritmi e computabilità\Progetto\Git\code\java\database\src\main\java\gestore_db\RimozioniJooq.java
-C:\Users\Asus\Documents\Università magistrale\1o anno - Semestre 1\Progettazione, algoritmi e computabilità\Progetto\Git\code\java\database\src\main\java\interfacce\Aggiornamenti.java
-C:\Users\Asus\Documents\Università magistrale\1o anno - Semestre 1\Progettazione, algoritmi e computabilità\Progetto\Git\code\java\database\src\main\java\interfacce\Inserimenti.java
-C:\Users\Asus\Documents\Università magistrale\1o anno - Semestre 1\Progettazione, algoritmi e computabilità\Progetto\Git\code\java\database\src\main\java\interfacce\Rimozioni.java
-C:\Users\Asus\Documents\Università magistrale\1o anno - Semestre 1\Progettazione, algoritmi e computabilità\Progetto\Git\code\java\database\src\main\java\jooq_db\jooq\generated\DefaultCatalog.java
-C:\Users\Asus\Documents\Università magistrale\1o anno - Semestre 1\Progettazione, algoritmi e computabilità\Progetto\Git\code\java\database\src\main\java\jooq_db\jooq\generated\DefaultSchema.java
-C:\Users\Asus\Documents\Università magistrale\1o anno - Semestre 1\Progettazione, algoritmi e computabilità\Progetto\Git\code\java\database\src\main\java\jooq_db\jooq\generated\Keys.java
-C:\Users\Asus\Documents\Università magistrale\1o anno - Semestre 1\Progettazione, algoritmi e computabilità\Progetto\Git\code\java\database\src\main\java\jooq_db\jooq\generated\Tables.java
-C:\Users\Asus\Documents\Università magistrale\1o anno - Semestre 1\Progettazione, algoritmi e computabilità\Progetto\Git\code\java\database\src\main\java\jooq_db\jooq\generated\tables\Luogo.java
-C:\Users\Asus\Documents\Università magistrale\1o anno - Semestre 1\Progettazione, algoritmi e computabilità\Progetto\Git\code\java\database\src\main\java\jooq_db\jooq\generated\tables\Mappa.java
-C:\Users\Asus\Documents\Università magistrale\1o anno - Semestre 1\Progettazione, algoritmi e computabilità\Progetto\Git\code\java\database\src\main\java\jooq_db\jooq\generated\tables\records\LuogoRecord.java
-C:\Users\Asus\Documents\Università magistrale\1o anno - Semestre 1\Progettazione, algoritmi e computabilità\Progetto\Git\code\java\database\src\main\java\jooq_db\jooq\generated\tables\records\MappaRecord.java
-C:\Users\Asus\Documents\Università magistrale\1o anno - Semestre 1\Progettazione, algoritmi e computabilità\Progetto\Git\code\java\database\src\main\java\jooq_db\jooq\generated\tables\records\UtenteRecord.java
-C:\Users\Asus\Documents\Università magistrale\1o anno - Semestre 1\Progettazione, algoritmi e computabilità\Progetto\Git\code\java\database\src\main\java\jooq_db\jooq\generated\tables\Utente.java
+C:\Dati\Unibg_anno_4\Progetto_PAC\SmarTrip\code\java\database\src\main\java\gestore_db\CreaDB.java
+C:\Dati\Unibg_anno_4\Progetto_PAC\SmarTrip\code\java\database\src\main\java\gestore_db\DatabaseManager.java
+C:\Dati\Unibg_anno_4\Progetto_PAC\SmarTrip\code\java\database\src\main\java\gestore_db\GeneraJooq.java
+C:\Dati\Unibg_anno_4\Progetto_PAC\SmarTrip\code\java\database\src\main\java\gestore_db\PopolaDB.java
+C:\Dati\Unibg_anno_4\Progetto_PAC\SmarTrip\code\java\database\src\main\java\gestore_db\QueryLuogo.java
+C:\Dati\Unibg_anno_4\Progetto_PAC\SmarTrip\code\java\database\src\main\java\gestore_db\QueryMappa.java
+C:\Dati\Unibg_anno_4\Progetto_PAC\SmarTrip\code\java\database\src\main\java\gestore_db\QueryUtente.java
+C:\Dati\Unibg_anno_4\Progetto_PAC\SmarTrip\code\java\database\src\main\java\interfacce\LuogoDB.java
+C:\Dati\Unibg_anno_4\Progetto_PAC\SmarTrip\code\java\database\src\main\java\interfacce\MappaDB.java
+C:\Dati\Unibg_anno_4\Progetto_PAC\SmarTrip\code\java\database\src\main\java\interfacce\UtenteDB.java
+C:\Dati\Unibg_anno_4\Progetto_PAC\SmarTrip\code\java\database\src\main\java\jooq_db\jooq\generated\DefaultCatalog.java
+C:\Dati\Unibg_anno_4\Progetto_PAC\SmarTrip\code\java\database\src\main\java\jooq_db\jooq\generated\DefaultSchema.java
+C:\Dati\Unibg_anno_4\Progetto_PAC\SmarTrip\code\java\database\src\main\java\jooq_db\jooq\generated\Keys.java
+C:\Dati\Unibg_anno_4\Progetto_PAC\SmarTrip\code\java\database\src\main\java\jooq_db\jooq\generated\Tables.java
+C:\Dati\Unibg_anno_4\Progetto_PAC\SmarTrip\code\java\database\src\main\java\jooq_db\jooq\generated\tables\Luogo.java
+C:\Dati\Unibg_anno_4\Progetto_PAC\SmarTrip\code\java\database\src\main\java\jooq_db\jooq\generated\tables\Mappa.java
+C:\Dati\Unibg_anno_4\Progetto_PAC\SmarTrip\code\java\database\src\main\java\jooq_db\jooq\generated\tables\records\LuogoRecord.java
+C:\Dati\Unibg_anno_4\Progetto_PAC\SmarTrip\code\java\database\src\main\java\jooq_db\jooq\generated\tables\records\MappaRecord.java
+C:\Dati\Unibg_anno_4\Progetto_PAC\SmarTrip\code\java\database\src\main\java\jooq_db\jooq\generated\tables\records\UtenteRecord.java
+C:\Dati\Unibg_anno_4\Progetto_PAC\SmarTrip\code\java\database\src\main\java\jooq_db\jooq\generated\tables\Utente.java

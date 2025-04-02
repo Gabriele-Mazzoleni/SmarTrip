@@ -1,0 +1,11 @@
+modelli\UtenteRepository.class
+modelli\GiornoVisita.class
+modelli\ItinerarioRepository.class
+modelli\LuogoRepository.class
+interfacce\GestoreLuogo.class
+modelli\Utente.class
+modelli\LuogoEsteso.class
+interfacce\GestoreUtente.class
+modelli\Itinerario.class
+modelli\Luogo.class
+modelli\Mappa.class
