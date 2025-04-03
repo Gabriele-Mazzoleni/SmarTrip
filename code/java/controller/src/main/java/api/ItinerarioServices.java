@@ -106,7 +106,7 @@ public class ItinerarioServices {
 	          }
 	      }
 	  
-	      return repo.salva(tabelleDiMarcia);
+	      return repo.salva(i.getUtente(), tabelleDiMarcia);
 	  }
 	  
 	  private int convertTimeToSeconds(String time) {

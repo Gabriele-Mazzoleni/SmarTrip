@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class Itinerario {
 	
+	private String utente;
 	private double latA;
     private double lonA;
     private int nGiorni;
@@ -59,12 +60,14 @@ public class Itinerario {
 	
 	@JsonCreator
     public Itinerario(
+    		@JsonProperty("utente") String utente,
             @JsonProperty("latA") double latA,
             @JsonProperty("lonA") double lonA,
             @JsonProperty("nGiorni") int nGiorni,
             @JsonProperty("velocitaMedia") double velocitaMedia,
             @JsonProperty("giorni") List<GiornoVisita> giorni,
             @JsonProperty("luoghi") List<Luogo> luoghi) {
+		this.utente = utente;
 		this.latA = latA;
         this.lonA = lonA;
         this.nGiorni = nGiorni;
@@ -72,6 +75,10 @@ public class Itinerario {
         this.giorni = giorni;
         this.luoghi = luoghi;
     }
+	
+	public String getUtente() {
+		return utente;
+	}
 
 	public GiornoVisita getGiorno(int numeroGiorno) { 
 		return giorni.get(numeroGiorno); 
