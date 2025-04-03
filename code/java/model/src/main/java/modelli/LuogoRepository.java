@@ -6,6 +6,7 @@ import java.util.List;
 import interfacce.GestoreLuogo;
 
 public class LuogoRepository implements GestoreLuogo {
+	
 	List<Luogo> lista = new ArrayList<>();
 
 	@Override

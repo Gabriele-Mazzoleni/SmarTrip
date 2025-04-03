@@ -5,7 +5,9 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-
+/**
+ * Classe modello dell'itinerario
+ */
 public class Itinerario {
 	
 	private double latA;
@@ -16,15 +18,15 @@ public class Itinerario {
     private double velocitaMedia;
 	
 	/*
-	 * esempio di jason da inviare: 
+	 * Esempio di jason da inviare: 
 	 * {
-  		"latA": 45.4642,
-  		"lonA": 9.1900,
-  		"nGiorni": 2,
-  		"velocitaMedia": 1.4,
-  		"giorni": [
+    "latA": 45.4642,
+  	"lonA": 9.1900,
+  	"nGiorni": 2,
+  	"velocitaMedia": 1.4,
+  	"giorni": [
 	    		{
-	      			"orarioDiInizioVisita": "09:00",
+	      			"orarioDiInizioVisita": "11:40",
   					"devoPranzare" : true,
   					"orarioPranzo": "12:00",
 	      			"pausa": 1800,
@@ -38,7 +40,7 @@ public class Itinerario {
 	      			"tempoVisita": 3600
 	    		}
 	  		],
-  		"luoghi": [
+  	"luoghi": [
 	    		{
 	      			"nome": "Duomo di Milano",
 	      			"latitudine": 45.4641,
@@ -71,17 +73,27 @@ public class Itinerario {
         this.luoghi = luoghi;
     }
 
-    // Getters
+	public GiornoVisita getGiorno(int numeroGiorno) { 
+		return giorni.get(numeroGiorno); 
+	}
 	
-	public GiornoVisita getGiorno(int numeroGiorno) { return giorni.get(numeroGiorno); }
-	
-    public double getLatA() { return latA; }
+    public double getLatA() { 
+    	return latA; 
+    }
     
-    public double getLonA() { return lonA; }
+    public double getLonA() { 
+    	return lonA; 
+    }
     
-    public int getNumeroGiorni() { return nGiorni; }
+    public int getNumeroGiorni() { 
+    	return nGiorni; 
+    }
     
-    public List<Luogo> getLuoghi() { return luoghi; }
+    public List<Luogo> getLuoghi() { 
+    	return luoghi; 
+    }
     
-    public double getVelocitaMedia() { return velocitaMedia; }
+    public double getVelocitaMedia() { 
+    	return velocitaMedia; 
+    }
 }

@@ -122,11 +122,6 @@ public class ItinerarioServices {
 	      return String.format("%02d:%02d", hours, minutes);
 	  }
 
-
-	public Map<Integer, List<LuogoEsteso>> getAllItinerari() {
-		return repo.getAll();
-	}
-
 	private static double calcolaDistanza(double lat1, double lon1, double lat2, double lon2) {
 	    final int R = 6371000; // Raggio della Terra in metri
 	    double dLat = Math.toRadians(lat2 - lat1);
@@ -137,4 +132,5 @@ public class ItinerarioServices {
 	    double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 	    return R * c; // distanza in metri
 	}
+	
 }
