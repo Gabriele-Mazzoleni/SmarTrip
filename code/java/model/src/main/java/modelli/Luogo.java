@@ -4,56 +4,46 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Classe modello del luogo 
+ * Classe modello del luogo, con tutti gli attributi nel database 
  */
-public class Luogo {
+public class Luogo extends LuogoRidotto{
 	
-	private String nome;
-    private double latitudine;
-    private double longitudine;
-    private double tempoDiVisita;
+    private String citta;
+    private String indirizzo;
+    private String tipo;
+    private String immagine;
     
     @JsonCreator
 	public Luogo(@JsonProperty("nome") String n, 
 			@JsonProperty("latitudine") double la, 
-			@JsonProperty("longitudine") double lo, 
-			@JsonProperty("tempoDiVisita") double t) {
-    	this.setNome(n);
-    	this.setLatitudine(la);
-    	this.setLongitudine(lo);
-    	this.setTempoDiVisita(t);
+			@JsonProperty("longitudine") double lo,
+			@JsonProperty("citta") String c,
+			@JsonProperty("indirizzo") String i,
+			@JsonProperty("tipo") String t,
+			@JsonProperty("tempoDiVisita") int tv,
+			@JsonProperty("immagine") String img) {
+    	super(n, la, lo, tv);
+    	this.citta = c;
+    	this.indirizzo = i;
+    	this.tipo = t;
+    	this.immagine = img;
 	}
-    
-    public void setNome(String n) {
-    	this.nome = n;
-    }
-    
-    public void setLatitudine(double lat) {
-    	this.latitudine = lat;
-    }
-    
-    public void setLongitudine(double lon) {
-    	this.longitudine = lon;
-    }
-    
-    public void setTempoDiVisita(double tv) {
-    	this.tempoDiVisita = tv;
-    }
-    
-    public String getNome() {
-        return nome;
-    }
 
-    public double getLatitudine() {
-        return latitudine;
-    }
+	public String getCitta() {
+		return citta;
+	}
 
-    public double getLongitudine() {
-        return longitudine;
-    }
+	public String getIndirizzo() {
+		return indirizzo;
+	}
 
-    public double getTempoDiVisita() {
-        return tempoDiVisita;
-    }
+	public String getTipo() {
+		return tipo;
+	}
+
+	public String getImmagine() {
+		return immagine;
+	}     
     
 }
+

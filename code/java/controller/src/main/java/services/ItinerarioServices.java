@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import modelli.GiornoVisita;
 import modelli.Itinerario;
-import modelli.Luogo;
+import modelli.LuogoRidotto;
 import modelli.LuogoEsteso;
 import repository.ItinerarioRepository;
 
@@ -21,20 +21,20 @@ public class ItinerarioServices {
 		//tempo medio modificabile in futuro o in caso aggiungibile al Jason
 		String tempoMedioPerPranzare = "01:45";
 		// Creazione del grafo
-	      Graph<Luogo, DefaultWeightedEdge> grafo = new SimpleWeightedGraph<>(DefaultWeightedEdge.class);
+	      Graph<LuogoRidotto, DefaultWeightedEdge> grafo = new SimpleWeightedGraph<>(DefaultWeightedEdge.class);
 	  
 	      // Nodo iniziale (A)
-	      Luogo nodoA = new Luogo("Soggiorno", i.getLatA(), i.getLonA(), 0);
+	      LuogoRidotto nodoA = new LuogoRidotto("Soggiorno", i.getLatA(), i.getLonA(), 0);
 	      grafo.addVertex(nodoA);
 	  
 	      // Aggiungi i luoghi come nodi nel grafo
-	      for (Luogo luogo : i.getLuoghi()) {
+	      for (LuogoRidotto luogo : i.getLuoghi()) {
 	          grafo.addVertex(luogo);
 	      }
 	  
 	      // Aggiungi archi con pesi basati sulla distanza e il tempo di percorrenza
-	      for (Luogo luogo1 : grafo.vertexSet()) {
-	          for (Luogo luogo2 : grafo.vertexSet()) {
+	      for (LuogoRidotto luogo1 : grafo.vertexSet()) {
+	          for (LuogoRidotto luogo2 : grafo.vertexSet()) {
 	              if (!luogo1.equals(luogo2)) {
 	                  double distanza = calcolaDistanza(luogo1.getLatitudine(), luogo1.getLongitudine(), 
 	                                                    luogo2.getLatitudine(), luogo2.getLongitudine());
@@ -63,23 +63,23 @@ public class ItinerarioServices {
 	  
 	          List<LuogoEsteso> percorso = new ArrayList<>();
 	          int tempoTotale = tempoInizio;
-	          Luogo[] nodoCorrente = {nodoA};
+	          LuogoRidotto[] nodoCorrente = {nodoA};
 	  
 	          percorso.add(new LuogoEsteso(nodoA, convertSecondsToTime(tempoTotale))); // Partenza
 	  
 	          while (true) {
 	              // Trova il nodo più vicino rispettando i vincoli
-	              Optional<Luogo> prossimoLuogo = grafo.vertexSet().stream()
+	              Optional<LuogoRidotto> prossimoLuogo = grafo.vertexSet().stream()
 	                      .filter(luogo -> !percorso.stream().anyMatch(le -> le.getLuogo().equals(luogo)))
 	                      .min(Comparator.comparingDouble(luogo -> grafo.getEdgeWeight(grafo.getEdge(nodoCorrente[0], luogo)) + luogo.getTempoDiVisita()));
 	  
 	              if (prossimoLuogo.isEmpty()) break;
 	  
-	              Luogo luogoScelto = prossimoLuogo.get();
+	              LuogoRidotto luogoScelto = prossimoLuogo.get();
 	              double tempoPercorrenza = grafo.getEdgeWeight(grafo.getEdge(nodoCorrente[0], luogoScelto));
 	              if(tempoTotale >= convertTimeToSeconds(giornoAttuale.getOrarioPranzo()) && devoPranzare) {
 	            	  devoPranzare = false;
-	            	  percorso.add(new LuogoEsteso(new Luogo("Ricerca risotrante",nodoCorrente[0].getLatitudine(),nodoCorrente[0].getLongitudine(),convertTimeToSeconds(tempoMedioPerPranzare)), convertSecondsToTime(tempoTotale)));
+	            	  percorso.add(new LuogoEsteso(new LuogoRidotto("Ricerca risotrante",nodoCorrente[0].getLatitudine(),nodoCorrente[0].getLongitudine(),convertTimeToSeconds(tempoMedioPerPranzare)), convertSecondsToTime(tempoTotale)));
 	            	  tempoTotale+= convertTimeToSeconds(tempoMedioPerPranzare);
 	              }
 	              if (tempoTotale + tempoPercorrenza + luogoScelto.getTempoDiVisita() > (giornoAttuale.getTempoVisita()+tempoInizio)) break;

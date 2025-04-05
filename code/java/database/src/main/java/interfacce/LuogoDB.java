@@ -1,6 +1,7 @@
 package interfacce;
 
 import java.util.List;
+import java.util.Map;
 
 public interface LuogoDB {
 	
@@ -36,6 +37,13 @@ public interface LuogoDB {
 	 * @return lista di città, se vuota errore
 	 */
 	public List<String> ritornaCitta();
+	
+	/**
+	 * Restituisce tutti i luoghi in una città
+	 * @param citta
+	 * @return lista di luoghi con attributi, se vuota errore
+	 */
+	public List<Map<String, Object>> ritornaLuoghiCitta(String citta);
 
 
 }

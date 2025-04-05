@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -45,7 +46,18 @@ public class TestLuogo {
     }
     
     @Test
-    public void test203EliminaLuogo() {
+    public void test203RitornaLuoghiCitta() {
+        String nomeCitta = "Città Test";
+        List<Map<String, Object>> luoghi = DatabaseManager.getIstanza().getQueryLuogo().ritornaLuoghiCitta(nomeCitta);
+        // Verifica la lista contenga almeno un luogo con nome
+        boolean trovatoLuogo = luoghi.stream()
+            .anyMatch(luogo -> luogo.containsKey("nome") && luogo.get("nome").equals("Luogo di Test"));
+        assertTrue(trovatoLuogo);
+    }
+
+    
+    @Test
+    public void test210EliminaLuogo() {
         int result = DatabaseManager.getIstanza().getQueryLuogo().eliminaLuogo("Luogo di Test", 0.0, 0.0);
         assertEquals(1, result);
     }

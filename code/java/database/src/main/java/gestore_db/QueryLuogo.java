@@ -4,10 +4,13 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.jooq.DSLContext;
 import org.jooq.Record1;
+import org.jooq.Record8;
 import org.jooq.Result;
 import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
@@ -85,10 +88,7 @@ public class QueryLuogo implements LuogoDB{
 	}
 	
 	/**
-	 * Restituisce tutte le città associate a un determinato luogo
-	 * @param nome del luogo
-	 * @param latitudine
-	 * @param longitudine
+	 * Restituisce tutte le città
 	 * @return lista di città, se vuota errore
 	 */
 	@Override
@@ -112,6 +112,49 @@ public class QueryLuogo implements LuogoDB{
 	    return citta;
 	}
 
-
+	/**
+	 * Restituisce tutti i luoghi in una città
+	 * @param citta
+	 * @return lista di luoghi con attributi, se vuota errore
+	 */
+	public List<Map<String, Object>> ritornaLuoghiCitta(String cittaInput) {
+	    List<Map<String, Object>> luoghi = new ArrayList<>();
+	    try {
+	        Connection conn = DriverManager.getConnection(DatabaseManager.getIstanza().getUrl());
+	        if (conn != null) {
+	            DSLContext create = DSL.using(conn, SQLDialect.SQLITE);
+	            Result<Record8<String, Double, Double, String, String, String, Integer, String>> result = create
+	                .select(
+	                	Luogo.LUOGO.NOME,
+	                	Luogo.LUOGO.LATITUDINE,
+	                	Luogo.LUOGO.LONGITUDINE,
+	                	Luogo.LUOGO.CITTA,
+	                	Luogo.LUOGO.INDIRIZZO,
+	                	Luogo.LUOGO.TIPO,
+	                    Luogo.LUOGO.TEMPOVISITA,
+	                    Luogo.LUOGO.IMMAGINE
+	                )
+	                .from(Luogo.LUOGO)
+	                .where(Luogo.LUOGO.CITTA.eq(cittaInput))
+	                .fetch();
+	            for (Record8<String, Double, Double, String, String, String, Integer, String> record : result) {
+	                Map<String, Object> luogo = new HashMap<>();
+	                luogo.put("nome", record.value1());
+	                luogo.put("latitudine", record.value2());
+	                luogo.put("longitudine", record.value3());
+	                luogo.put("citta", record.value4());
+	                luogo.put("indirizzo", record.value5());
+	                luogo.put("tipo", record.value6());
+	                luogo.put("tempoDiVisita", record.value7());
+	                luogo.put("immagine", record.value8());
+	                luoghi.add(luogo);
+	            }
+	        }
+	    } catch (SQLException e) {
+	        System.out.println("Errore durante il recupero dei luoghi dal database");
+	    }
+	    
+	    return luoghi;
+	}
 
 }

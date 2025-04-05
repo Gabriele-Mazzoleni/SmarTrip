@@ -15,7 +15,7 @@ public class Itinerario {
     private double lonA;
     private int nGiorni;
     private List<GiornoVisita> giorni;
-    private List<Luogo> luoghi;
+    private List<LuogoRidotto> luoghi;
     private double velocitaMedia;
 	
 	/*
@@ -66,7 +66,7 @@ public class Itinerario {
             @JsonProperty("nGiorni") int nGiorni,
             @JsonProperty("velocitaMedia") double velocitaMedia,
             @JsonProperty("giorni") List<GiornoVisita> giorni,
-            @JsonProperty("luoghi") List<Luogo> luoghi) {
+            @JsonProperty("luoghi") List<LuogoRidotto> luoghi) {
 		this.utente = utente;
 		this.latA = latA;
         this.lonA = lonA;
@@ -96,7 +96,7 @@ public class Itinerario {
     	return nGiorni; 
     }
     
-    public List<Luogo> getLuoghi() { 
+    public List<LuogoRidotto> getLuoghi() { 
     	return luoghi; 
     }
     

@@ -85,15 +85,9 @@ public class Luogo extends TableImpl<LuogoRecord> {
     public final TableField<LuogoRecord, Integer> TEMPOVISITA = createField(DSL.name("TEMPOVISITA"), SQLDataType.INTEGER, this, "");
 
     /**
-     * @deprecated Unknown data type. If this is a qualified, user-defined type,
-     * it may have been excluded from code generation. If this is a built-in
-     * type, you can define an explicit {@link org.jooq.Binding} to specify how
-     * this type should be handled. Deprecation can be turned off using
-     * {@literal <deprecationOnUnknownTypes/>} in your code generator
-     * configuration.
+     * The column <code>LUOGO.IMMAGINE</code>.
      */
-    @Deprecated
-    public final TableField<LuogoRecord, Object> IMMAGINE = createField(DSL.name("IMMAGINE"), org.jooq.impl.DefaultDataType.getDefaultDataType("\"STRING\""), this, "");
+    public final TableField<LuogoRecord, String> IMMAGINE = createField(DSL.name("IMMAGINE"), SQLDataType.CLOB, this, "");
 
     private Luogo(Name alias, Table<LuogoRecord> aliased) {
         this(alias, aliased, null);
@@ -182,14 +176,14 @@ public class Luogo extends TableImpl<LuogoRecord> {
     // -------------------------------------------------------------------------
 
     @Override
-    public Row8<String, Double, Double, String, String, String, Integer, Object> fieldsRow() {
+    public Row8<String, Double, Double, String, String, String, Integer, String> fieldsRow() {
         return (Row8) super.fieldsRow();
     }
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
-    public <U> SelectField<U> mapping(Function8<? super String, ? super Double, ? super Double, ? super String, ? super String, ? super String, ? super Integer, ? super Object, ? extends U> from) {
+    public <U> SelectField<U> mapping(Function8<? super String, ? super Double, ? super Double, ? super String, ? super String, ? super String, ? super Integer, ? super String, ? extends U> from) {
         return convertFrom(Records.mapping(from));
     }
 
@@ -197,7 +191,7 @@ public class Luogo extends TableImpl<LuogoRecord> {
      * Convenience mapping calling {@link SelectField#convertFrom(Class,
      * Function)}.
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function8<? super String, ? super Double, ? super Double, ? super String, ? super String, ? super String, ? super Integer, ? super Object, ? extends U> from) {
+    public <U> SelectField<U> mapping(Class<U> toType, Function8<? super String, ? super Double, ? super Double, ? super String, ? super String, ? super String, ? super Integer, ? super String, ? extends U> from) {
         return convertFrom(toType, Records.mapping(from));
     }
 }

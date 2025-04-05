@@ -1,11 +1,3 @@
-controller\GrafoAPI$Luogo.class
 server\App.class
 interfacce\FunzioniLuogo.class
 interfacce\FunzioniUtente.class
-api\ControllerUtente.class
-api\ControllerItinerario.class
-api\ControllerLuogo.class
-api\LuogoServices.class
-api\ItinerarioServices.class
-api\UtenteServices.class
-controller\GrafoAPI.class
