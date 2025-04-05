@@ -1,9 +1,11 @@
 package test_db;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -30,14 +32,20 @@ public class TestLuogo {
     }
 
     @Test
-    public void test201InserimentoLuogo() {
+    public void test201InserisciLuogo() {
         int result = DatabaseManager.getIstanza().getQueryLuogo().inserisciLuogo("Luogo di Test", 0.0, 0.0,
                 "Città Test", "Indirizzo Test", "Test", 1000, "url");
         assertEquals(1, result);
     }
     
     @Test
-    public void test202RimozioneUtente() {
+    public void test202RitornaCitta() {
+    	List<String> citta = DatabaseManager.getIstanza().getQueryLuogo().ritornaCitta();
+    	assertTrue(citta.contains("Città Test"));
+    }
+    
+    @Test
+    public void test203EliminaLuogo() {
         int result = DatabaseManager.getIstanza().getQueryLuogo().eliminaLuogo("Luogo di Test", 0.0, 0.0);
         assertEquals(1, result);
     }

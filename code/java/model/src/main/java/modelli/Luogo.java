@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Classe modello del luogo (utile nella creazione delle mappe)
+ * Classe modello del luogo 
  */
 public class Luogo {
 	
@@ -14,8 +14,10 @@ public class Luogo {
     private double tempoDiVisita;
     
     @JsonCreator
-	public Luogo(@JsonProperty("nome") String n, @JsonProperty("latitudine") double la, 
-			@JsonProperty("longitudine") double lo, @JsonProperty("tempoDiVisita") double t) {
+	public Luogo(@JsonProperty("nome") String n, 
+			@JsonProperty("latitudine") double la, 
+			@JsonProperty("longitudine") double lo, 
+			@JsonProperty("tempoDiVisita") double t) {
     	this.setNome(n);
     	this.setLatitudine(la);
     	this.setLongitudine(lo);
@@ -53,4 +55,5 @@ public class Luogo {
     public double getTempoDiVisita() {
         return tempoDiVisita;
     }
+    
 }

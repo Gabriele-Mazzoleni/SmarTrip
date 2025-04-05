@@ -103,4 +103,5 @@ public class Itinerario {
     public double getVelocitaMedia() { 
     	return velocitaMedia; 
     }
+    
 }

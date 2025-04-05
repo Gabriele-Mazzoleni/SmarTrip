@@ -1,11 +1,15 @@
-package modelli;
+package repository;
+
+import org.springframework.stereotype.Repository;
 
 import gestore_db.DatabaseManager;
 import interfacce.GestoreUtente;
+import modelli.Utente;
 
 /**
  * Permette di usare le funzioni nel progetto database
  */
+@Repository
 public class UtenteRepository implements GestoreUtente {
 
 	/**
@@ -29,7 +33,5 @@ public class UtenteRepository implements GestoreUtente {
 		}
 		else return false;
 	}
-
-
 	
 }

@@ -1,4 +1,4 @@
-package api;
+package controller;
 
 import java.util.Collections;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,16 +7,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import interfacce.FunzioniUtente;
 import modelli.Utente;
+import services.UtenteServices;
 
 
 @RestController
 @RequestMapping("/utenti")
-public class ControllerUtente implements FunzioniUtente{
+public class UtenteController implements FunzioniUtente{
 
 	@Autowired
 	private UtenteServices service;

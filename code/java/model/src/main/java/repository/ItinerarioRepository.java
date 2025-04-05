@@ -1,9 +1,14 @@
-package modelli;
+package repository;
 
 import java.util.*;
 
+import org.springframework.stereotype.Repository;
 
+import modelli.LuogoEsteso;
+
+@Repository
 public class ItinerarioRepository {
+	
 	Map<Integer, List<LuogoEsteso>> tabelleDiMarcia = new HashMap<>();
 
 	public Map<Integer, List<LuogoEsteso>> salva(String utente, Map<Integer, List<LuogoEsteso>> m){

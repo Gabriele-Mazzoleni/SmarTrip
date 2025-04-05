@@ -30,14 +30,14 @@ public class TestMappa {
     }
 	
     @Test
-    public void test301InserimentoLuogo() {
+    public void test301InserisciMappa() {
         int result = DatabaseManager.getIstanza().getQueryMappa().inserisciMappa("Mappa di Test", "Tester", 1,
                 "Nomi", "Latitudini", "Longitudini", "Tempi di visita", "Orari di arrivo");
         assertEquals(1, result);
     }
     
     @Test
-    public void test302RimozioneUtente() {
+    public void test302EliminaMappa() {
         int result = DatabaseManager.getIstanza().getQueryMappa().eliminaMappa("Mappa di Test", "Tester");
         assertEquals(1, result);
     }

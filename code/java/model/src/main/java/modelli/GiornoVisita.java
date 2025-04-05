@@ -3,6 +3,9 @@ package modelli;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Classe modello del giorno di visita
+ */
 public class GiornoVisita {
     private String orarioDiInizioVisita;
     private boolean devoPranzare;
@@ -23,12 +26,25 @@ public class GiornoVisita {
         this.pausa = pausa;
         this.tempoVisita = tempoVisita;
     }
-
-    // Getters
-
-	public boolean getDevoPranzare() { return devoPranzare; }
-	public String getOrarioPranzo() { return orarioPranzo; }
-    public String getOrarioDiInizioVisita() { return orarioDiInizioVisita; }
-    public double getPausa() { return pausa; }
-    public double getTempoVisita() { return tempoVisita; }
+    
+	public boolean getDevoPranzare() { 
+		return devoPranzare; 
+	}
+	
+	public String getOrarioPranzo() { 
+		return orarioPranzo; 
+	}
+	
+    public String getOrarioDiInizioVisita() { 
+    	return orarioDiInizioVisita; 
+    }
+    
+    public double getPausa() { 
+    	return pausa; 
+    }
+    
+    public double getTempoVisita() { 
+    	return tempoVisita; 
+    }
+    
 }

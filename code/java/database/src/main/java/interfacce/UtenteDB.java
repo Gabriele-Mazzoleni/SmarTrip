@@ -27,12 +27,4 @@ public interface UtenteDB {
 	 */
 	public int controllaPassword(String username, String password);
 	
-	/**
-	 * Permette di cambiare password
-	 * @param username dell'utente a cui fare modifiche
-	 * @param newPassword nuovo valore della password, unico attributo modificabile
-	 * @return 1 se la modifica ha avuto successo, 0 altrimenti
-	 */
-	public int cambiaPassword(String username, String newPassword);
-	
 }

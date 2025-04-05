@@ -1,12 +1,12 @@
 package interfacce;
 
-import java.util.List;
-
-import modelli.Luogo;
-
+import org.springframework.http.ResponseEntity;
 
 public interface FunzioniLuogo {
 
-	public Luogo creaLuogo(String nome, double latitudine, double longitudine, double tempoDiVisita);
-	public List<Luogo> getAllLuoghi();
+	/**
+	 * Ritorna la lista di città disponibili
+	 * @return citta se presenti, altrimenti errore
+	 */
+	public ResponseEntity<?> getAllCitta();
 }

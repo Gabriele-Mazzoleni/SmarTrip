@@ -96,28 +96,4 @@ public class QueryUtente implements UtenteDB {
 	    return result;
 	}
 	
-	/**
-	 * Permette di cambiare password
-	 * @param username dell'utente a cui fare modifiche
-	 * @param newPassword nuovo valore della password, unico attributo modificabile
-	 * @return 1 se la modifica ha avuto successo, 0 altrimenti
-	 */
-	@Override
-	public synchronized int cambiaPassword(String username, String newPassword) {
-		int result = 0;
-		try {
-			Connection conn = DriverManager.getConnection(DatabaseManager.getIstanza().getUrl());
-			if (conn != null) {
-				DSLContext cambiaPW = DSL.using(conn, SQLDialect.SQLITE);
-				result = cambiaPW.update(Utente.UTENTE).set(Utente.UTENTE.PASSWORD, newPassword).
-						where(Utente.UTENTE.USERNAME.eq(username)).execute();
-			}
-		} catch (SQLException e) {
-			System.out.println("Errore aggiornamento password nel database");
-		}
-		return result;
-	}
-	
-
-
 }

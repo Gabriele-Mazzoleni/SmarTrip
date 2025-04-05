@@ -1,7 +1,9 @@
 package server;
 
+import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
+import java.net.SocketException;
 import java.util.Enumeration;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -14,7 +16,7 @@ import org.springframework.context.annotation.ComponentScan;
  * Classe che avvia il server con Spring Boot
  */
 @SpringBootApplication
-@ComponentScan(basePackages = {"api", "server"})
+@ComponentScan(basePackages = {"controller", "services", "server"})
 public class App implements CommandLineRunner {
 
     // Valore di default porta
@@ -31,38 +33,43 @@ public class App implements CommandLineRunner {
     }
 
     public void trovaIp() {
-        try {
+    	try {
+            // Ottieni tutte le interfacce di rete
             Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
+
             while (interfaces.hasMoreElements()) {
                 NetworkInterface networkInterface = interfaces.nextElement();
 
-                // Esclude interfacce non attive o loopback
+                // Ignora le interfacce che non sono attive o sono di loopback
                 if (!networkInterface.isUp() || networkInterface.isLoopback()) {
                     continue;
                 }
 
+                // Puoi filtrare ulteriormente per nome, ad esempio "wlan0", "wlp3s0", ecc.
+                String interfaceName = networkInterface.getName();
+                if (!interfaceName.startsWith("wlan") && !interfaceName.startsWith("wl")) {
+                    continue;
+                }
+
+                // Ottieni gli indirizzi associati a questa interfaccia
                 Enumeration<InetAddress> addresses = networkInterface.getInetAddresses();
+
                 while (addresses.hasMoreElements()) {
-                    InetAddress inetAddress = addresses.nextElement();
-                    String ip = inetAddress.getHostAddress();
+                    InetAddress address = addresses.nextElement();
 
-                    // Controlla se è IPv4 e inizia con 172
-                    if (inetAddress.getAddress().length == 4 && ip.startsWith("172.")) {
-                        String[] parts = ip.split("\\.");
-                        int secondOctet = Integer.parseInt(parts[1]);
-
-                        // Controlla se il secondo ottetto è tra 16 e 31 (range privato)
-                        if (secondOctet >= 16 && secondOctet <= 31) {
-                            System.out.println("Server avviato correttamente");
-                            System.out.println("Inserisci su app questo indirizzo: ");
-                            System.out.println(ip + ":" + getServerPort());
-                            return; // Esce dopo aver trovato il primo indirizzo valido
-                        }
+                    // Considera solo indirizzi IPv4 non di loopback
+                    if (address instanceof Inet4Address && !address.isLoopbackAddress()) {
+                        System.out.println("Server avviato correttamente");
+                        System.out.println("Inserisci su app questo indirizzo: ");
+                        System.out.println(address.getHostAddress() + ":" + getServerPort());
+                        return; // trovato, esci
                     }
                 }
             }
-        } catch (Exception e) {
-            System.err.println("Errore nel recupero dell'IP: " + e.getMessage());
+
+            System.out.println("Nessun indirizzo IPv4 trovato per l'interfaccia Wi-Fi.");
+        } catch (SocketException e) {
+            e.printStackTrace();
         }
     }
 

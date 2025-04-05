@@ -1,4 +1,4 @@
-package api;
+package services;
 
 import java.util.*;
 import org.jgrapht.Graph;
@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service;
 
 import modelli.GiornoVisita;
 import modelli.Itinerario;
-import modelli.ItinerarioRepository;
 import modelli.Luogo;
 import modelli.LuogoEsteso;
+import repository.ItinerarioRepository;
 
 @Service
 public class ItinerarioServices {

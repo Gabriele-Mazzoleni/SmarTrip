@@ -1,5 +1,7 @@
 package interfacce;
 
+import java.util.List;
+
 public interface LuogoDB {
 	
 	/**
@@ -25,5 +27,15 @@ public interface LuogoDB {
 	 * @return 1 se la rimozione ha avuto successo, 0 altrimenti
 	 */
 	public int eliminaLuogo(String nome, double latitudine, double longitudine);
+	
+	/**
+	 * Restituisce tutte le città associate a un determinato luogo
+	 * @param nome del luogo
+	 * @param latitudine
+	 * @param longitudine
+	 * @return lista di città, se vuota errore
+	 */
+	public List<String> ritornaCitta();
+
 
 }

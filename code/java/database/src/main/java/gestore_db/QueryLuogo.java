@@ -3,8 +3,12 @@ package gestore_db;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.jooq.DSLContext;
+import org.jooq.Record1;
+import org.jooq.Result;
 import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
 
@@ -79,5 +83,35 @@ public class QueryLuogo implements LuogoDB{
 		}
 		return result;
 	}
+	
+	/**
+	 * Restituisce tutte le città associate a un determinato luogo
+	 * @param nome del luogo
+	 * @param latitudine
+	 * @param longitudine
+	 * @return lista di città, se vuota errore
+	 */
+	@Override
+	public List<String> ritornaCitta() {
+	    List<String> citta = new ArrayList<>();
+	    try {
+	        Connection conn = DriverManager.getConnection(DatabaseManager.getIstanza().getUrl());
+	        if (conn != null) {
+	            DSLContext create = DSL.using(conn, SQLDialect.SQLITE);
+	            Result<Record1<String>> result = create
+	                .selectDistinct(Luogo.LUOGO.CITTA)
+	                .from(Luogo.LUOGO)
+	                .fetch();
+	            for (Record1<String> record : result) {
+	                citta.add(record.value1());
+	            }
+	        }
+	    } catch (SQLException e) {
+	        System.out.println("Errore durante il recupero delle città dal database");
+	    }
+	    return citta;
+	}
+
+
 
 }

@@ -1,5 +1,8 @@
 package modelli;
 
+/**
+ * Classe modello del luogo 
+ */
 public class LuogoEsteso {
     private Luogo luogo;
     private String orarioDiArrivo;
@@ -9,6 +12,12 @@ public class LuogoEsteso {
         this.orarioDiArrivo = orarioDiArrivo;
     }
 
-    public Luogo getLuogo() { return luogo; }
-    public String getOrarioDiArrivo() { return orarioDiArrivo; }
+    public Luogo getLuogo() { 
+    	return luogo; 
+    }
+    
+    public String getOrarioDiArrivo() { 
+    	return orarioDiArrivo; 
+    }
+    
 }

@@ -30,7 +30,7 @@ public class TestUtente {
     }
 	
     @Test
-    public void test101InserimentoUtente() {
+    public void test101InserisciUtente() {
         int result = DatabaseManager.getIstanza().getQueryUtente().inserisciUtente("Tester", "tttt");
         assertEquals(1, result);
     }
@@ -42,13 +42,7 @@ public class TestUtente {
     }
     
     @Test
-    public void test103CambiaPassword() {
-        int result = DatabaseManager.getIstanza().getQueryUtente().cambiaPassword("Tester", "TTTT");
-        assertEquals(1, result);
-    }
-    
-    @Test
-    public void test110RimozioneUtente() {
+    public void test110RimuoviUtente() {
         int result = DatabaseManager.getIstanza().getQueryUtente().eliminaUtente("Tester");
         assertEquals(1, result);
     }

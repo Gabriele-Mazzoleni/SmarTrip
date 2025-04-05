@@ -1,8 +1,8 @@
-package api;
+package services;
 
 import org.springframework.stereotype.Service;
 import modelli.Utente;
-import modelli.UtenteRepository;
+import repository.UtenteRepository;
 
 /**
  * Logica delle api di utente, utilizza le funzioni del model

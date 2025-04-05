@@ -2,10 +2,11 @@ package interfacce;
 
 import java.util.List;
 
-import modelli.Luogo;
-
 public interface GestoreLuogo {
 
-	public Luogo salva(Luogo l);
-	public List<Luogo> getAll();
+	/**
+	 * Restituisce lista città passate dal database
+	 */
+	public List<String> listaCitta();
+	
 }
