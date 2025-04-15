@@ -15,12 +15,13 @@ public class Itinerario {
     private double lonA;
     private int nGiorni;
     private List<GiornoVisita> giorni;
-    private List<LuogoRidotto> luoghi;
+    private List<Luogo> luoghi;
     private double velocitaMedia;
 	
 	/*
 	 * Esempio di jason da inviare: 
 	 * {
+    "utente": "Daniele",
     "latA": 45.4642,
   	"lonA": 9.1900,
   	"nGiorni": 2,
@@ -46,13 +47,21 @@ public class Itinerario {
 	      			"nome": "Duomo di Milano",
 	      			"latitudine": 45.4641,
 	      			"longitudine": 9.1919,
-	      			"tempoDiVisita": 2600
+	      			"citta": "Milano",
+	      			"indirizzo": "Via Duomo",
+	      			"tipo": "visitabile",
+	      			"tempoDiVisita": 2600,
+	      			"immagine": "abc"
 	    		},
 	    		{
 	      			"nome": "Castello Sforzesco",
 	      			"latitudine": 45.4672,
 	      			"longitudine": 9.1798,
-	      			"tempoDiVisita": 1000
+	      			"citta": "Milano",
+	      			"indirizzo": "Via Sforza",
+	      			"tipo": "visitabile",
+	      			"tempoDiVisita": 1000,
+	      			"immagine": "def"
 	    		}
 	  		]
 		}
@@ -66,7 +75,7 @@ public class Itinerario {
             @JsonProperty("nGiorni") int nGiorni,
             @JsonProperty("velocitaMedia") double velocitaMedia,
             @JsonProperty("giorni") List<GiornoVisita> giorni,
-            @JsonProperty("luoghi") List<LuogoRidotto> luoghi) {
+            @JsonProperty("luoghi") List<Luogo> luoghi) {
 		this.utente = utente;
 		this.latA = latA;
         this.lonA = lonA;
@@ -96,7 +105,7 @@ public class Itinerario {
     	return nGiorni; 
     }
     
-    public List<LuogoRidotto> getLuoghi() { 
+    public List<Luogo> getLuoghi() { 
     	return luoghi; 
     }
     

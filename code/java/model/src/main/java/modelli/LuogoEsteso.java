@@ -1,22 +1,19 @@
 package modelli;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 /**
  * Classe modello del luogo, contiene attributi aggiuntivi per API
  */
-public class LuogoEsteso extends LuogoRidotto{
+public class LuogoEsteso {
 	
-    private LuogoRidotto luogo;
+    private Luogo luogo;
     private String orarioDiArrivo;
 
-    public LuogoEsteso(@JsonProperty("luogo") LuogoRidotto luogo, @JsonProperty("luogo") String orarioDiArrivo) {
-    	super(luogo.getNome(), luogo.getLatitudine(), luogo.getLongitudine(), luogo.getTempoDiVisita());
-        this.luogo = luogo;
+    public LuogoEsteso(Luogo luogo, String orarioDiArrivo) {
+    	this.luogo = luogo;
         this.orarioDiArrivo = orarioDiArrivo;
     }
 
-	public LuogoRidotto getLuogo() { 
+	public Luogo getLuogo() { 
     	return luogo; 
     }
     
