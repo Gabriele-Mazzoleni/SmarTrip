@@ -21,7 +21,7 @@ Future<List<Mappa>?> retrieveUserMaps(String mail,String indirizzo) async{
 
 
   if (response.statusCode >= 200 && response.statusCode<300) {
-    //TODO devo anc ora implementare la costruzione della lista di mappe
+    //TODO devo ancora implementare la costruzione della lista di mappe
     return null;
     
   } else {

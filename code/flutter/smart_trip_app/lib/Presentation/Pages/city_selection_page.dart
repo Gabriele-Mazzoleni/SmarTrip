@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:smart_trip_app/Domain/user.dart';
-import 'package:smart_trip_app/Presentation/Pages/login_page.dart';
 import 'package:smart_trip_app/Presentation/Pages/map_selection_page.dart';
-//import 'package:smart_trip_app/Presentation/Controllers/city_selection_page_controller.dart';
+import 'package:smart_trip_app/Presentation/Pages/location_page.dart';
+import 'package:smart_trip_app/Presentation/Controllers/city_selection_page_controller.dart';
 import 'package:smart_trip_app/Presentation/Styles/app_colors.dart';
 import 'package:smart_trip_app/Presentation/Styles/font_styles.dart';
 import 'package:smart_trip_app/Presentation/Styles/sizes.dart';
@@ -21,23 +21,40 @@ class _CitySelectionPageState extends State<CitySelectionPage>{
 
   bool isLoading=false;
   late List<String> cities=[];
+  String _selectedString='';
 
     @override
   void initState() {
     super.initState();
-    _caricaCity(widget.user.username);
+    _caricaCity();
   }
 
-  Future<void> _caricaCity(String mail) async {
+  Future<void> _caricaCity() async {
     setState(() {
       isLoading = true;
     });
 
-    //cities= await retrievecities(widget.user.username,widget.ip);
+    cities= await retrieveCities(widget.ip);
 
     setState(() {
       isLoading = false;
     });
+  }
+
+  //metodo per selezione/deselezione città
+  void _selezionaCity(String city) {
+    setState(() {
+      _selectedString = (_selectedString == city) ? '' : city; 
+    });
+  }
+
+  void navigateToLocationPage(user,city, ip) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => LocationPage(user: user, city:city, ip:ip),
+      ),
+    );
   }
 
   @override
@@ -64,13 +81,6 @@ class _CitySelectionPageState extends State<CitySelectionPage>{
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Spacer(),
-                  const Text(
-                    'SELEZIONA LA CITTA\'',
-                    style: FontStyles.headerTitle,
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(width: Sizes.largePaddingSpace),
                   IconButton(
                   onPressed: () {
                           Navigator.of(context).pushAndRemoveUntil(
@@ -84,6 +94,13 @@ class _CitySelectionPageState extends State<CitySelectionPage>{
                     color: AppColors.white, size: Sizes.smallIconSize
                     ),
                 ),
+                  //const Spacer(),
+                  const Text(
+                    'SELEZIONA LA CITTA\'',
+                    style: FontStyles.headerTitle,
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(width: Sizes.largePaddingSpace),
                 ],
               ),
               const SizedBox(height:Sizes.stdPaddingSpace),
@@ -104,19 +121,46 @@ class _CitySelectionPageState extends State<CitySelectionPage>{
                         ),
                     )
             : cities.isNotEmpty?
-              ListView.builder(
-                itemBuilder: (BuildContext context, int index) {  
-                  //qui compare la lista di mappe, da implementare una volta realizzata l'API adatta
-                  itemCount: cities.length;
-                  
-
-                },
-              )
+              Expanded(
+                            child: ListView.builder(
+                              itemCount: cities.length,
+                              itemBuilder: (context, index) {
+                                final city = cities[index];
+                                final isSelected = _selectedString == city;
+                                return GestureDetector(
+                                  onTap: () => _selezionaCity(city),
+                                  child: Card(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                      side: BorderSide(
+                                        color: isSelected
+                                            ? AppColors.red
+                                            : Colors.transparent,
+                                        width: 2,
+                                      ),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.fromLTRB(Sizes.stdPaddingSpace,Sizes.smallPaddingSpace,Sizes.stdPaddingSpace,Sizes.smallPaddingSpace),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            city,
+                                            style: FontStyles.cardTitle,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          )
               :const Column(
                 children: [
                   SizedBox(height:Sizes.largePaddingSpace),
                   Text(
-                    'PAGINA IN COSTRUZIONE',
+                    'ERRORE NEL CARICAMENTO DELLE CITTA\' DAL DATABASE',
                     style: FontStyles.noMapsText,
                     textAlign: TextAlign.center,
                   ),
@@ -139,13 +183,20 @@ class _CitySelectionPageState extends State<CitySelectionPage>{
             children: [
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.red,
+                    backgroundColor: _selectedString.isNotEmpty
+                      ?AppColors.red
+                      :AppColors.gray,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(Sizes.smallRoundedCorner),
                     ),
                 ),
-                onPressed:  (){
-                  
+                onPressed:  _selectedString.isNotEmpty
+                ?(){
+                  //naviga a pagina della selezione luoghi
+                  navigateToLocationPage(widget.user, _selectedString, widget.ip);
+                }
+                :(){
+                  //non fa nulla
                 },
                 child: const Text('CONFERMA', style: FontStyles.buttonTextWhite),
               )
