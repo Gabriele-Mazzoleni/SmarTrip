@@ -1,9 +1,9 @@
-//import 'package:smart_trip_app/Domain/user.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:smart_trip_app/Domain/luogo.dart';
 
 //Richiede e ottiene la lista di città presenti nel database
-Future<List<String>> retrieveLocations(String city, String indirizzo) async{
+Future<List<Luogo>> retrieveLocations(String city, String indirizzo) async{
   String apiUrl='http://$indirizzo/luoghi/$city';
 
   var url = Uri.parse(apiUrl);
@@ -12,16 +12,18 @@ Future<List<String>> retrieveLocations(String city, String indirizzo) async{
     url,
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
-    },
+    }
   );
 
-  List<String> cities=[];
+  
 
   if (response.statusCode >= 200 && response.statusCode<300) {
-    cities= List<String>.from(jsonDecode(response.body));
-    return cities;
+    final responseBody = jsonDecode(response.body);
+    var locations= List<Luogo>.from(responseBody.map((item) => Luogo.fromJSON(item)));
+
+    return locations;
     
   } else {
-    return cities;
+    throw Exception('Error during location DB access');
   }
 }

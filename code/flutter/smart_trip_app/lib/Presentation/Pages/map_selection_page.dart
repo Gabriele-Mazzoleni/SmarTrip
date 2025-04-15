@@ -208,7 +208,7 @@ class _MapSelectionPageState extends State<MapSelectionPage>{
                                   ? () {
                                       // Azione di conferma (da definire)
                                       //navigateToTripPage(_selectedMappa);
-                                      print("Mappa selezionata: ${_selectedMappa!.idMappa}");
+                                      //print("Mappa selezionata: ${_selectedMappa!.idMappa}");
                                     }
                                   : null,
                               child: const Text(
