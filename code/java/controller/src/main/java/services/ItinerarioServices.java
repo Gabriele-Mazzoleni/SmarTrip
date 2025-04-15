@@ -22,7 +22,7 @@ public class ItinerarioServices {
 	      Graph<Luogo, DefaultWeightedEdge> grafo = new SimpleWeightedGraph<>(DefaultWeightedEdge.class);
 	  
 	      // Nodo iniziale (A)
-	      Luogo nodoA = new Luogo("Soggiorno", i.getLatA(), i.getLonA(), "", "", "", 0, "");
+	      Luogo nodoA = new Luogo("Soggiorno", i.getLatA(), i.getLonA(), "Default", "Default", "Default", 0, "Default");
 	      grafo.addVertex(nodoA);
 	  
 	      // Aggiungi i luoghi come nodi nel grafo
@@ -107,7 +107,7 @@ public class ItinerarioServices {
 	          }
 	      }
 	  
-	      return repo.salva(i.getUtente(), tabelleDiMarcia);
+	      return repo.salva(i.getNomeMappa(), i.getUtente(), tabelleDiMarcia);
 	  }
 	  
 	  private int convertTimeToSeconds(String time) {

@@ -34,11 +34,12 @@ public class QueryMappa implements MappaDB{
 			Connection conn = DriverManager.getConnection(DatabaseManager.getIstanza().getUrl());
 		    if (conn != null) {
 		    	DSLContext create = DSL.using(conn, SQLDialect.SQLITE);    
-		        // Controllo se la mappa esiste già per lo stesso nome e utente
+		        // Controllo se la mappa esiste già per lo stesso nome, utente e giorno
 		        int count = create.selectCount()
 		                          .from(Mappa.MAPPA)
 		                          .where(Mappa.MAPPA.NOMEMAPPA.eq(nomeMappa)
-		                          .and(Mappa.MAPPA.NOMEUTENTE.eq(nomeUtente)))
+		                          .and(Mappa.MAPPA.NOMEUTENTE.eq(nomeUtente))
+		                          .and(Mappa.MAPPA.GIORNO.eq(giorno)))
 		                          .fetchOne(0, int.class);    
 		         if (count == 0) { // Se la mappa non esiste, procedi con l'inserimento
 		        	 MappaRecord mappa = new MappaRecord(nomeMappa, nomeUtente, giorno, stringaNome, 

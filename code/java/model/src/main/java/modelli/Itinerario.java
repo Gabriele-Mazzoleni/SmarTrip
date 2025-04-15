@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class Itinerario {
 	
+	private String nomeMappa;
 	private String utente;
 	private double latA;
     private double lonA;
@@ -21,6 +22,7 @@ public class Itinerario {
 	/*
 	 * Esempio di jason da inviare: 
 	 * {
+    "nomeMappa": "MiaMappaBergamo",
     "utente": "Daniele",
     "latA": 45.4642,
   	"lonA": 9.1900,
@@ -51,7 +53,7 @@ public class Itinerario {
 	      			"longitudine": 9.1919,
 	      			"citta": "Milano",
 	      			"indirizzo": "Via Duomo",
-	      			"tipo": "visitabile",
+	      			"tipo": "Visitabile",
 	      			"tempoDiVisita": 2600,
 	      			"immagine": "abc"
 	    		},
@@ -61,7 +63,7 @@ public class Itinerario {
 	      			"longitudine": 9.1798,
 	      			"citta": "Milano",
 	      			"indirizzo": "Via Sforza",
-	      			"tipo": "visitabile",
+	      			"tipo": "Visitabile",
 	      			"tempoDiVisita": 1000,
 	      			"immagine": "def"
 	    		}
@@ -71,6 +73,7 @@ public class Itinerario {
 	
 	@JsonCreator
     public Itinerario(
+    		@JsonProperty("nomeMappa") String nomeMappa,
     		@JsonProperty("utente") String utente,
             @JsonProperty("latA") double latA,
             @JsonProperty("lonA") double lonA,
@@ -78,6 +81,7 @@ public class Itinerario {
             @JsonProperty("velocitaMedia") double velocitaMedia,
             @JsonProperty("giorni") List<GiornoVisita> giorni,
             @JsonProperty("luoghi") List<Luogo> luoghi) {
+		this.nomeMappa = nomeMappa;
 		this.utente = utente;
 		this.latA = latA;
         this.lonA = lonA;
@@ -86,6 +90,10 @@ public class Itinerario {
         this.giorni = giorni;
         this.luoghi = luoghi;
     }
+	
+	public String getNomeMappa() {
+		return nomeMappa;
+	}
 	
 	public String getUtente() {
 		return utente;
