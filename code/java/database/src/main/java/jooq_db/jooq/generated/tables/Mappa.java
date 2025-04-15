@@ -12,11 +12,11 @@ import jooq_db.jooq.generated.tables.records.MappaRecord;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
-import org.jooq.Function8;
+import org.jooq.Function12;
 import org.jooq.Name;
 import org.jooq.Record;
 import org.jooq.Records;
-import org.jooq.Row8;
+import org.jooq.Row12;
 import org.jooq.Schema;
 import org.jooq.SelectField;
 import org.jooq.Table;
@@ -80,9 +80,29 @@ public class Mappa extends TableImpl<MappaRecord> {
     public final TableField<MappaRecord, String> LISTALONGITUDINE = createField(DSL.name("LISTALONGITUDINE"), SQLDataType.CLOB, this, "");
 
     /**
+     * The column <code>MAPPA.LISTACITTA</code>.
+     */
+    public final TableField<MappaRecord, String> LISTACITTA = createField(DSL.name("LISTACITTA"), SQLDataType.CLOB, this, "");
+
+    /**
+     * The column <code>MAPPA.LISTAINDIRIZZO</code>.
+     */
+    public final TableField<MappaRecord, String> LISTAINDIRIZZO = createField(DSL.name("LISTAINDIRIZZO"), SQLDataType.CLOB, this, "");
+
+    /**
+     * The column <code>MAPPA.LISTATIPO</code>.
+     */
+    public final TableField<MappaRecord, String> LISTATIPO = createField(DSL.name("LISTATIPO"), SQLDataType.CLOB, this, "");
+
+    /**
      * The column <code>MAPPA.LISTATEMPOVISITA</code>.
      */
     public final TableField<MappaRecord, String> LISTATEMPOVISITA = createField(DSL.name("LISTATEMPOVISITA"), SQLDataType.CLOB, this, "");
+
+    /**
+     * The column <code>MAPPA.LISTAIMMAGINE</code>.
+     */
+    public final TableField<MappaRecord, String> LISTAIMMAGINE = createField(DSL.name("LISTAIMMAGINE"), SQLDataType.CLOB, this, "");
 
     /**
      * The column <code>MAPPA.LISTAORAARRIVO</code>.
@@ -172,18 +192,18 @@ public class Mappa extends TableImpl<MappaRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row8 type methods
+    // Row12 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row8<String, String, Integer, String, String, String, String, String> fieldsRow() {
-        return (Row8) super.fieldsRow();
+    public Row12<String, String, Integer, String, String, String, String, String, String, String, String, String> fieldsRow() {
+        return (Row12) super.fieldsRow();
     }
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
-    public <U> SelectField<U> mapping(Function8<? super String, ? super String, ? super Integer, ? super String, ? super String, ? super String, ? super String, ? super String, ? extends U> from) {
+    public <U> SelectField<U> mapping(Function12<? super String, ? super String, ? super Integer, ? super String, ? super String, ? super String, ? super String, ? super String, ? super String, ? super String, ? super String, ? super String, ? extends U> from) {
         return convertFrom(Records.mapping(from));
     }
 
@@ -191,7 +211,7 @@ public class Mappa extends TableImpl<MappaRecord> {
      * Convenience mapping calling {@link SelectField#convertFrom(Class,
      * Function)}.
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function8<? super String, ? super String, ? super Integer, ? super String, ? super String, ? super String, ? super String, ? super String, ? extends U> from) {
+    public <U> SelectField<U> mapping(Class<U> toType, Function12<? super String, ? super String, ? super Integer, ? super String, ? super String, ? super String, ? super String, ? super String, ? super String, ? super String, ? super String, ? super String, ? extends U> from) {
         return convertFrom(toType, Records.mapping(from));
     }
 }

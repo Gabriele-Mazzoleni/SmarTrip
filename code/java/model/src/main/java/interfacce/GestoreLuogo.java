@@ -1,11 +1,8 @@
 package interfacce;
 
 import java.util.List;
-import java.util.Map;
 
 import modelli.Luogo;
-
-
 
 public interface GestoreLuogo {
 

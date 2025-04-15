@@ -22,13 +22,18 @@ public class QueryMappa implements MappaDB{
 	 * @param stringaNome è elenco dei nomi dei luoghi 
 	 * @param stringaLatitudine è elenco delle latitudini dei luoghi 
 	 * @param stringaLongitudine è elenco delle longitudini dei luoghi 
-	 * @param stringaTempoVisita è elenco dei tempi di visita dei luoghi 
+	 * @param stringaCitta è elenco delle città dove si trovano i luoghi
+	 * @param stringaIndirizzo è indirizzo dei luoghi
+	 * @param stringaTipo indica se il luogo è visitabile o ristoro
+	 * @param stringaTempoVisita è elenco dei tempi di visita dei luoghi
+	 * @param stringaImmagine è elenco dei link delle immagini 
 	 * @param stringaOraArrivo è elenco degli orari di arrivo dei luoghi 
 	 * @return 1 se l'inserimento ha avuto successo, 0 altrimenti
 	 */
 	@Override
 	public synchronized int inserisciMappa(String nomeMappa, String nomeUtente, int giorno, String stringaNome, String stringaLatitudine, 
-			String stringaLongitudine, String stringaTempoVisita, String stringaOraArrivo) {
+			String stringaLongitudine, String stringaCitta, String stringaIndirizzo, String stringaTipo, String stringaTempoVisita, 
+			String stringaImmagine, String stringaOraArrivo) {
 		int result = 0;
 		try {
 			Connection conn = DriverManager.getConnection(DatabaseManager.getIstanza().getUrl());
@@ -43,8 +48,9 @@ public class QueryMappa implements MappaDB{
 		                          .fetchOne(0, int.class);    
 		         if (count == 0) { // Se la mappa non esiste, procedi con l'inserimento
 		        	 MappaRecord mappa = new MappaRecord(nomeMappa, nomeUtente, giorno, stringaNome, 
-		                                                    stringaLatitudine, stringaLongitudine, 
-		                                                    stringaTempoVisita, stringaOraArrivo);
+		                                                    stringaLatitudine, stringaLongitudine, stringaCitta, 
+		                                                    stringaIndirizzo, stringaTipo, stringaTempoVisita, 
+		                                                    stringaImmagine, stringaOraArrivo);
 		             result = create.insertInto(Mappa.MAPPA).set(mappa).execute();
 		         }
 		     }

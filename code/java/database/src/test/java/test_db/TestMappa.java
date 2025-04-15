@@ -32,7 +32,8 @@ public class TestMappa {
     @Test
     public void test301InserisciMappa() {
         int result = DatabaseManager.getIstanza().getQueryMappa().inserisciMappa("Mappa di Test", "Tester", 1,
-                "Nomi", "Latitudini", "Longitudini", "Tempi di visita", "Orari di arrivo");
+                "Nomi", "Latitudini", "Longitudini", "Città", "Indirizzi", "Tipi", "Tempi di visita", 
+                "Immagini", "Orari di arrivo");
         assertEquals(1, result);
     }
     

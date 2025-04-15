@@ -10,13 +10,22 @@ import modelli.GiornoVisita;
 import modelli.Itinerario;
 import modelli.Luogo;
 import modelli.LuogoEsteso;
+import modelli.Utente;
 import repository.ItinerarioRepository;
 
+/**
+ * Logica delle api di itinerario, utilizza le funzioni del model
+ */
 @Service
 public class ItinerarioServices {
 
 	private ItinerarioRepository repo = new ItinerarioRepository();
 	
+	/**
+	 * Registra utente chiamando funzione del model
+	 * @param i 
+	 * @return itinerario di viaggio, altrimenti null
+	 */
 	public Map<Integer, List<LuogoEsteso>> creaTabelleDiMarcia(Itinerario i) {
 		// Creazione del grafo
 	      Graph<Luogo, DefaultWeightedEdge> grafo = new SimpleWeightedGraph<>(DefaultWeightedEdge.class);
@@ -132,6 +141,24 @@ public class ItinerarioServices {
 	            * Math.sin(dLon / 2) * Math.sin(dLon / 2);
 	    double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 	    return R * c; // distanza in metri
+	}
+	
+	/**
+	 * Ritorna lista delle mappe dato utente chiamando funzione dal model
+	 * @return lista mappe
+	 */
+	public void ritornaMappeDatoUtente() {
+		
+	}
+	
+	/**
+	 * Elimina mappa funzione del model
+	 * @param nomeMappa
+	 * @param nomeUtente
+	 * @return true se è possibile inserire utente, altrimenti errore
+	 */
+	public boolean eliminaItinerario(String nomeMappa, String nomeUtente) {
+		return repo.cancellaMappa(nomeMappa, nomeUtente);
 	}
 	
 }

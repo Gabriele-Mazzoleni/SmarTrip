@@ -3,22 +3,24 @@ package repository;
 import java.util.*;
 
 import org.springframework.stereotype.Repository;
-
 import gestore_db.DatabaseManager;
+import interfacce.GestoreItinerario;
+import modelli.Itinerario;
 import modelli.Luogo;
 import modelli.LuogoEsteso;
 
 @Repository
-public class ItinerarioRepository {
+public class ItinerarioRepository implements GestoreItinerario{
 	
-	Map<Integer, List<LuogoEsteso>> tabelleDiMarcia = new HashMap<>();
+	private Map<Integer, List<LuogoEsteso>> tabelleDiMarcia = new HashMap<>();
 
+	/*
+	 * Converte itinerario calcolato e lo salva nel database come mappa
+	 */
 	public Map<Integer, List<LuogoEsteso>> salva(String nomeMappa, String utente, Map<Integer, List<LuogoEsteso>> m) {
-
 	    for (Map.Entry<Integer, List<LuogoEsteso>> entry : m.entrySet()) {
 	        Integer giorno = entry.getKey();
-
-	        // StringJoiner per ogni campo
+	        
 	        StringJoiner nomiSJ = new StringJoiner(";");
 	        StringJoiner latitudiniSJ = new StringJoiner(";");
 	        StringJoiner longitudiniSJ = new StringJoiner(";");
@@ -67,19 +69,36 @@ public class ItinerarioRepository {
 	        System.out.println("Immagini: " + immagini);
 	        System.out.println("Orari di arrivo: " + orariDiArrivo);
 
-	        if(DatabaseManager.getIstanza().getQueryMappa().inserisciMappa(nomeMappa, utente, giorno, nomi, latitudini, longitudini, tempiDiVisita, orariDiArrivo) == 0) {
+	        if(DatabaseManager.getIstanza().getQueryMappa().inserisciMappa(nomeMappa, utente, giorno, nomi, latitudini, longitudini, 
+	        		citta, indirizzi, tipi, tempiDiVisita, immagini, orariDiArrivo) == 0) {
 	        	return null;
 			}
 	    }
-
-	    this.tabelleDiMarcia = m;
 	    
+	    this.tabelleDiMarcia = m;
 	    return tabelleDiMarcia;
 	}
-
-
-	public Map<Integer, List<LuogoEsteso>> getAll() {
-		return tabelleDiMarcia;
+	
+	/*
+	 * Restituisce mappa vecchia dal database dato utente
+	 */
+	@Override
+	public void listaMappeDiUtente() {
+		// TODO Auto-generated method stub
+		
 	}
+
+	/**
+	 * Elimina mappa dal database
+	 */
+	@Override
+	public boolean cancellaMappa(String nomeMappa, String nomeUtente) {
+		if(DatabaseManager.getIstanza().getQueryMappa().eliminaMappa(nomeMappa, nomeUtente) > 0) {
+			return true;
+		}
+		else return false;
+	}
+
+
 	
 }

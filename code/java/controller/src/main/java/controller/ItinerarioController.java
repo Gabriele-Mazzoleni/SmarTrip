@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,6 +40,36 @@ public class ItinerarioController implements FunzioniItinerario{
 	        return ResponseEntity.ok(mappa);
 	    } else {
 	        System.out.println("Itinerario non inserito");
+	        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+	                .body(Collections.singletonMap("errore", false));
+	    }
+	}
+	
+	/**
+	 * Ritorna la lista di mappe dato l'username dell'utente
+	 * @param u username
+	 * @return mappe se presenti, altrimenti errore
+	 */
+	@Override
+	public ResponseEntity<?> getItinerarioByUsername() {
+		return null;
+		
+	}
+	
+	/**
+	 * Elimina l'itinerario di viaggio 
+	 * @param nomeMappa
+	 * @param nomeUtente
+	 * @return true, altrimenti errore
+	 */
+	@Override
+	@PostMapping("/delete/{nomeMappa}/{nomeUtente}")
+	public ResponseEntity<?> deleteItinerario(@PathVariable String nomeMappa, @PathVariable String nomeUtente) { 
+		if (service.eliminaItinerario(nomeMappa, nomeUtente)) {
+	        System.out.println("Itinerario eliminato");
+	        return ResponseEntity.ok(Collections.singletonMap("esito", true));
+	    } else {
+	        System.out.println("Itinerario non eliminato");
 	        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 	                .body(Collections.singletonMap("errore", false));
 	    }

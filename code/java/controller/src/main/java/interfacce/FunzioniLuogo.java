@@ -16,4 +16,5 @@ public interface FunzioniLuogo {
 	 * @return luoghi se presenti, altrimenti errore
 	 */
 	public ResponseEntity<?> getLuoghiByCitta(String citta);
+	
 }
