@@ -31,6 +31,7 @@ public class Itinerario {
 	      			"orarioDiInizioVisita": "11:40",
   					"devoPranzare" : true,
   					"orarioPranzo": "12:00",
+  					"tempoPranzo": 522000,
 	      			"pausa": 1800,
 	      			"tempoVisita": 3600
 	    		},
@@ -38,6 +39,7 @@ public class Itinerario {
 	      			"orarioDiInizioVisita": "18:00",
   					"devoPranzare" : false,
   					"orarioPranzo": "00:00",
+  					"tempoPranzo": 0,
 	      			"pausa": 1800,
 	      			"tempoVisita": 3600
 	    		}

@@ -18,8 +18,6 @@ public class ItinerarioServices {
 	private ItinerarioRepository repo = new ItinerarioRepository();
 	
 	public Map<Integer, List<LuogoEsteso>> creaTabelleDiMarcia(Itinerario i) {
-		//tempo medio modificabile in futuro o in caso aggiungibile al Jason
-		String tempoMedioPerPranzare = "01:45";
 		// Creazione del grafo
 	      Graph<Luogo, DefaultWeightedEdge> grafo = new SimpleWeightedGraph<>(DefaultWeightedEdge.class);
 	  
@@ -57,6 +55,7 @@ public class ItinerarioServices {
 	      for (int giorno = 1; giorno <= i.getNumeroGiorni(); giorno++) {
 	    	  GiornoVisita giornoAttuale = i.getGiorno(giorno-1);
 	    	  boolean devoPranzare = giornoAttuale.getDevoPranzare();
+	    	  int tempoPranzo = giornoAttuale.getTempoPranzo();
 		      // Converti ora di inizio in secondi
 		      int tempoInizio = convertTimeToSeconds(giornoAttuale.getOrarioDiInizioVisita());
 	          if (grafo.vertexSet().size() <= 1) break; // Solo il nodo A rimasto
@@ -81,8 +80,8 @@ public class ItinerarioServices {
 	            	  devoPranzare = false;
 	            	  percorso.add(new LuogoEsteso(new Luogo("Ricerca ristorante",nodoCorrente[0].getLatitudine(),nodoCorrente[0].getLongitudine(),
 	            			  nodoCorrente[0].getCitta(), nodoCorrente[0].getIndirizzo(), "Ristorante",
-	            			  convertTimeToSeconds(tempoMedioPerPranzare), nodoCorrente[0].getImmagine()), convertSecondsToTime(tempoTotale)));
-	            	  tempoTotale+= convertTimeToSeconds(tempoMedioPerPranzare);
+	            			  tempoPranzo, nodoCorrente[0].getImmagine()), convertSecondsToTime(tempoTotale)));
+	            	  tempoTotale+= tempoPranzo;
 	              }
 	              if (tempoTotale + tempoPercorrenza + luogoScelto.getTempoDiVisita() > (giornoAttuale.getTempoVisita()+tempoInizio)) break;
 	              tempoTotale += tempoPercorrenza;

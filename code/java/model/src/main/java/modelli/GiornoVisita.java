@@ -10,19 +10,22 @@ public class GiornoVisita {
     private String orarioDiInizioVisita;
     private boolean devoPranzare;
     private String orarioPranzo;
-    private double pausa;
-    private double tempoVisita;
+    private int tempoPranzo;
+    private int pausa;
+    private int tempoVisita;
 
     @JsonCreator
     public GiornoVisita(
             @JsonProperty("orarioDiInizioVisita") String orarioDiInizioVisita,
             @JsonProperty("devoPranzare") boolean devoPranzare,
             @JsonProperty("orarioPranzo") String orarioPranzo,
-            @JsonProperty("pausa") double pausa,
-            @JsonProperty("tempoVisita") double tempoVisita) {
+            @JsonProperty("tempoPranzo") int tempoPranzo,
+            @JsonProperty("pausa") int pausa,
+            @JsonProperty("tempoVisita") int tempoVisita) {
         this.orarioDiInizioVisita = orarioDiInizioVisita;
         this.devoPranzare = devoPranzare;
         this.orarioPranzo = orarioPranzo;
+        this.tempoPranzo = tempoPranzo;
         this.pausa = pausa;
         this.tempoVisita = tempoVisita;
     }
@@ -39,11 +42,15 @@ public class GiornoVisita {
     	return orarioDiInizioVisita; 
     }
     
-    public double getPausa() { 
+    public int getTempoPranzo() { 
+    	return tempoPranzo; 
+    }
+    
+    public int getPausa() { 
     	return pausa; 
     }
     
-    public double getTempoVisita() { 
+    public int getTempoVisita() { 
     	return tempoVisita; 
     }
     
