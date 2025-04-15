@@ -6,11 +6,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Classe modello del luogo, con tutti gli attributi nel database 
  */
-public class Luogo extends LuogoRidotto{
+public class Luogo {
 	
-    private String citta;
+	private String nome;
+    private double latitudine;
+    private double longitudine;
+	private String citta;
     private String indirizzo;
     private String tipo;
+    private double tempoDiVisita;
     private String immagine;
     
     @JsonCreator
@@ -22,10 +26,13 @@ public class Luogo extends LuogoRidotto{
 			@JsonProperty("tipo") String t,
 			@JsonProperty("tempoDiVisita") int tv,
 			@JsonProperty("immagine") String img) {
-    	super(n, la, lo, tv);
+    	this.nome = n;
+    	this.latitudine = la;
+    	this.longitudine = lo;
     	this.citta = c;
     	this.indirizzo = i;
     	this.tipo = t;
+    	this.tempoDiVisita = tv;
     	this.immagine = img;
 	}
 
@@ -43,7 +50,23 @@ public class Luogo extends LuogoRidotto{
 
 	public String getImmagine() {
 		return immagine;
-	}     
+	}
+    
+    public String getNome() {
+        return nome;
+    }
+
+    public double getLatitudine() {
+        return latitudine;
+    }
+
+    public double getLongitudine() {
+        return longitudine;
+    }
+
+    public double getTempoDiVisita() {
+        return tempoDiVisita;
+    }
     
 }
 

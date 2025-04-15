@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import modelli.GiornoVisita;
 import modelli.Itinerario;
-import modelli.LuogoRidotto;
+import modelli.Luogo;
 import modelli.LuogoEsteso;
 import repository.ItinerarioRepository;
 
@@ -18,23 +18,21 @@ public class ItinerarioServices {
 	private ItinerarioRepository repo = new ItinerarioRepository();
 	
 	public Map<Integer, List<LuogoEsteso>> creaTabelleDiMarcia(Itinerario i) {
-		//tempo medio modificabile in futuro o in caso aggiungibile al Jason
-		String tempoMedioPerPranzare = "01:45";
 		// Creazione del grafo
-	      Graph<LuogoRidotto, DefaultWeightedEdge> grafo = new SimpleWeightedGraph<>(DefaultWeightedEdge.class);
+	      Graph<Luogo, DefaultWeightedEdge> grafo = new SimpleWeightedGraph<>(DefaultWeightedEdge.class);
 	  
 	      // Nodo iniziale (A)
-	      LuogoRidotto nodoA = new LuogoRidotto("Soggiorno", i.getLatA(), i.getLonA(), 0);
+	      Luogo nodoA = new Luogo("Soggiorno", i.getLatA(), i.getLonA(), "", "", "", 0, "");
 	      grafo.addVertex(nodoA);
 	  
 	      // Aggiungi i luoghi come nodi nel grafo
-	      for (LuogoRidotto luogo : i.getLuoghi()) {
+	      for (Luogo luogo : i.getLuoghi()) {
 	          grafo.addVertex(luogo);
 	      }
 	  
 	      // Aggiungi archi con pesi basati sulla distanza e il tempo di percorrenza
-	      for (LuogoRidotto luogo1 : grafo.vertexSet()) {
-	          for (LuogoRidotto luogo2 : grafo.vertexSet()) {
+	      for (Luogo luogo1 : grafo.vertexSet()) {
+	          for (Luogo luogo2 : grafo.vertexSet()) {
 	              if (!luogo1.equals(luogo2)) {
 	                  double distanza = calcolaDistanza(luogo1.getLatitudine(), luogo1.getLongitudine(), 
 	                                                    luogo2.getLatitudine(), luogo2.getLongitudine());
@@ -57,30 +55,33 @@ public class ItinerarioServices {
 	      for (int giorno = 1; giorno <= i.getNumeroGiorni(); giorno++) {
 	    	  GiornoVisita giornoAttuale = i.getGiorno(giorno-1);
 	    	  boolean devoPranzare = giornoAttuale.getDevoPranzare();
+	    	  int tempoPranzo = giornoAttuale.getTempoPranzo();
 		      // Converti ora di inizio in secondi
 		      int tempoInizio = convertTimeToSeconds(giornoAttuale.getOrarioDiInizioVisita());
 	          if (grafo.vertexSet().size() <= 1) break; // Solo il nodo A rimasto
 	  
 	          List<LuogoEsteso> percorso = new ArrayList<>();
 	          int tempoTotale = tempoInizio;
-	          LuogoRidotto[] nodoCorrente = {nodoA};
+	          Luogo[] nodoCorrente = {nodoA};
 	  
 	          percorso.add(new LuogoEsteso(nodoA, convertSecondsToTime(tempoTotale))); // Partenza
 	  
 	          while (true) {
 	              // Trova il nodo più vicino rispettando i vincoli
-	              Optional<LuogoRidotto> prossimoLuogo = grafo.vertexSet().stream()
+	              Optional<Luogo> prossimoLuogo = grafo.vertexSet().stream()
 	                      .filter(luogo -> !percorso.stream().anyMatch(le -> le.getLuogo().equals(luogo)))
 	                      .min(Comparator.comparingDouble(luogo -> grafo.getEdgeWeight(grafo.getEdge(nodoCorrente[0], luogo)) + luogo.getTempoDiVisita()));
 	  
 	              if (prossimoLuogo.isEmpty()) break;
 	  
-	              LuogoRidotto luogoScelto = prossimoLuogo.get();
+	              Luogo luogoScelto = prossimoLuogo.get();
 	              double tempoPercorrenza = grafo.getEdgeWeight(grafo.getEdge(nodoCorrente[0], luogoScelto));
 	              if(tempoTotale >= convertTimeToSeconds(giornoAttuale.getOrarioPranzo()) && devoPranzare) {
 	            	  devoPranzare = false;
-	            	  percorso.add(new LuogoEsteso(new LuogoRidotto("Ricerca risotrante",nodoCorrente[0].getLatitudine(),nodoCorrente[0].getLongitudine(),convertTimeToSeconds(tempoMedioPerPranzare)), convertSecondsToTime(tempoTotale)));
-	            	  tempoTotale+= convertTimeToSeconds(tempoMedioPerPranzare);
+	            	  percorso.add(new LuogoEsteso(new Luogo("Ricerca ristorante",nodoCorrente[0].getLatitudine(),nodoCorrente[0].getLongitudine(),
+	            			  nodoCorrente[0].getCitta(), nodoCorrente[0].getIndirizzo(), "Ristorante",
+	            			  tempoPranzo, nodoCorrente[0].getImmagine()), convertSecondsToTime(tempoTotale)));
+	            	  tempoTotale+= tempoPranzo;
 	              }
 	              if (tempoTotale + tempoPercorrenza + luogoScelto.getTempoDiVisita() > (giornoAttuale.getTempoVisita()+tempoInizio)) break;
 	              tempoTotale += tempoPercorrenza;

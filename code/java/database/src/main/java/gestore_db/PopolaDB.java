@@ -18,7 +18,7 @@ public class PopolaDB {
 		DatabaseManager.getIstanza().getQueryUtente().inserisciUtente("Filippo", "1111");
 		DatabaseManager.getIstanza().getQueryUtente().inserisciUtente("Gabriele", "1234");
 		
-		//Inserimento luoghi default
+		//Luoghi visitabili Bergamo
 		DatabaseManager.getIstanza().getQueryLuogo().inserisciLuogo("Piazza Vecchia Bergamo Alta", 45.704132898433684, 9.663110704162177, 
 				"Bergamo", "Piazza Vecchia, 12", "Visitabile", 1800, 
 				"https://lh5.googleusercontent.com/p/AF1QipMz7mB9xRRRqfZjhfSZz2P7lEYv7uTOtlNplL7z=w408-h306-k-no");
@@ -34,12 +34,22 @@ public class PopolaDB {
 		DatabaseManager.getIstanza().getQueryLuogo().inserisciLuogo("Museo Civico di Scienze Naturali", 45.70551457238456, 9.659585488376312,
 				"Bergamo", "Piazza della Cittadella, 10", "Visitabile", 10800,
 				"https://lh5.googleusercontent.com/p/AF1QipNDhmoG96RLjGRE2c4vbx-ajTU4VwLoltE6e4dF=w428-h240-k-no");
+		DatabaseManager.getIstanza().getQueryLuogo().inserisciLuogo("Basilica di Santa Maria Maggiore", 45.70359115967612, 9.662869239959228,
+				"Bergamo", "Piazza Duomo, 1", "Visitabile", 1200,
+				"https://lh3.googleusercontent.com/p/AF1QipPjmEvn0ks8AfecHPS09AjqHwXveqHLyRLiZbOF=w408-h302-k-no");
+		
+		//Luoghi ristoro Bergamo
 		DatabaseManager.getIstanza().getQueryLuogo().inserisciLuogo("La Marianna", 45.706377641685286, 9.658217176604019,
 				"Bergamo", "Largo Colle Aperto, 4", "Ristoro", 2700,
 				"https://lh5.googleusercontent.com/p/AF1QipPbocYVM8Y9QBQQctaXIaq73cRA9SR5RzeVbbeO=w408-h724-k-no");
 		DatabaseManager.getIstanza().getQueryLuogo().inserisciLuogo("Circolino Città Alta", 45.70519839897728, 9.661652423418223,
 				"Bergamo", "Vicolo Sant'Agata, 19", "Ristoro", 3600,
 				"https://lh5.googleusercontent.com/p/AF1QipNtrBmP9qS9i0mw-UO6k1xPcqi1L70Gs6rffGcC=w408-h272-k-no");
+		
+		//Luoghi visitabili Milano
+		
+		//Luoghi ristoro Milano
+		
 		
 		System.out.println("Dati inseriti");
 		
