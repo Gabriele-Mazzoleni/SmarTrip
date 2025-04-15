@@ -22,9 +22,11 @@ class FontStyles{
   static const TextStyle buttonTextWhite= TextStyle(color: AppColors.white, fontWeight: FontWeight.bold, fontSize: 20, fontFamily:'Verdana' );
   static const TextStyle smallButtonTextWhite= TextStyle(color: AppColors.white, fontWeight: FontWeight.bold, fontSize: 17, fontFamily:'Verdana' );
 
+  //stili testi vari
   static const TextStyle subTitle= TextStyle(color: AppColors.black, fontWeight: FontWeight.bold, fontSize: 20, fontFamily:'Verdana' );
-  static const TextStyle userPageTitle= TextStyle(color: AppColors.black, fontWeight: FontWeight.bold, fontSize: 16, fontFamily:'Verdana' );
-  static const TextStyle userParameterNameText= TextStyle(color: AppColors.black, fontWeight: FontWeight.bold, fontSize: 14, fontFamily:'Verdana' );
+  static const TextStyle noMapsText= TextStyle(color: AppColors.black, fontWeight: FontWeight.bold, fontSize: 16, fontFamily:'Verdana' );
+  static const TextStyle cardTitle= TextStyle(color: AppColors.black, fontWeight: FontWeight.bold, fontSize: 20, fontFamily:'Verdana' );
+  static const TextStyle cardText= TextStyle(color: Colors.grey, fontWeight: FontWeight.normal, fontSize: 14, fontFamily:'Verdana' );
   static const TextStyle userParameterText= TextStyle(color: AppColors.black, fontWeight: FontWeight.normal, fontSize: 14, fontFamily:'Verdana' );
   static const TextStyle errorMessageStyle=TextStyle(color: AppColors.white, fontWeight: FontWeight.normal, fontSize: 14, fontFamily:'Verdana');
   static const TextStyle graphicTag= TextStyle(color: AppColors.red, fontWeight: FontWeight.normal, fontSize: 10, fontFamily:'Verdana' );
