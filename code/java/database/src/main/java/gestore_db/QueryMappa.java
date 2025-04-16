@@ -3,8 +3,15 @@ package gestore_db;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.jooq.DSLContext;
+import org.jooq.Record1;
+import org.jooq.Record12;
+import org.jooq.Result;
 import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
 
@@ -60,6 +67,90 @@ public class QueryMappa implements MappaDB{
 		
 		return result;
 	}
+	
+	/**
+	 * Restituisce solo i nomi delle mappe associate a un utente
+	 * @param nomeUtente
+	 * @return lista dei nomi delle mappe, se vuota nessuna mappa trovata
+	 */
+	public List<String> ritornaNomiMappeUtente(String nomeUtente) {
+	    List<String> nomiMappe = new ArrayList<>();
+	    try {
+	        Connection conn = DriverManager.getConnection(DatabaseManager.getIstanza().getUrl());
+	        if (conn != null) {
+	            DSLContext create = DSL.using(conn, SQLDialect.SQLITE);
+	            Result<Record1<String>> result = create
+	                .select(Mappa.MAPPA.NOMEMAPPA)
+	                .from(Mappa.MAPPA)
+	                .where(Mappa.MAPPA.NOMEUTENTE.eq(nomeUtente))
+	                .fetch();
+
+	            for (Record1<String> record : result) {
+	                nomiMappe.add(record.value1());
+	            }
+	        }
+	    } catch (SQLException e) {
+	        System.out.println("Errore durante il recupero dei nomi delle mappe dal database");
+	    }
+
+	    return nomiMappe;
+	}
+
+	
+	/**
+	 * Restituisce tutte le mappe associate a un utente
+	 * @param nomeUtente
+	 * @return lista di mappe con attributi, se vuota nessuna mappa trovata
+	 */
+	public List<Map<String, Object>> ritornaMappeUtente(String nomeUtente) {
+	    List<Map<String, Object>> mappe = new ArrayList<>();
+	    try {
+	        Connection conn = DriverManager.getConnection(DatabaseManager.getIstanza().getUrl());
+	        if (conn != null) {
+	            DSLContext create = DSL.using(conn, SQLDialect.SQLITE);
+	            Result<Record12<String, String, Integer, String, String, String, String, String, String, String, String, String>> result = create
+	                .select(
+	                    Mappa.MAPPA.NOMEMAPPA,
+	                    Mappa.MAPPA.NOMEUTENTE,
+	                    Mappa.MAPPA.GIORNO,
+	                    Mappa.MAPPA.LISTANOME,
+	                    Mappa.MAPPA.LISTALATITUDINE,
+	                    Mappa.MAPPA.LISTALONGITUDINE,
+	                    Mappa.MAPPA.LISTACITTA,
+	                    Mappa.MAPPA.LISTAINDIRIZZO,
+	                    Mappa.MAPPA.LISTATIPO,
+	                    Mappa.MAPPA.LISTATEMPOVISITA,
+	                    Mappa.MAPPA.LISTAIMMAGINE,
+	                    Mappa.MAPPA.LISTAORAARRIVO
+	                )
+	                .from(Mappa.MAPPA)
+	                .where(Mappa.MAPPA.NOMEUTENTE.eq(nomeUtente))
+	                .fetch();
+	            
+	            for (Record12<String, String, Integer, String, String, String, String, String, String, String, String, String> record : result) {
+	                Map<String, Object> mappa = new HashMap<>();
+	                mappa.put("nomeMappa", record.value1());
+	                mappa.put("nomeUtente", record.value2());
+	                mappa.put("giorno", record.value3());
+	                mappa.put("nomi", record.value4());
+	                mappa.put("latitudini", record.value5());
+	                mappa.put("longitudini", record.value6());
+	                mappa.put("citta", record.value7());
+	                mappa.put("indirizzi", record.value8());
+	                mappa.put("tipi", record.value9());
+	                mappa.put("tempiDiVisita", record.value10());
+	                mappa.put("immagini", record.value11());
+	                mappa.put("orariDiArrivo", record.value12());
+	                mappe.add(mappa);
+	            }
+	        }
+	    } catch (SQLException e) {
+	        System.out.println("Errore durante il recupero delle mappe dal database");
+	    }
+	    
+	    return mappe;
+	}
+
 	
 	/**
 	 * Elimina mappa

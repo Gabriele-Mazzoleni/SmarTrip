@@ -1,9 +1,12 @@
 package test_db;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -38,7 +41,18 @@ public class TestMappa {
     }
     
     @Test
-    public void test302EliminaMappa() {
+    public void test302RitornaMappeUtente() {
+        String nomeUtente = "Tester"; 
+        List<Map<String, Object>> mappe = DatabaseManager.getIstanza().getQueryMappa().ritornaMappeUtente(nomeUtente);
+        // Verifica che ci sia almeno una mappa con nomeMappa uguale a "Mappa di Test"
+        boolean trovataMappa = mappe.stream()
+            .anyMatch(mappa -> mappa.containsKey("nomeMappa") && mappa.get("nomeMappa").equals("Mappa di Test"));
+        assertTrue(trovataMappa);
+    }
+
+    
+    @Test
+    public void test303EliminaMappa() {
         int result = DatabaseManager.getIstanza().getQueryMappa().eliminaMappa("Mappa di Test", "Tester");
         assertEquals(1, result);
     }
