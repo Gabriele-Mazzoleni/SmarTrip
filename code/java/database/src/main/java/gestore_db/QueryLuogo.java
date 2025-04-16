@@ -64,30 +64,6 @@ public class QueryLuogo implements LuogoDB{
 	}
 	
 	/**
-	 * Elimina luogo
-	 * @param nome del luogo
-	 * @param latitudine
-	 * @param longitudine
-	 * @return 1 se la rimozione ha avuto successo, 0 altrimenti
-	 */
-	@Override
-	public synchronized int eliminaLuogo(String nome, double latitudine, double longitudine) {
-		int result = 0;
-		try {
-			Connection conn = DriverManager.getConnection(DatabaseManager.getIstanza().getUrl());
-			if (conn != null) {
-				DSLContext delete = DSL.using(conn, SQLDialect.SQLITE);
-				result = delete.deleteFrom(Luogo.LUOGO).where(Luogo.LUOGO.NOME.eq(nome).
-						and(Luogo.LUOGO.LATITUDINE.eq(latitudine)).
-						and(Luogo.LUOGO.LONGITUDINE.eq(longitudine))).execute();
-			}
-		} catch (SQLException e) {
-			System.out.println("Errore eliminazione luogo nel database");
-		}
-		return result;
-	}
-	
-	/**
 	 * Restituisce tutte le città
 	 * @return lista di città, se vuota errore
 	 */
@@ -155,6 +131,30 @@ public class QueryLuogo implements LuogoDB{
 	    }
 	    
 	    return luoghi;
+	}
+	
+	/**
+	 * Elimina luogo
+	 * @param nome del luogo
+	 * @param latitudine
+	 * @param longitudine
+	 * @return 1 se la rimozione ha avuto successo, 0 altrimenti
+	 */
+	@Override
+	public synchronized int eliminaLuogo(String nome, double latitudine, double longitudine) {
+		int result = 0;
+		try {
+			Connection conn = DriverManager.getConnection(DatabaseManager.getIstanza().getUrl());
+			if (conn != null) {
+				DSLContext delete = DSL.using(conn, SQLDialect.SQLITE);
+				result = delete.deleteFrom(Luogo.LUOGO).where(Luogo.LUOGO.NOME.eq(nome).
+						and(Luogo.LUOGO.LATITUDINE.eq(latitudine)).
+						and(Luogo.LUOGO.LONGITUDINE.eq(longitudine))).execute();
+			}
+		} catch (SQLException e) {
+			System.out.println("Errore eliminazione luogo nel database");
+		}
+		return result;
 	}
 
 }

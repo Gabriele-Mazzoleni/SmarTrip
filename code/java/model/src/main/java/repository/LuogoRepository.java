@@ -18,7 +18,10 @@ public class LuogoRepository implements GestoreLuogo {
 	@Override
 	public List<String> listaCitta() {
 		List<String> citta = DatabaseManager.getIstanza().getQueryLuogo().ritornaCitta();
-		return citta;
+		if (citta.size() == 0) {
+			return null;
+		}
+		else return citta;
 	}
 	
 	/**
@@ -27,23 +30,26 @@ public class LuogoRepository implements GestoreLuogo {
 	@Override
 	public List<Luogo> listaLuoghiDiCitta(String cittaInserita) {
 		List<Map<String, Object>> risultati = DatabaseManager.getIstanza().getQueryLuogo().ritornaLuoghiCitta(cittaInserita);
-		List<Luogo> luoghi = new ArrayList<>(); 
-		
-		for(Map<String, Object> mappa: risultati) {
-			String nome = (String) mappa.get("nome");
-			double latitudine = (Double) mappa.get("latitudine");
-			double longitudine = (Double) mappa.get("longitudine");
-			String citta = (String) mappa.get("citta");
-			String indirizzo = (String) mappa.get("indirizzo");
-			String tipo = (String) mappa.get("tipo");
-			int tempoDiVisita = (Integer) mappa.get("tempoDiVisita");
-			String immagine = (String) mappa.get("immagine");
-			Luogo luogo = new Luogo(nome, latitudine, longitudine, citta, indirizzo, tipo, tempoDiVisita, immagine);
-			luoghi.add(luogo);
+		if (risultati.size() == 0) {
+			return null;
 		}
-		
-		return luoghi;
+		else {
+			List<Luogo> luoghi = new ArrayList<>(); 
+			for(Map<String, Object> mappa: risultati) {
+				String nome = (String) mappa.get("nome");
+				double latitudine = (Double) mappa.get("latitudine");
+				double longitudine = (Double) mappa.get("longitudine");
+				String citta = (String) mappa.get("citta");
+				String indirizzo = (String) mappa.get("indirizzo");
+				String tipo = (String) mappa.get("tipo");
+				int tempoDiVisita = (Integer) mappa.get("tempoDiVisita");
+				String immagine = (String) mappa.get("immagine");
+				Luogo luogo = new Luogo(nome, latitudine, longitudine, citta, indirizzo, tipo, tempoDiVisita, immagine);
+				luoghi.add(luogo);
+			}
+			
+			return luoghi;
+		}
 	}
-
 
 }

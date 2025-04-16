@@ -17,7 +17,14 @@ public interface FunzioniItinerario {
 	 * @param u username
 	 * @return mappe se presenti, altrimenti errore
 	 */
-	public ResponseEntity<?> getItinerarioByUsername();
+	public ResponseEntity<?> getNomiItinerarioByUtente(String nomeUtente);
+	
+	/**
+	 * Ritorna la mappa dato nome mappa e l'username dell'utente
+	 * @param u username
+	 * @return mappe se presenti, altrimenti errore
+	 */
+	public ResponseEntity<?> getItinerarioByNomeAndUtente(String nomeMappa, String nomeUtente);
 
 	/**
 	 * Elimina l'itinerario di viaggio 

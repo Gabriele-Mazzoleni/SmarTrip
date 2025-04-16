@@ -57,7 +57,7 @@ public class TestLuogo {
 
     
     @Test
-    public void test210EliminaLuogo() {
+    public void test204EliminaLuogo() {
         int result = DatabaseManager.getIstanza().getQueryLuogo().eliminaLuogo("Luogo di Test", 0.0, 0.0);
         assertEquals(1, result);
     }

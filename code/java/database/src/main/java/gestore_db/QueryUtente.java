@@ -47,28 +47,6 @@ public class QueryUtente implements UtenteDB {
 	    
 	    return result;
 	}
-
-	
-	/**
-	 * Elimina utente
-	 * @param username
-	 * @param password
-	 * @return 1 se la rimozione ha avuto successo, 0 altrimenti
-	 */
-	@Override
-	public synchronized int eliminaUtente(String username) {
-		int result = 0;
-		try {
-			Connection conn = DriverManager.getConnection(DatabaseManager.getIstanza().getUrl());
-			if (conn != null) {
-				DSLContext delete = DSL.using(conn, SQLDialect.SQLITE);
-				result = delete.deleteFrom(Utente.UTENTE).where(Utente.UTENTE.USERNAME.eq(username)).execute();
-			}
-		} catch (SQLException e) {
-			System.out.println("Errore eliminazione utente nel database");
-		}
-		return result;
-	}
 	
 	/**
 	 * Controlla se la password inserita è corretta
@@ -94,6 +72,27 @@ public class QueryUtente implements UtenteDB {
 	        System.out.println("Errore controllo password nel database");
 	    }
 	    return result;
+	}
+	
+	/**
+	 * Elimina utente
+	 * @param username
+	 * @param password
+	 * @return 1 se la rimozione ha avuto successo, 0 altrimenti
+	 */
+	@Override
+	public synchronized int eliminaUtente(String username) {
+		int result = 0;
+		try {
+			Connection conn = DriverManager.getConnection(DatabaseManager.getIstanza().getUrl());
+			if (conn != null) {
+				DSLContext delete = DSL.using(conn, SQLDialect.SQLITE);
+				result = delete.deleteFrom(Utente.UTENTE).where(Utente.UTENTE.USERNAME.eq(username)).execute();
+			}
+		} catch (SQLException e) {
+			System.out.println("Errore eliminazione utente nel database");
+		}
+		return result;
 	}
 	
 }

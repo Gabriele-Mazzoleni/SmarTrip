@@ -133,7 +133,7 @@ public class ItinerarioServices {
 	  }
 
 	private static double calcolaDistanza(double lat1, double lon1, double lat2, double lon2) {
-	    final int R = 6371000; // Raggio della Terra in metri
+	    final int R = 6371000; // raggio della Terra in metri
 	    double dLat = Math.toRadians(lat2 - lat1);
 	    double dLon = Math.toRadians(lon2 - lon1);
 	    double a = Math.sin(dLat / 2) * Math.sin(dLat / 2)
@@ -144,11 +144,22 @@ public class ItinerarioServices {
 	}
 	
 	/**
-	 * Ritorna lista delle mappe dato utente chiamando funzione dal model
-	 * @return lista mappe
+	 * Ritorna lista dei nomi delle mappe dato utente chiamando funzione dal model
+	 * @param nomeUtente
+	 * @return lista nomi mappe
 	 */
-	public void ritornaMappeDatoUtente() {
-		
+	public List<String> ritornaNomiMappeDatoUtente(String nomeUtente) {
+		return repo.listaNomiMappeDiUtente(nomeUtente);
+	}
+	
+	/**
+	 * Ritorna lista dei nomi delle mappe dato utente chiamando funzione dal model
+	 * @param nomeMappa
+	 * @param nomeUtente
+	 * @return mappa
+	 */
+	public Map<Integer, List<LuogoEsteso>> ritornaMappeDatoUtente(String nomeMappa, String nomeUtente) {
+		return repo.listaMappeDiUtente(nomeMappa, nomeUtente);
 	}
 	
 	/**

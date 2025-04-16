@@ -21,15 +21,6 @@ public interface LuogoDB {
 			String indirizzo, String tipo, int tempoVisita, String immagine);
 	
 	/**
-	 * Elimina luogo
-	 * @param nome del luogo
-	 * @param latitudine
-	 * @param longitudine
-	 * @return 1 se la rimozione ha avuto successo, 0 altrimenti
-	 */
-	public int eliminaLuogo(String nome, double latitudine, double longitudine);
-	
-	/**
 	 * Restituisce tutte le città associate a un determinato luogo
 	 * @param nome del luogo
 	 * @param latitudine
@@ -45,5 +36,13 @@ public interface LuogoDB {
 	 */
 	public List<Map<String, Object>> ritornaLuoghiCitta(String citta);
 
+	/**
+	 * Elimina luogo
+	 * @param nome del luogo
+	 * @param latitudine
+	 * @param longitudine
+	 * @return 1 se la rimozione ha avuto successo, 0 altrimenti
+	 */
+	public int eliminaLuogo(String nome, double latitudine, double longitudine);
 
 }

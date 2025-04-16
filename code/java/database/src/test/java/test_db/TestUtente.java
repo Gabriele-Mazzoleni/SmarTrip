@@ -42,7 +42,7 @@ public class TestUtente {
     }
     
     @Test
-    public void test110RimuoviUtente() {
+    public void test103RimuoviUtente() {
         int result = DatabaseManager.getIstanza().getQueryUtente().eliminaUtente("Tester");
         assertEquals(1, result);
     }

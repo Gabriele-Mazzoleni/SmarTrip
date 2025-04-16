@@ -5,7 +5,6 @@ import java.util.*;
 import org.springframework.stereotype.Repository;
 import gestore_db.DatabaseManager;
 import modelIF.GestoreItinerario;
-import modelli.Itinerario;
 import modelli.Luogo;
 import modelli.LuogoEsteso;
 
@@ -55,19 +54,6 @@ public class ItinerarioRepository implements GestoreItinerario{
 	        String tempiDiVisita = tempiDiVisitaSJ.toString();
 	        String immagini = immaginiSJ.toString();
 	        String orariDiArrivo = orariDiArrivoSJ.toString();
-	        
-	        System.out.println("Nome mappa: " + nomeMappa);
-	        System.out.println("Giorno: " + giorno);
-	        System.out.println("Utente: " + utente);
-	        System.out.println("Nomi: " + nomi);
-	        System.out.println("Latitudini: " + latitudini);
-	        System.out.println("Longitudini: " + longitudini);
-	        System.out.println("Città: " + citta);
-	        System.out.println("Indirizzi: " + indirizzi);
-	        System.out.println("Tipi: " + tipi);
-	        System.out.println("Tempi di visita: " + tempiDiVisita);
-	        System.out.println("Immagini: " + immagini);
-	        System.out.println("Orari di arrivo: " + orariDiArrivo);
 
 	        if(DatabaseManager.getIstanza().getQueryMappa().inserisciMappa(nomeMappa, utente, giorno, nomi, latitudini, longitudini, 
 	        		citta, indirizzi, tipi, tempiDiVisita, immagini, orariDiArrivo) == 0) {
@@ -80,12 +66,67 @@ public class ItinerarioRepository implements GestoreItinerario{
 	}
 	
 	/*
-	 * Restituisce mappa vecchia dal database dato utente
+	 * Restituisce nomi mappe dal database dato utente
 	 */
 	@Override
-	public void listaMappeDiUtente() {
-		// TODO Auto-generated method stub
-		
+	public List<String> listaNomiMappeDiUtente(String nomeUtente) {
+		List<String> nomiMappe = DatabaseManager.getIstanza().getQueryMappa().ritornaNomiMappeUtente(nomeUtente);
+		if (nomiMappe.size() == 0) {
+			return null;
+		}
+		else {
+			Set<String> unici = new LinkedHashSet<>(nomiMappe); // elimina duplicati
+			return new ArrayList<>(unici);
+		}
+	}
+	
+	/*
+	 * Restituisce mappa dal database dato nome mappa e utente
+	 */
+	@Override
+	public Map<Integer, List<LuogoEsteso>> listaMappeDiUtente(String nomeMappa, String nomeUtente) {
+		List<Map<String, Object>> risultati = DatabaseManager.getIstanza().getQueryMappa().ritornaMappeUtente(nomeMappa, nomeUtente);
+		if (risultati.size() == 0) {
+			return null;
+		}
+		else {
+			Map<Integer, List<LuogoEsteso>> mappa = new HashMap<>(); 
+			
+			for (Map<String, Object> risultato : risultati) {
+				int giorno = (int) risultato.get("giorno");
+				String[] nomi = ((String) risultato.get("nomi")).split(";");
+				String[] latitudini = ((String) risultato.get("latitudini")).split(";");
+				String[] longitudini = ((String) risultato.get("longitudini")).split(";");
+				String[] citta = ((String) risultato.get("citta")).split(";");
+				String[] indirizzi = ((String) risultato.get("indirizzi")).split(";");
+				String[] tipi = ((String) risultato.get("tipi")).split(";");
+				String[] tempiDiVisita = ((String) risultato.get("tempiDiVisita")).split(";");
+				String[] immagini = ((String) risultato.get("immagini")).split(";");
+				String[] orariDiArrivo = ((String) risultato.get("orariDiArrivo")).split(";");
+
+				for (int i = 0; i < nomi.length; i++) {
+					String nome = nomi[i];
+					double latitudine = Double.parseDouble(latitudini[i]);
+					double longitudine = Double.parseDouble(longitudini[i]);
+					String città = citta[i];
+					String indirizzo = indirizzi[i];
+					String tipo = tipi[i];
+					int tempo = Integer.parseInt(tempiDiVisita[i]);
+					String immagine = immagini[i];
+					String orario = orariDiArrivo[i];
+
+					Luogo luogo = new Luogo(nome, latitudine, longitudine, città, indirizzo, tipo, tempo, immagine);
+					LuogoEsteso esteso = new LuogoEsteso(luogo, orario);
+
+					mappa.computeIfAbsent(giorno, k -> new ArrayList<>()); // elimina duplicati
+					if (!mappa.get(giorno).contains(esteso)) {
+						mappa.get(giorno).add(esteso);
+					}
+				}
+			}
+			
+			return mappa;
+		}
 	}
 
 	/**

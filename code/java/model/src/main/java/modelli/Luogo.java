@@ -14,7 +14,7 @@ public class Luogo {
 	private String citta;
     private String indirizzo;
     private String tipo;
-    private double tempoDiVisita;
+    private int tempoDiVisita;
     private String immagine;
     
     @JsonCreator
@@ -64,7 +64,7 @@ public class Luogo {
         return longitudine;
     }
 
-    public double getTempoDiVisita() {
+    public int getTempoDiVisita() {
         return tempoDiVisita;
     }
     

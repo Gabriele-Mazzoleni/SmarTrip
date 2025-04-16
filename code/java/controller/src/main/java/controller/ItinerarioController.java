@@ -27,14 +27,13 @@ public class ItinerarioController implements FunzioniItinerario{
 	
 	/**
 	 * Ritorna l'itinerario di viaggio personalizzato all'utente
-	 * @param i utente
+	 * @param i itinerario
 	 * @return itinerario di viaggio, altrimenti errore
 	 */
 	@Override
 	@PostMapping("/add")
 	public ResponseEntity<?> addItinerario(@RequestBody Itinerario i) { 
 	    Map<Integer, List<LuogoEsteso>> mappa = service.creaTabelleDiMarcia(i);
-	    
 	    if (mappa != null) {
 	        System.out.println("Itinerario inserito");
 	        return ResponseEntity.ok(mappa);
@@ -51,9 +50,37 @@ public class ItinerarioController implements FunzioniItinerario{
 	 * @return mappe se presenti, altrimenti errore
 	 */
 	@Override
-	public ResponseEntity<?> getItinerarioByUsername() {
-		return null;
+	@PostMapping("/mappe/{nomeUtente}")
+	public ResponseEntity<?> getNomiItinerarioByUtente(@PathVariable String nomeUtente) {
+		List<String> nomiMappe = service.ritornaNomiMappeDatoUtente(nomeUtente);
+	    if (nomiMappe.size() > 0) {
+	        System.out.println("Mappa ottenuta");
+	        return ResponseEntity.ok(nomiMappe);
+	    } else {
+	        System.out.println("Mappa non ottenuta");
+	        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+	                .body(Collections.singletonMap("errore", false));
+	    }
 		
+	}
+	
+	/**
+	 * Ritorna la mappa dato nome mappa e l'username dell'utente
+	 * @param u username
+	 * @return mappe se presenti, altrimenti errore
+	 */
+	@Override
+	@PostMapping("/{nomeMappa}/{nomeUtente}")
+	public ResponseEntity<?> getItinerarioByNomeAndUtente(@PathVariable String nomeMappa, @PathVariable String nomeUtente) {
+		Map<Integer, List<LuogoEsteso>> mappa = service.ritornaMappeDatoUtente(nomeMappa, nomeUtente);
+	    if (mappa != null) {
+	        System.out.println("Mappa ottenuta");
+	        return ResponseEntity.ok(mappa);
+	    } else {
+	        System.out.println("Mappa non ottenuta");
+	        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+	                .body(Collections.singletonMap("errore", false));
+	    }
 	}
 	
 	/**

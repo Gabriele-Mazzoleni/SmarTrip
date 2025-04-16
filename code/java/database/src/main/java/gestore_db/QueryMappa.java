@@ -19,7 +19,10 @@ import databaseIF.MappaDB;
 import jooq_db.jooq.generated.tables.Mappa;
 import jooq_db.jooq.generated.tables.records.MappaRecord;
 
-public class QueryMappa implements MappaDB{
+/**
+ * Classe contenente tutte le query di mappa
+ */
+public class QueryMappa implements MappaDB {
 	
 	/**
 	 * Inserisce nuova mappa
@@ -99,10 +102,11 @@ public class QueryMappa implements MappaDB{
 	
 	/**
 	 * Restituisce tutte le mappe associate a un utente
+	 * @param nomeMappa
 	 * @param nomeUtente
 	 * @return lista di mappe con attributi, se vuota nessuna mappa trovata
 	 */
-	public List<Map<String, Object>> ritornaMappeUtente(String nomeUtente) {
+	public List<Map<String, Object>> ritornaMappeUtente(String nomeMappa, String nomeUtente) {
 	    List<Map<String, Object>> mappe = new ArrayList<>();
 	    try {
 	        Connection conn = DriverManager.getConnection(DatabaseManager.getIstanza().getUrl());
@@ -124,7 +128,8 @@ public class QueryMappa implements MappaDB{
 	                    Mappa.MAPPA.LISTAORAARRIVO
 	                )
 	                .from(Mappa.MAPPA)
-	                .where(Mappa.MAPPA.NOMEUTENTE.eq(nomeUtente))
+	                .where(Mappa.MAPPA.NOMEMAPPA.eq(nomeMappa)
+	                		.and(Mappa.MAPPA.NOMEUTENTE.eq(nomeUtente)))
 	                .fetch();
 	            
 	            for (Record12<String, String, Integer, String, String, String, String, String, String, String, String, String> record : result) {
