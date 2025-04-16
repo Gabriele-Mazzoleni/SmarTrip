@@ -1,4 +1,4 @@
-package interfacce;
+package modelIF;
 
 import java.util.List;
 

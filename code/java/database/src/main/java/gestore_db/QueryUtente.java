@@ -8,7 +8,7 @@ import org.jooq.DSLContext;
 import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
 
-import interfacce.UtenteDB;
+import databaseIF.UtenteDB;
 import jooq_db.jooq.generated.tables.Utente;
 import jooq_db.jooq.generated.tables.records.UtenteRecord;
 

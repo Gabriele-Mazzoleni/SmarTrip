@@ -3,7 +3,7 @@ package repository;
 import org.springframework.stereotype.Repository;
 
 import gestore_db.DatabaseManager;
-import interfacce.GestoreUtente;
+import modelIF.GestoreUtente;
 import modelli.Utente;
 
 /**

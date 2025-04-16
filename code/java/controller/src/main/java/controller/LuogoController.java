@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import interfacce.FunzioniLuogo;
+import controllerIF.FunzioniLuogo;
 import modelli.Luogo;
 import services.LuogoServices;
 

@@ -6,7 +6,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 import gestore_db.DatabaseManager;
-import interfacce.GestoreLuogo;
+import modelIF.GestoreLuogo;
 import modelli.Luogo;
 
 @Repository

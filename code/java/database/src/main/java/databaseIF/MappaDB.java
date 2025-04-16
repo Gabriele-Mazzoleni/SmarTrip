@@ -1,4 +1,4 @@
-package interfacce;
+package databaseIF;
 
 public interface MappaDB {
 

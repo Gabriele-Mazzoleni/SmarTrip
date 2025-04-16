@@ -1,0 +1,18 @@
+IT1
+
+
+PLANNING
+Toolchain, selezione tutte le componenti e tools
+
+
+DESIGN
+Java: UML vari che rappresentano struttura, Pattern sigleton e spiegazione database, ER database,
+Flutter: riverpodUML, Adobe per bozza grafica
+Descrizione API query sign in e log in
+Pseudocodice + complessità Algoritmo filippo
+
+
+
+IMPLEMENTAZIONE
+Java: setup 3 progetti (e connessioni), creazione database, API login, signin, test API (junit+postman), Algoritmo filippo 
+Flutter: setup progetto, splashpage(connessione backend), login page

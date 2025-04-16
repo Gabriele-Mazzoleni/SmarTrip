@@ -15,7 +15,7 @@ import org.jooq.Result;
 import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
 
-import interfacce.MappaDB;
+import databaseIF.MappaDB;
 import jooq_db.jooq.generated.tables.Mappa;
 import jooq_db.jooq.generated.tables.records.MappaRecord;
 

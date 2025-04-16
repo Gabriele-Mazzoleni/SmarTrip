@@ -1,4 +1,4 @@
-package interfacce;
+package controllerIF;
 
 import org.springframework.http.ResponseEntity;
 import modelli.Itinerario;

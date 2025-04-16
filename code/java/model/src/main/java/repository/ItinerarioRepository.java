@@ -4,7 +4,7 @@ import java.util.*;
 
 import org.springframework.stereotype.Repository;
 import gestore_db.DatabaseManager;
-import interfacce.GestoreItinerario;
+import modelIF.GestoreItinerario;
 import modelli.Itinerario;
 import modelli.Luogo;
 import modelli.LuogoEsteso;

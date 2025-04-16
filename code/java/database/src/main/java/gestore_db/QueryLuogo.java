@@ -15,7 +15,7 @@ import org.jooq.Result;
 import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
 
-import interfacce.LuogoDB;
+import databaseIF.LuogoDB;
 import jooq_db.jooq.generated.tables.Luogo;
 import jooq_db.jooq.generated.tables.records.LuogoRecord;
 
