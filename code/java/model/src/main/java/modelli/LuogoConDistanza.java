@@ -1,7 +1,8 @@
 package modelli;
 
 public class LuogoConDistanza {
-    private Luogo luogo;
+    
+	private Luogo luogo;
     private int distanza;
 
     public LuogoConDistanza(Luogo luogo, int distanza) {

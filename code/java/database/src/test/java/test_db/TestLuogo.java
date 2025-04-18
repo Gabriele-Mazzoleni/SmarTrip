@@ -47,17 +47,24 @@ public class TestLuogo {
     
     @Test
     public void test203RitornaLuoghiCitta() {
-        String nomeCitta = "Città Test";
-        List<Map<String, Object>> luoghi = DatabaseManager.getIstanza().getQueryLuogo().ritornaLuoghiCitta(nomeCitta);
+        List<Map<String, Object>> luoghi = DatabaseManager.getIstanza().getQueryLuogo().ritornaLuoghiCitta("Città Test");
         // Verifica la lista contenga almeno un luogo con nome
         boolean trovatoLuogo = luoghi.stream()
             .anyMatch(luogo -> luogo.containsKey("nome") && luogo.get("nome").equals("Luogo di Test"));
         assertTrue(trovatoLuogo);
     }
-
     
     @Test
-    public void test204EliminaLuogo() {
+    public void test204RitornaRistorantiVicini() {
+    	List<Map<String, Object>> ristoranti = DatabaseManager.getIstanza().getQueryLuogo().ritornaRistorantiVicini(45.4642, 9.19, 1);
+        // Verifica che la lista contenga almeno un ristorante con tipo "Ristoro"
+        boolean trovatoRistoro = ristoranti.stream()
+            .anyMatch(r -> r.containsKey("tipo") && "Ristoro".equals(r.get("tipo")));
+        assertTrue(trovatoRistoro);
+    }
+    
+    @Test
+    public void test205EliminaLuogo() {
         int result = DatabaseManager.getIstanza().getQueryLuogo().eliminaLuogo("Luogo di Test", 0.0, 0.0);
         assertEquals(1, result);
     }
