@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import modelli.Luogo;
+import modelli.LuogoConDistanza;
 import repository.LuogoRepository;
 
 /**
@@ -29,6 +30,14 @@ public class LuogoServices {
 	 */
 	public List<Luogo> ritornaLuoghiDataCitta(String citta) {
 		return repo.listaLuoghiDiCitta(citta);
+	}
+	
+	/**
+	 * Ritorna lista degli n ristoranti più vicini chiamando funzione dal model
+	 * @return lista n ristoranti più vicini
+	 */
+	public List<LuogoConDistanza> ritornaRistorantiDateCoordinate(double longitudine, double latitudine, int n) {
+		return repo.listaRistorantiVicini(longitudine,latitudine,n);
 	}
 
 }

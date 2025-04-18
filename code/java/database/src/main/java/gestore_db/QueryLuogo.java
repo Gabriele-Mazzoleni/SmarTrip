@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -130,6 +131,78 @@ public class QueryLuogo implements LuogoDB{
 	        System.out.println("Errore durante il recupero dei luoghi dal database");
 	    }
 	    
+	    return luoghi;
+	}
+	
+	/**
+	 * Ritorna la lista dei n ristoranti più vicini date le coordinate
+	 * @param latitudine, longitudine, n
+	 * @return lista dei n ristoranti più vicini se presenti, altrimenti errore
+	 */
+	public List<Map<String, Object>> ritornaRistorantiVicini(double longitudine, double latitudine, int n) {
+	    List<Map<String, Object>> luoghi = new ArrayList<>();
+	    try {
+	        Connection conn = DriverManager.getConnection(DatabaseManager.getIstanza().getUrl());
+	        if (conn != null) {
+	            DSLContext create = DSL.using(conn, SQLDialect.SQLITE);
+	            Result<Record8<String, Double, Double, String, String, String, Integer, String>> result = create
+	                .select(
+	                    Luogo.LUOGO.NOME,
+	                    Luogo.LUOGO.LATITUDINE,
+	                    Luogo.LUOGO.LONGITUDINE,
+	                    Luogo.LUOGO.CITTA,
+	                    Luogo.LUOGO.INDIRIZZO,
+	                    Luogo.LUOGO.TIPO,
+	                    Luogo.LUOGO.TEMPOVISITA,
+	                    Luogo.LUOGO.IMMAGINE
+	                )
+	                .from(Luogo.LUOGO)
+	                .where(Luogo.LUOGO.TIPO.eq("Ristoro"))
+	                .fetch();
+
+	            for (Record8<String, Double, Double, String, String, String, Integer, String> record : result) {
+	                double latRistorante = record.value2();
+	                double lonRistorante = record.value3();
+
+	                // Calcolo le distanze usando il metodo di Haversine (è usato di solito)
+	                double R = 6371e3; // raggio della terra in metri
+	                double phi1 = Math.toRadians(latitudine);
+	                double phi2 = Math.toRadians(latRistorante);
+	                double deltaPhi = Math.toRadians(latRistorante - latitudine);
+	                double deltaLambda = Math.toRadians(lonRistorante - longitudine);
+
+	                double a = Math.sin(deltaPhi / 2) * Math.sin(deltaPhi / 2) +
+	                           Math.cos(phi1) * Math.cos(phi2) *
+	                           Math.sin(deltaLambda / 2) * Math.sin(deltaLambda / 2);
+	                double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+	                double distanza = R * c;
+
+	                Map<String, Object> luogo = new HashMap<>();
+	                luogo.put("nome", record.value1());
+	                luogo.put("latitudine", latRistorante);
+	                luogo.put("longitudine", lonRistorante);
+	                luogo.put("citta", record.value4());
+	                luogo.put("indirizzo", record.value5());
+	                luogo.put("tipo", record.value6());
+	                luogo.put("tempoDiVisita", record.value7());
+	                luogo.put("immagine", record.value8());
+	                luogo.put("distanza", distanza);
+
+	                luoghi.add(luogo);
+	            }
+	            
+	            // Ordino per vicinanza
+	            luoghi.sort(Comparator.comparingDouble(l -> (double) l.get("distanza")));
+
+	            // limito i primi 
+	            if (luoghi.size() > n) {
+	                luoghi = luoghi.subList(0, n);
+	            }
+	        }
+	    } catch (SQLException e) {
+	        System.out.println("Errore durante il recupero dei luoghi dal database");
+	    }
+
 	    return luoghi;
 	}
 	

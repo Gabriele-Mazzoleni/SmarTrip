@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import controllerIF.FunzioniLuogo;
 import modelli.Luogo;
+import modelli.LuogoConDistanza;
 import services.LuogoServices;
 
 
@@ -55,6 +56,30 @@ public class LuogoController implements FunzioniLuogo{
 	        return ResponseEntity.ok(luoghi);
 	    } else {
 	        System.out.println("Luoghi non ottenuti");
+	        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+	                .body(Collections.singletonMap("errore", false));
+	    }
+	}
+	
+	/**
+	 * Ritorna la lista dei ristoranti più vicini date le coordinate
+	 * @param latitudine, longitudine
+	 * @return lista dei ristoranti più vicini se presenti, altrimenti errore
+	 */
+	@Override
+	@PostMapping("/{latitudine}/{longitudine}/{n}")
+	public ResponseEntity<?> getRistorantiByCoordinate(
+	        @PathVariable double latitudine,
+	        @PathVariable double longitudine,
+	        @PathVariable int n) {
+	    
+	    List<LuogoConDistanza> luoghi = service.ritornaRistorantiDateCoordinate(longitudine, latitudine, n);
+	    
+	    if (!luoghi.isEmpty()) {
+	    	System.out.println("Ristoranti ottenuti");
+	        return ResponseEntity.ok(luoghi);
+	    } else {
+	        System.out.println("Ristoranti non ottenuti");
 	        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 	                .body(Collections.singletonMap("errore", false));
 	    }

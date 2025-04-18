@@ -17,4 +17,11 @@ public interface FunzioniLuogo {
 	 */
 	public ResponseEntity<?> getLuoghiByCitta(String citta);
 	
+	/**
+	 * Ritorna la lista dei n ristoranti più vicini date le coordinate
+	 * @param latitudine, longitudine, n
+	 * @return lista dei n ristoranti più vicini se presenti, altrimenti errore
+	 */
+	public ResponseEntity<?> getRistorantiByCoordinate(double latitudine, double longitudine, int n);
+	
 }

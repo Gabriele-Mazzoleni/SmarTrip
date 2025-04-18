@@ -97,7 +97,6 @@ public class ItinerarioServices {
 	            		  pranzoTroppoLungo = true;
 	            	  }
 	              }
-	              System.out.println("Tempo: " + (tempoTotale + tempoPercorrenza + tempoInizio));
 	              if (tempoTotale + tempoPercorrenza + luogoScelto.getTempoDiVisita() > (giornoAttuale.getTempoVisita()+tempoInizio) || tempoTotale + tempoPercorrenza + luogoScelto.getTempoDiVisita()> 84616 || pranzoTroppoLungo) break;
 	              tempoTotale += tempoPercorrenza;
 	              percorso.add(new LuogoEsteso(luogoScelto, convertSecondsToTime(tempoTotale)));
