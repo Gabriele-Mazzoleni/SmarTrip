@@ -59,12 +59,12 @@ public class ItinerarioServices {
 	  
 	      // Output: Tabelle di marcia per ogni giorno
 	      Map<Integer, List<LuogoEsteso>> tabelleDiMarcia = new HashMap<>();
-	  
 	      // Algoritmo per calcolare il percorso ottimale
 	      for (int giorno = 1; giorno <= i.getNumeroGiorni(); giorno++) {
 	    	  GiornoVisita giornoAttuale = i.getGiorno(giorno-1);
 	    	  boolean devoPranzare = giornoAttuale.getDevoPranzare();
 	    	  int tempoPranzo = giornoAttuale.getTempoPranzo();
+		      boolean pranzoTroppoLungo = false;
 		      // Converti ora di inizio in secondi
 		      int tempoInizio = convertTimeToSeconds(giornoAttuale.getOrarioDiInizioVisita());
 	          if (grafo.vertexSet().size() <= 1) break; // Solo il nodo A rimasto
@@ -86,13 +86,19 @@ public class ItinerarioServices {
 	              Luogo luogoScelto = prossimoLuogo.get();
 	              double tempoPercorrenza = grafo.getEdgeWeight(grafo.getEdge(nodoCorrente[0], luogoScelto));
 	              if(tempoTotale >= convertTimeToSeconds(giornoAttuale.getOrarioPranzo()) && devoPranzare) {
-	            	  devoPranzare = false;
-	            	  percorso.add(new LuogoEsteso(new Luogo("Ricerca ristorante",nodoCorrente[0].getLatitudine(),nodoCorrente[0].getLongitudine(),
-	            			  nodoCorrente[0].getCitta(), nodoCorrente[0].getIndirizzo(), "Ristorante",
-	            			  tempoPranzo, nodoCorrente[0].getImmagine()), convertSecondsToTime(tempoTotale)));
-	            	  tempoTotale+= tempoPranzo;
+	            	  if(tempoTotale + tempoPranzo < 84616) {
+		            	  devoPranzare = false;
+		            	  percorso.add(new LuogoEsteso(new Luogo("Ricerca ristorante",nodoCorrente[0].getLatitudine(),nodoCorrente[0].getLongitudine(),
+		            			  nodoCorrente[0].getCitta(), nodoCorrente[0].getIndirizzo(), "Ristorante",
+		            			  tempoPranzo, nodoCorrente[0].getImmagine()), convertSecondsToTime(tempoTotale)));
+		            	  tempoTotale+= tempoPranzo;
+	            	  }
+	            	  else {
+	            		  pranzoTroppoLungo = true;
+	            	  }
 	              }
-	              if (tempoTotale + tempoPercorrenza + luogoScelto.getTempoDiVisita() > (giornoAttuale.getTempoVisita()+tempoInizio)) break;
+	              System.out.println("Tempo: " + (tempoTotale + tempoPercorrenza + tempoInizio));
+	              if (tempoTotale + tempoPercorrenza + luogoScelto.getTempoDiVisita() > (giornoAttuale.getTempoVisita()+tempoInizio) || tempoTotale + tempoPercorrenza + luogoScelto.getTempoDiVisita()> 84616 || pranzoTroppoLungo) break;
 	              tempoTotale += tempoPercorrenza;
 	              percorso.add(new LuogoEsteso(luogoScelto, convertSecondsToTime(tempoTotale)));
 	              tempoTotale += luogoScelto.getTempoDiVisita();
