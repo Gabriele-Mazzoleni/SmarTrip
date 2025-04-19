@@ -10,7 +10,6 @@ import modelli.GiornoVisita;
 import modelli.Itinerario;
 import modelli.Luogo;
 import modelli.LuogoEsteso;
-import modelli.Utente;
 import repository.ItinerarioRepository;
 
 /**
