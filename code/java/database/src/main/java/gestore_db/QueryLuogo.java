@@ -113,6 +113,7 @@ public class QueryLuogo implements LuogoDB{
 	                )
 	                .from(Luogo.LUOGO)
 	                .where(Luogo.LUOGO.CITTA.eq(cittaInput))
+	                .and(Luogo.LUOGO.TIPO.eq("Visitabile"))
 	                .fetch();
 	            for (Record8<String, Double, Double, String, String, String, Integer, String> record : result) {
 	                Map<String, Object> luogo = new HashMap<>();

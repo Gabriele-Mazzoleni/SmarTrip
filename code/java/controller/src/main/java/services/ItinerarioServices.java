@@ -30,7 +30,7 @@ public class ItinerarioServices {
 	      Graph<Luogo, DefaultWeightedEdge> grafo = new SimpleWeightedGraph<>(DefaultWeightedEdge.class);
 	  
 	      // Nodo iniziale (A)
-	      Luogo nodoA = new Luogo("Soggiorno", i.getLatA(), i.getLonA(), "Default", "Default", "Default", 0, "Default");
+	      Luogo nodoA = new Luogo("Partenza o Arrivo", i.getLatA(), i.getLonA(), "Default", "Default", "Default", 0, "Default");
 	      grafo.addVertex(nodoA);
 	  
 	      // Aggiungi i luoghi come nodi nel grafo
