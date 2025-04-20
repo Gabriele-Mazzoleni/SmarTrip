@@ -10,7 +10,7 @@ Questa funzione genera le tabelle di marcia per un itinerario turistico, creando
 ## Pseudocodice dettagliato
 
 ```pseudocode
-Funzione creaTabelleDiMarcia(itinerario):
+public Map<Integer, List<LuogoEsteso>> creaTabelleDiMarcia(itinerario):
 
     if (itinerario è nullo oppure itinerario.luoghi è vuoto):
         return (mappa vuota);
