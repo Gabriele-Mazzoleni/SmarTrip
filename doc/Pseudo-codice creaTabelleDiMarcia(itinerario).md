@@ -13,97 +13,83 @@ Questa funzione genera le tabelle di marcia per un itinerario turistico, creando
 Funzione creaTabelleDiMarcia(itinerario):
 
     if (itinerario è nullo oppure itinerario.luoghi è vuoto):
-        viene restituita una mappa vuota
+        return (mappa vuota);
 
-    grafo = nuovo grafo pesato
+    grafo = nuovo grafo pesato;
 
-    nodoAlloggio = nuovo luogo con coordinate dell’alloggio
-    nodoAlloggio viene aggiunto al grafo
+    nodoAlloggio = nuovo luogo con coordinate dell’alloggio;
+    grafo.add(nodoAlloggio);
 
     for each luogo in itinerario.luoghi:
-        luogo viene aggiunto al grafo
+       grafo.add(luogo);
 
-    for i da 0 a numero dei luoghi - 1:
+    for (i da 0 a numero dei luoghi - 1){
         for j da i+1 a numero dei luoghi:
             luogo1 = itinerario.luoghi[i]
             luogo2 = itinerario.luoghi[j]
 
-            distanza = viene calcolata la distanza tra luogo1 e luogo2
-            tempoPercorrenza = viene calcolato il tempo per percorrerla a piedi
+            distanza = calcolaDistanza(luogo1, luogo2);
+            tempoPercorrenza = calcolaTempoPercorrenza(distanza,velocità);
 
             if (non esiste ancora un arco tra luogo1 e luogo2):
-                un arco viene aggiunto al grafo tra i due
+                grafo.addArco(luogo1,luogo2);
 
-            il peso dell’arco viene impostato a tempoPercorrenza
+            grafo.setPeso(arco tra luogo1 e luogo2, tempoPercorrenza);
+    }
+    tabellaDiMarcia = nuova mappa vuota
 
-    tabelle = nuova mappa vuota
+    for (nGiorno da 0 a itinerario.giorni.size - 1) {
 
-    for giornoIndex da 0 a itinerario.giorni.size - 1:
+        giornoAttuale = itinerario.getGiorno(nGiorno-1);
+        tempoInizio = convertiInSecondi(giornoAttuale.Orario_di_inizio_visita);
+        devePranzare = giornoAttuale.deve_pranzare;
+        pranzoTroppoLungo = false;
+        orarioPranzo = convertiInSecondi(giornoAttuale.Orario_di_pranzo);
+        tempoCorrente = tempoInizio;
+        percorso = new lista di luoghi;
+        percorso.add(nodoAlloggio,tempoCorrente);
+        nodoCorrente = nodoAlloggio;
 
-        giorno = viene preso il giorno corrispondente dell’itinerario
+        if(rimasto solo il nodoAlloggio nel grafo):
+            break;
 
-        tempoInizio = l’orario di inizio del giorno viene convertito in secondi
-        orarioPranzo = l’orario previsto per il pranzo viene convertito in secondi
-        tempoCorrente = tempoInizio
+        while (true){
+            
+            prossimoLuogo = nodo più vicino a nodoCorrente non ancora visitato e presente nel grafo che minimizza (tempoPercorrenza + tempoDiVisita);
+            if (prossimoLuogo.isEmpty()):
+                break;
 
-        percorso = nuova lista vuota
-        al percorso viene aggiunta una tappa che rappresenta l’alloggio con l’orario di partenza
-        nodoCorrente = nodoAlloggio
+            luogoScelto = prossimoLuogo;
+            tempoPercorrenza = grafo.getPeso(nodoCorrente,luogoScelto);
 
-        luoghiVisitati = nuova lista vuota
-        devePranzare = viene preso dal giorno se il pranzo è previsto
-        pranzoTroppoLungo = false
-
-        while (ci sono luoghi visitabili nel grafo):
-
-            migliorLuogo = null
-            tempoMinimo = infinito
-
-            for each luogo in grafo.nodi:
-                if (luogo è già nel percorso):
-                    continua
-
-                tempoSpostamento = viene calcolato il tempo da nodoCorrente a luogo
-                tempoArrivo = tempoCorrente + tempoSpostamento
-                tempoFineVisita = tempoArrivo + durata della visita al luogo
-
-                if (tempoFineVisita < tempoMinimo):
-                    migliorLuogo = luogo
-                    tempoMinimo = tempoFineVisita
-
-            if (migliorLuogo è null):
-                esci dal ciclo
-
-            if (devePranzare e tempoCorrente >= orarioPranzo):
-                if (tempoCorrente + 3600 <= giorno.orarioFine convertito in secondi):
-                    al percorso viene aggiunta una tappa fittizia "pranzo"
-                    tempoCorrente = tempoCorrente + 3600
-                    devePranzare = false
+            if (devePranzare && tempoCorrente >= orarioPranzo):
+                if (tempoCorrente + durataPranzo < mezzanotte): 
+                    percorso.add(ricercaRistorante,tempoCorrente);
+                    tempoCorrente += durataPranzo;
+                    devePranzare = false;
                 else:
-                    pranzoTroppoLungo = true
+                    pranzoTroppoLungo = true;
+             if (tempoCorrente + tempoPercorrenza + luogoScelto.TempoDiVisita > giornoAttuale.orarioFineVisite || pranzoTroppoLungo):
+                break;
 
-            tempoRitorno = tempo da migliorLuogo all’alloggio
-            if (tempoMinimo + tempoRitorno > giorno.orarioFine convertito in secondi oppure pranzoTroppoLungo):
-                esci dal ciclo
+            tempoCorrente += tempoPercorrenza;
+            percorso.add(luogoScelto,tempoCorrente);
+            tempoCorrente += luogoScelto.TempoPerVisitare;
+            nodoCorrente = luogoScelto;
+        }
+        if (nodoCorrente diverso da nodoAlloggio):
+            tempoCorrente += grafo.getPeso(nodoCorrente,nodoAlloggio);
+        percorso.add(nodoAlloggio,tempoCorrente);
 
-            tempoCorrente = tempoCorrente + tempo da nodoCorrente a migliorLuogo
-            al percorso viene aggiunta una tappa con migliorLuogo e tempoCorrente
-            tempoCorrente = tempoCorrente + durata della visita
-            nodoCorrente = migliorLuogo
-            luoghiVisitati.add(migliorLuogo)
+        tabellaDiMarcia.put(nGiorno,percorso);
 
-        tempoRitorno = tempo da nodoCorrente all’alloggio
-        tempoCorrente = tempoCorrente + tempoRitorno
-        al percorso viene aggiunta una tappa con l’alloggio e tempoCorrente
+        for (luogo in percorso) {
+            if (luogo diverso da nodoAlloggio):
+                grafo.rimuoviNodo(luogo);
+        }
+    }
 
-        tabelle["Giorno " + (giornoIndex + 1)] = percorso
-
-        for each luogo in luoghiVisitati:
-            il luogo viene rimosso dal grafo
-
-    repository.salvaMappa(nome dell’itinerario, utente, tabelle)
-
-    restituisci tabelle
+    return repository.salva(itinerario.NomeMappa, itinerario.Utente, tabellaDiMarcia);
 ```
 
 ---
