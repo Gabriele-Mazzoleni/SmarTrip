@@ -3,6 +3,7 @@ import 'package:smart_trip_app/Domain/user.dart';
 import 'package:smart_trip_app/Domain/luogo.dart';
 import 'package:smart_trip_app/Presentation/Pages/city_selection_page.dart';
 import 'package:smart_trip_app/Presentation/Controllers/location_page_controller.dart';
+import 'package:smart_trip_app/Presentation/Pages/requirements_page.dart';
 import 'package:smart_trip_app/Presentation/Styles/app_colors.dart';
 import 'package:smart_trip_app/Presentation/Styles/font_styles.dart';
 import 'package:smart_trip_app/Presentation/Styles/sizes.dart';
@@ -52,22 +53,31 @@ class _LocationPageState extends State<LocationPage>{
   }
 
   String formattaDurata(int secondiTotali) {
-  final ore = secondiTotali ~/ 3600; // divisione intera
-  final minuti = (secondiTotali  ~/ 60) - (ore*60);
+    final ore = secondiTotali ~/ 3600; // divisione intera
+    final minuti = (secondiTotali  ~/ 60) - (ore*60);
 
-  final parteOre = ore > 0 ? '$ore ${ore == 1 ? "ora" : "ore"}' : '';
-  final parteMinuti = minuti > 0 ? '$minuti ${minuti == 1 ? "minuto" : "minuti"}' : '';
+    final parteOre = ore > 0 ? '$ore ${ore == 1 ? "ora" : "ore"}' : '';
+    final parteMinuti = minuti > 0 ? '$minuti ${minuti == 1 ? "minuto" : "minuti"}' : '';
 
-  if (parteOre.isNotEmpty && parteMinuti.isNotEmpty) {
-    return '$parteOre e $parteMinuti';
-  } else if (parteOre.isNotEmpty) {
-    return parteOre;
-  } else if (parteMinuti.isNotEmpty) {
-    return parteMinuti;
-  } else {
-    return '0 minuti';
+    if (parteOre.isNotEmpty && parteMinuti.isNotEmpty) {
+      return '$parteOre e $parteMinuti';
+    } else if (parteOre.isNotEmpty) {
+      return parteOre;
+    } else if (parteMinuti.isNotEmpty) {
+      return parteMinuti;
+    } else {
+      return '0 minuti';
+    }
   }
-}
+
+  void navigateToRequirementsPage(user,city, localita, ip) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => RequirementsPage(user: user, city:city, luoghiSelezionati: localita, ip:ip),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -201,6 +211,7 @@ class _LocationPageState extends State<LocationPage>{
               ),
 
         ),
+
         //footer della pagina
         Container(
           decoration: const BoxDecoration(
@@ -226,7 +237,7 @@ class _LocationPageState extends State<LocationPage>{
                 onPressed: luoghiSelezionati.isNotEmpty
                 ?(){
                   //naviga a pagina della definizione requisiti
-                  //navigateToRequirementsPage(widget.user, luoghiSelezionati, widget.ip);
+                  navigateToRequirementsPage(widget.user, widget.city, luoghiSelezionati, widget.ip);
                 }
                 :(){
                   //non fa nulla
