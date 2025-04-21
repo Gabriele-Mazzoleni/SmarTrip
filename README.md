@@ -43,7 +43,7 @@ Scaricare il file `.zip` dal repository GitHub cliccando su **Code** → **Downl
 #### Avvio rapido con script:
 - Estrarre lo zip in una cartella a scelta.
 - Navigare in:  
-  `SmarTrip-main → SmarTrip-main → code → java → controller`.
+  `SmarTrip-main → code → java → controller`.
 - Eseguire il file **`start_server.bat`**.
 
 ### 3. App mobile
