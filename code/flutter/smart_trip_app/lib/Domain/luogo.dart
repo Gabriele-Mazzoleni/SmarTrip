@@ -5,7 +5,7 @@ class Luogo{
   final String city;
   final String indirizzo;
   final String tipo;
-  final double tempoVisita;
+  final int tempoVisita;
   final String immagine;
 
    Luogo({

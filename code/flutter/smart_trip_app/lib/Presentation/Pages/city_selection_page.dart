@@ -121,41 +121,39 @@ class _CitySelectionPageState extends State<CitySelectionPage>{
                         ),
                     )
             : cities.isNotEmpty?
-              Expanded(
-                            child: ListView.builder(
-                              itemCount: cities.length,
-                              itemBuilder: (context, index) {
-                                final city = cities[index];
-                                final isSelected = _selectedString == city;
-                                return GestureDetector(
-                                  onTap: () => _selezionaCity(city),
-                                  child: Card(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                      side: BorderSide(
-                                        color: isSelected
-                                            ? AppColors.red
-                                            : Colors.transparent,
-                                        width: 2,
-                                      ),
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.fromLTRB(Sizes.stdPaddingSpace,Sizes.smallPaddingSpace,Sizes.stdPaddingSpace,Sizes.smallPaddingSpace),
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            city,
-                                            style: FontStyles.cardTitle,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              },
+              ListView.builder(
+                itemCount: cities.length,
+                itemBuilder: (context, index) {
+                  final city = cities[index];
+                  final isSelected = _selectedString == city;
+                  return GestureDetector(
+                    onTap: () => _selezionaCity(city),
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        side: BorderSide(
+                          color: isSelected
+                              ? AppColors.red
+                              : Colors.transparent,
+                          width: 2,
+                        ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(Sizes.stdPaddingSpace,Sizes.smallPaddingSpace,Sizes.stdPaddingSpace,Sizes.smallPaddingSpace),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              city,
+                              style: FontStyles.cardTitle,
                             ),
-                          )
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              )
               :const Column(
                 children: [
                   SizedBox(height:Sizes.largePaddingSpace),

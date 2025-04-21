@@ -22,7 +22,8 @@ class MapSelectionPage extends StatefulWidget {
 class _MapSelectionPageState extends State<MapSelectionPage>{
 
   bool isLoading=false;
-  late List<Mappa> mappeUtente=[Mappa(nomeUtente: widget.user.username,idMappa: 'Bergamo', giorni: 3),Mappa(nomeUtente: widget.user.username,idMappa: 'Milano', giorni: 2)];
+  late List<Mappa> mappeUtente=[];
+  //Mappa(nomeUtente: widget.user.username,idMappa: 'Bergamo', giorni: 3),Mappa(nomeUtente: widget.user.username,idMappa: 'Milano', giorni: 2)
   Mappa? _selectedMappa;
 
     @override
@@ -179,7 +180,7 @@ class _MapSelectionPageState extends State<MapSelectionPage>{
                                             style: FontStyles.cardTitle,
                                           ),
                                           Text(
-                                            'Durata in giorni: ${mappa.giorni}',
+                                            'Durata in giorni: ${mappa.numGiorni}',
                                             style: FontStyles.cardText,
                                           ),
                                         ],

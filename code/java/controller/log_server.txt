@@ -7,22 +7,22 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v2.7.5)
 
-2025-04-21 02:11:28.371  INFO 17456 --- [           main] server.App                               : Starting App using Java 17.0.2 on ZEN0602 with PID 17456 (C:\Users\Asus\Documents\Università magistrale\1o anno - Semestre 1\Progettazione, algoritmi e computabilità\Progetto\Git\code\java\controller\target\classes started by Asus in C:\Users\Asus\Documents\Università magistrale\1o anno - Semestre 1\Progettazione, algoritmi e computabilità\Progetto\Git\code\java\controller)
-2025-04-21 02:11:28.376  INFO 17456 --- [           main] server.App                               : No active profile set, falling back to 1 default profile: "default"
-2025-04-21 02:11:29.547  INFO 17456 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
-2025-04-21 02:11:29.560  INFO 17456 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2025-04-21 02:11:29.561  INFO 17456 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.68]
-2025-04-21 02:11:29.672  INFO 17456 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2025-04-21 02:11:29.672  INFO 17456 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1225 ms
-2025-04-21 02:11:30.088  INFO 17456 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
-2025-04-21 02:11:30.100  INFO 17456 --- [           main] server.App                               : Started App in 2.21 seconds (JVM running for 2.552)
+2025-04-21 15:54:28.281  INFO 3596 --- [           main] server.App                               : Starting App using Java 23 on PcGab with PID 3596 (C:\Dati\Unibg_anno_4\Progetto_PAC\SmarTrip\code\java\controller\target\classes started by lelem in C:\Dati\Unibg_anno_4\Progetto_PAC\SmarTrip\code\java\controller)
+2025-04-21 15:54:28.285  INFO 3596 --- [           main] server.App                               : No active profile set, falling back to 1 default profile: "default"
+2025-04-21 15:54:29.412  INFO 3596 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2025-04-21 15:54:29.426  INFO 3596 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-04-21 15:54:29.426  INFO 3596 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.68]
+2025-04-21 15:54:29.537  INFO 3596 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-04-21 15:54:29.538  INFO 3596 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1175 ms
+2025-04-21 15:54:29.940  INFO 3596 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
+2025-04-21 15:54:29.949  INFO 3596 --- [           main] server.App                               : Started App in 2.102 seconds (JVM running for 2.511)
 Server avviato correttamente
 Inserisci su app questo indirizzo: 
-192.168.178.34:8081
-2025-04-21 02:11:33.686  INFO 17456 --- [0.0-8081-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-04-21 02:11:33.686  INFO 17456 --- [0.0-8081-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2025-04-21 02:11:33.688  INFO 17456 --- [0.0-8081-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
-2025-04-21 02:11:34.708  INFO 17456 --- [0.0-8081-exec-2] org.jooq.Constants                       : 
+192.168.1.22:8081
+2025-04-21 16:00:12.441  INFO 3596 --- [0.0-8081-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-04-21 16:00:12.442  INFO 3596 --- [0.0-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-04-21 16:00:12.443  INFO 3596 --- [0.0-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-04-21 16:00:13.593  INFO 3596 --- [0.0-8081-exec-1] org.jooq.Constants                       : 
                                       
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -42,9 +42,15 @@ Inserisci su app questo indirizzo:
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  Thank you for using jOOQ 3.18.7 (Build date: 2023-10-10T12:53:05Z)
                                       
-2025-04-21 02:11:34.714  INFO 17456 --- [0.0-8081-exec-2] org.jooq.Constants                       : 
+2025-04-21 16:00:13.598  INFO 3596 --- [0.0-8081-exec-1] org.jooq.Constants                       : 
 
-jOOQ tip of the day: Most formats that can be exported can be imported again: https://www.jooq.org/doc/latest/manual/sql-execution/importing/
+jOOQ tip of the day: In order to improve cardinality estimates, it can be valuable to auto-inline bind variables on certain columns, e.g. on enum types: https://www.jooq.org/doc/latest/manual/sql-building/dsl-context/custom-settings/settings-auto-inline-bind-values/
 
-2025-04-21 02:11:34.769  INFO 17456 --- [0.0-8081-exec-2] o.j.i.D.logVersionSupport                : Version                  : Database version is supported by dialect SQLITE: 3.39.4
+2025-04-21 16:00:13.656  INFO 3596 --- [0.0-8081-exec-1] o.j.i.D.logVersionSupport                : Version                  : Database version is supported by dialect SQLITE: 3.39.4
 Password corretta
+Città ottenute
+Luoghi ottenuti
+Password corretta
+Città ottenute
+Luoghi ottenuti
+Città ottenute

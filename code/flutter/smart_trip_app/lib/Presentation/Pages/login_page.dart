@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:smart_trip_app/Domain/user.dart'; //USATO PER DEBUGGING
+//import 'package:smart_trip_app/Domain/user.dart'; //USATO PER DEBUGGING
 import 'package:smart_trip_app/Presentation/Controllers/login_page_controller.dart';
 import 'package:smart_trip_app/Presentation/Pages/map_selection_page.dart';
 import 'package:smart_trip_app/Presentation/Styles/app_colors.dart';
@@ -157,16 +157,16 @@ Future<void> login() async {
                       signInErrorMessage = '';
                     });
                     //PER DEBUGGING GRAFICO, DA RIMUOVERE!!!!
-                    
+                    /*
                     var user= User(
                         username: 'Debugger',
                         password: 'PW',
                       );
                       isSignInLoading=false;
                       navigateToMapSelectionPage(user,widget.ip);
-                    
+                    */
                     //DA TESTARE
-                    //signin(setState);
+                    signin(setState);
                   },
                   child: isSignInLoading
                       ? const CircularProgressIndicator(color: AppColors.black)
@@ -239,17 +239,15 @@ Future<void> login() async {
                   ElevatedButton(
                     onPressed: () {
                       // TEMPORANEO, SOLO PER DEBUGGING!!!
-                      
+                      /*
                       var user= User(
                         username: 'Debugger',
                         password: 'PW',
                       );
                       navigateToMapSelectionPage(user,widget.ip);
-                      
+                      */
 
-
-                      //DA TESTARE!!
-                      //login();
+                      login();
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.red,

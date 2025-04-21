@@ -51,6 +51,24 @@ class _LocationPageState extends State<LocationPage>{
     }
   }
 
+  String formattaDurata(int secondiTotali) {
+  final ore = secondiTotali ~/ 3600; // divisione intera
+  final minuti = (secondiTotali  ~/ 60) - (ore*60);
+
+  final parteOre = ore > 0 ? '$ore ${ore == 1 ? "ora" : "ore"}' : '';
+  final parteMinuti = minuti > 0 ? '$minuti ${minuti == 1 ? "minuto" : "minuti"}' : '';
+
+  if (parteOre.isNotEmpty && parteMinuti.isNotEmpty) {
+    return '$parteOre e $parteMinuti';
+  } else if (parteOre.isNotEmpty) {
+    return parteOre;
+  } else if (parteMinuti.isNotEmpty) {
+    return parteMinuti;
+  } else {
+    return '0 minuti';
+  }
+}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -90,7 +108,7 @@ class _LocationPageState extends State<LocationPage>{
                 ),
                   //const Spacer(),
                   const Text(
-                    'SELEZIONA I LUOGHI D\' INTERESSE',
+                    'SELEZIONA I LUOGHI',
                     style: FontStyles.headerTitle,
                     textAlign: TextAlign.center,
                   ),
@@ -115,41 +133,62 @@ class _LocationPageState extends State<LocationPage>{
                         ),
                     )
             : luoghi.isNotEmpty?
-              Expanded(
-                            child: ListView.builder(
-                              itemCount: luoghi.length,
-                              itemBuilder: (context, index) {
-                                final luogo = luoghi[index];
-                                final isSelected = luoghiSelezionati.contains(luogo);
-                                return GestureDetector(
-                                  onTap: () => toggleSelezioneLuogo(luogo),
-                                  child: Card(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                      side: BorderSide(
-                                        color: isSelected
-                                            ? AppColors.red
-                                            : Colors.transparent,
-                                        width: 2,
-                                      ),
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.fromLTRB(Sizes.stdPaddingSpace,Sizes.smallPaddingSpace,Sizes.stdPaddingSpace,Sizes.smallPaddingSpace),
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            luogo.nome,
-                                            style: FontStyles.cardTitle,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
+              ListView.builder(
+                itemCount: luoghi.length,
+                itemBuilder: (context, index) {
+                  final luogo = luoghi[index];
+                  final isSelected = luoghiSelezionati.contains(luogo);
+                  return Card(
+                    margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10), 
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(Sizes.smallPaddingSpace),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                    luogo.nome,
+                                    style: FontStyles.cardTitle,
                                   ),
-                                );
-                              },
+                              ),
+                              const SizedBox(width: Sizes.smallPaddingSpace),
+                              Checkbox(
+                                value: isSelected,
+                                onChanged: (_) {
+                                  setState(() {
+                                    toggleSelezioneLuogo(luogo);
+                                  });
+                                },
+                                activeColor: AppColors.red
+                              ), 
+                            ],
+                          ),
+                          Text(
+                            luogo.indirizzo,
+                            style:FontStyles.cardText
+                          ),
+                          Text(
+                            'Tempo di visita previsto: ${formattaDurata(luogo.tempoVisita)}',
+                            style:FontStyles.cardText
+                          ),
+                          const SizedBox(height: Sizes.smallPaddingSpace),
+                          SizedBox(
+                            child: Image.network(
+                              luogo.immagine,
+                              fit: BoxFit.fill,
                             ),
-                          )
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              )
               :const Column(
                 children: [
                   SizedBox(height:Sizes.largePaddingSpace),
