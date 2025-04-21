@@ -8,8 +8,7 @@
 ---
 
 ## 🎯 Obiettivo 
-
-> Offrire uno strumento innovativo, intuitivo e ottimizzato per pianificare i propri viaggi risparmiando tempo e migliorando l’esperienza utente grazie ad algoritmi di ottimizzazione e tecnologie moderne.
+Offrire uno strumento innovativo, intuitivo e ottimizzato per pianificare i propri viaggi risparmiando tempo e migliorando l’esperienza utente grazie ad algoritmi di ottimizzazione e tecnologie moderne.
 
 ---
 
@@ -24,12 +23,12 @@ Il repository è suddiviso in due macro-cartelle:
 
 ## ⚙️ Compatibilità
 
-### 🖥️ Server
+#### 🖥️ Server
 - Compatibile con **Windows** e **Linux**.
 - Richiede **Java 17 o superiore**.
 - ❌ *Non compatibile con Mac OS*.
 
-### 📱 App Mobile
+#### 📱 App Mobile
 - Sviluppata e testata su **Android**.
 - ❌ *Non testata su iOS*.
 
@@ -49,7 +48,7 @@ Scaricare il file `.zip` dal repository GitHub cliccando su **Code** → **Downl
   `SmarTrip-main → SmarTrip-main → code → java → controller`.
 - Eseguire il file **`start_server.bat`**.
 
-### 3. App Mobile:
+### 3. App mobile
 #### Installazione con .apk:
 🚧 *Sezione in aggiornamento*  
 Questa sezione sarà completata una volta disponibile l'.apk per l’installazione diretta dell’app Android.
