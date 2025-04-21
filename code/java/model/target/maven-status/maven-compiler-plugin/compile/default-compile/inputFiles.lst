@@ -1,10 +1,11 @@
-C:\Users\Asus\Documents\Università magistrale\1o anno - Semestre 1\Progettazione, algoritmi e computabilità\Progetto\Git\code\java\model\src\main\java\interfacce\GestoreLuogo.java
-C:\Users\Asus\Documents\Università magistrale\1o anno - Semestre 1\Progettazione, algoritmi e computabilità\Progetto\Git\code\java\model\src\main\java\interfacce\GestoreUtente.java
+C:\Users\Asus\Documents\Università magistrale\1o anno - Semestre 1\Progettazione, algoritmi e computabilità\Progetto\Git\code\java\model\src\main\java\modelIF\GestoreItinerario.java
+C:\Users\Asus\Documents\Università magistrale\1o anno - Semestre 1\Progettazione, algoritmi e computabilità\Progetto\Git\code\java\model\src\main\java\modelIF\GestoreLuogo.java
+C:\Users\Asus\Documents\Università magistrale\1o anno - Semestre 1\Progettazione, algoritmi e computabilità\Progetto\Git\code\java\model\src\main\java\modelIF\GestoreUtente.java
 C:\Users\Asus\Documents\Università magistrale\1o anno - Semestre 1\Progettazione, algoritmi e computabilità\Progetto\Git\code\java\model\src\main\java\modelli\GiornoVisita.java
 C:\Users\Asus\Documents\Università magistrale\1o anno - Semestre 1\Progettazione, algoritmi e computabilità\Progetto\Git\code\java\model\src\main\java\modelli\Itinerario.java
 C:\Users\Asus\Documents\Università magistrale\1o anno - Semestre 1\Progettazione, algoritmi e computabilità\Progetto\Git\code\java\model\src\main\java\modelli\Luogo.java
+C:\Users\Asus\Documents\Università magistrale\1o anno - Semestre 1\Progettazione, algoritmi e computabilità\Progetto\Git\code\java\model\src\main\java\modelli\LuogoConDistanza.java
 C:\Users\Asus\Documents\Università magistrale\1o anno - Semestre 1\Progettazione, algoritmi e computabilità\Progetto\Git\code\java\model\src\main\java\modelli\LuogoEsteso.java
-C:\Users\Asus\Documents\Università magistrale\1o anno - Semestre 1\Progettazione, algoritmi e computabilità\Progetto\Git\code\java\model\src\main\java\modelli\LuogoRidotto.java
 C:\Users\Asus\Documents\Università magistrale\1o anno - Semestre 1\Progettazione, algoritmi e computabilità\Progetto\Git\code\java\model\src\main\java\modelli\Mappa.java
 C:\Users\Asus\Documents\Università magistrale\1o anno - Semestre 1\Progettazione, algoritmi e computabilità\Progetto\Git\code\java\model\src\main\java\modelli\Utente.java
 C:\Users\Asus\Documents\Università magistrale\1o anno - Semestre 1\Progettazione, algoritmi e computabilità\Progetto\Git\code\java\model\src\main\java\repository\ItinerarioRepository.java

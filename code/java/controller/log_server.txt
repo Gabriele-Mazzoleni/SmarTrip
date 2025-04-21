@@ -1,0 +1,50 @@
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v2.7.5)
+
+2025-04-21 02:11:28.371  INFO 17456 --- [           main] server.App                               : Starting App using Java 17.0.2 on ZEN0602 with PID 17456 (C:\Users\Asus\Documents\Università magistrale\1o anno - Semestre 1\Progettazione, algoritmi e computabilità\Progetto\Git\code\java\controller\target\classes started by Asus in C:\Users\Asus\Documents\Università magistrale\1o anno - Semestre 1\Progettazione, algoritmi e computabilità\Progetto\Git\code\java\controller)
+2025-04-21 02:11:28.376  INFO 17456 --- [           main] server.App                               : No active profile set, falling back to 1 default profile: "default"
+2025-04-21 02:11:29.547  INFO 17456 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2025-04-21 02:11:29.560  INFO 17456 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-04-21 02:11:29.561  INFO 17456 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.68]
+2025-04-21 02:11:29.672  INFO 17456 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-04-21 02:11:29.672  INFO 17456 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1225 ms
+2025-04-21 02:11:30.088  INFO 17456 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
+2025-04-21 02:11:30.100  INFO 17456 --- [           main] server.App                               : Started App in 2.21 seconds (JVM running for 2.552)
+Server avviato correttamente
+Inserisci su app questo indirizzo: 
+192.168.178.34:8081
+2025-04-21 02:11:33.686  INFO 17456 --- [0.0-8081-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-04-21 02:11:33.686  INFO 17456 --- [0.0-8081-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-04-21 02:11:33.688  INFO 17456 --- [0.0-8081-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2025-04-21 02:11:34.708  INFO 17456 --- [0.0-8081-exec-2] org.jooq.Constants                       : 
+                                      
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@  @@        @@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@        @@@@@@@@@@
+@@@@@@@@@@@@@@@@  @@  @@    @@@@@@@@@@
+@@@@@@@@@@  @@@@  @@  @@    @@@@@@@@@@
+@@@@@@@@@@        @@        @@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@        @@        @@@@@@@@@@
+@@@@@@@@@@    @@  @@  @@@@  @@@@@@@@@@
+@@@@@@@@@@    @@  @@  @@@@  @@@@@@@@@@
+@@@@@@@@@@        @@  @  @  @@@@@@@@@@
+@@@@@@@@@@        @@        @@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@  @@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  Thank you for using jOOQ 3.18.7 (Build date: 2023-10-10T12:53:05Z)
+                                      
+2025-04-21 02:11:34.714  INFO 17456 --- [0.0-8081-exec-2] org.jooq.Constants                       : 
+
+jOOQ tip of the day: Most formats that can be exported can be imported again: https://www.jooq.org/doc/latest/manual/sql-execution/importing/
+
+2025-04-21 02:11:34.769  INFO 17456 --- [0.0-8081-exec-2] o.j.i.D.logVersionSupport                : Version                  : Database version is supported by dialect SQLITE: 3.39.4
+Password corretta

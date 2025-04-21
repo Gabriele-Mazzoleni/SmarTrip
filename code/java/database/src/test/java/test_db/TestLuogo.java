@@ -35,7 +35,7 @@ public class TestLuogo {
     @Test
     public void test201InserisciLuogo() {
         int result = DatabaseManager.getIstanza().getQueryLuogo().inserisciLuogo("Luogo di Test", 0.0, 0.0,
-                "Città Test", "Indirizzo Test", "Test", 1000, "url");
+                "Città Test", "Indirizzo Test", "Visitabile", 1000, "url");
         assertEquals(1, result);
     }
     

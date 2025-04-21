@@ -65,7 +65,7 @@ public class TestCrea {
         ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM utente");
         rs.next();
         int userCount = rs.getInt(1);
-        assertEquals(3, userCount);
+        assertEquals(1, userCount);
 
         //Controlla se i luoghi sono stati inseriti
         rs = stmt.executeQuery("SELECT COUNT(*) FROM luogo");

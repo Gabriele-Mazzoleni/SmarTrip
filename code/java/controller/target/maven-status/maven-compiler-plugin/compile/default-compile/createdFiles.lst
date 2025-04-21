@@ -1,3 +1,11 @@
+services\LuogoServices.class
+controller\ItinerarioController.class
+controllerIF\FunzioniItinerario.class
+services\UtenteServices.class
+controller\LuogoController.class
+controller\UtenteController.class
+controllerIF\FunzioniUtente.class
+server\App$1.class
 server\App.class
-interfacce\FunzioniLuogo.class
-interfacce\FunzioniUtente.class
+services\ItinerarioServices.class
+controllerIF\FunzioniLuogo.class

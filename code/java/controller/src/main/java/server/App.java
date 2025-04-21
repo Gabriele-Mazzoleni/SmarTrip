@@ -1,5 +1,9 @@
 package server;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -24,6 +28,7 @@ public class App implements CommandLineRunner {
     private int serverPort;
 
     public static void main(String[] args) {
+    	duplicaOutputConsole("log_server.txt");
         SpringApplication.run(App.class, args);
     }
 
@@ -33,42 +38,65 @@ public class App implements CommandLineRunner {
     }
 
     public void trovaIp() {
-    	try {
-            // Ottieni tutte le interfacce di rete
+        try {
             Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
 
             while (interfaces.hasMoreElements()) {
                 NetworkInterface networkInterface = interfaces.nextElement();
 
-                // Ignora le interfacce che non sono attive o sono di loopback
                 if (!networkInterface.isUp() || networkInterface.isLoopback()) {
                     continue;
                 }
 
-                // Puoi filtrare ulteriormente per nome, ad esempio "wlan0", "wlp3s0", ecc.
-                String interfaceName = networkInterface.getName();
-                if (!interfaceName.startsWith("wlan") && !interfaceName.startsWith("wl")) {
+                // Nome tecnico (es. wlan0) o nome descrittivo (es. Wi-Fi)
+                String name = networkInterface.getName().toLowerCase();
+                String displayName = networkInterface.getDisplayName().toLowerCase();
+
+                // Aggiunto supporto a interfacce Windows come "Wi-Fi" e "Ethernet"
+                if (!(name.startsWith("wlan") || name.startsWith("wl") || 
+                      displayName.contains("wi-fi") || displayName.contains("ethernet"))) {
                     continue;
                 }
 
-                // Ottieni gli indirizzi associati a questa interfaccia
                 Enumeration<InetAddress> addresses = networkInterface.getInetAddresses();
-
                 while (addresses.hasMoreElements()) {
                     InetAddress address = addresses.nextElement();
-
-                    // Considera solo indirizzi IPv4 non di loopback
                     if (address instanceof Inet4Address && !address.isLoopbackAddress()) {
                         System.out.println("Server avviato correttamente");
                         System.out.println("Inserisci su app questo indirizzo: ");
                         System.out.println(address.getHostAddress() + ":" + getServerPort());
-                        return; // trovato, esci
+                        return;
                     }
                 }
             }
 
-            System.out.println("Nessun indirizzo IPv4 trovato per l'interfaccia Wi-Fi.");
+            System.out.println("Nessun indirizzo IPv4 trovato per l'interfaccia Wi-Fi o Ethernet.");
         } catch (SocketException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public static void duplicaOutputConsole(String nomeFile) {
+        try {
+            // Crea un file log
+            FileOutputStream fos = new FileOutputStream(nomeFile);
+            @SuppressWarnings("resource")
+			PrintStream fileOut = new PrintStream(fos, true);
+            PrintStream console = System.out;
+
+            // Scrivi sia su console che su file
+            PrintStream dualOut = new PrintStream(new OutputStream() {
+                @Override
+                public void write(int b) throws IOException {
+                    console.write(b);
+                    fileOut.write(b);
+                }
+            }, true);
+
+            System.setOut(dualOut);
+            System.setErr(dualOut);
+
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
