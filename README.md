@@ -39,8 +39,6 @@ Il repository è suddiviso in due macro-cartelle:
 ### 1. Download del Progetto
 Scaricare il file `.zip` dal repository GitHub cliccando su **Code** → **Download ZIP**.
 
----
-
 ### 2. Server
 #### Avvio rapido con script:
 - Estrarre lo zip in una cartella a scelta.
