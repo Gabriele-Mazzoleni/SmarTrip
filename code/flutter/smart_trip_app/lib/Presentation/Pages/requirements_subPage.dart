@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:smart_trip_app/Domain/user.dart';
 import 'package:smart_trip_app/Domain/luogo.dart';
 import 'package:smart_trip_app/Domain/velocita.dart';
@@ -23,9 +22,16 @@ class RequirementsPage extends StatefulWidget {
 
 class _RequirementsPageState extends State<RequirementsPage>{
 
-  bool isLoading=false;
+  
+  @override
+  void initState() {
+    super.initState();
+  }
 
-  //controller per i campi del form
+  bool isLoading=false;
+  bool showSubforms = false;
+
+  //controller per i campi del form della prima sezione
   final TextEditingController _mapNameController = TextEditingController();
   final TextEditingController _latitudeController = TextEditingController();
   final TextEditingController _longitudeController = TextEditingController();
@@ -33,12 +39,8 @@ class _RequirementsPageState extends State<RequirementsPage>{
   VelocitaSpostamenti? selectedSpeed;
   final List<VelocitaSpostamenti> speedOptions = VelocitaSpostamenti.values;
 
-
-
-  @override
-  void initState() {
-    super.initState();
-  }
+  //controller per le sottoform delle singole giornate
+  List<TextEditingController> subformControllers = [];
 
   String formattaDurata(int secondiTotali) {
   final ore = secondiTotali ~/ 3600; // divisione intera
@@ -61,6 +63,8 @@ class _RequirementsPageState extends State<RequirementsPage>{
 bool formCompleta(){
   return (numGiorni!=null && _mapNameController.text.isNotEmpty && _latitudeController.text.isNotEmpty && _longitudeController.text.isNotEmpty && selectedSpeed!=null);
 }
+
+ bool giornateDefinite=false;
 
   @override
   Widget build(BuildContext context) {
@@ -121,7 +125,32 @@ bool formCompleta(){
         Expanded(
           child:Padding(
             padding: const EdgeInsets.all(Sizes.stdPaddingSpace),
-            child: Column(
+            child: showSubforms //se true, siamo nella seconda sottopagina, di impostazione delle giornate
+            ? ListView.builder(
+            itemCount: numGiorni ?? 0,
+            itemBuilder: (context, index) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Attività per il giorno ${index + 1}', style: FontStyles.noMapsText),
+                  const SizedBox(height: Sizes.smallPaddingSpace),
+                  TextField(
+                    controller: subformControllers[index],
+                    style: FontStyles.signinText,
+                    decoration: const InputDecoration(
+                      hintText: 'Descrivi le attività',
+                      hintStyle: FontStyles.signinText,
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: AppColors.black),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: Sizes.stdPaddingSpace),
+                ],
+              );
+            },
+          )
+            : Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 const Align(
@@ -258,29 +287,39 @@ bool formCompleta(){
           width: double.infinity,
           child: Column(
             children: [
+              if (showSubforms) //se ci troviamo nella seconda sottopagina
+                ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      showSubforms = false;
+                    });
+                  },
+                  style: ElevatedButton.styleFrom(backgroundColor: AppColors.red),
+                  child: const Text('INDIETRO', style: FontStyles.buttonTextWhite),
+                ),
+              const SizedBox(height: Sizes.smallPaddingSpace),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    backgroundColor: formCompleta()
-                      ?AppColors.red
-                      :AppColors.gray,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(Sizes.smallRoundedCorner),
-                    ),
+                  backgroundColor: formCompleta() ? AppColors.red : AppColors.gray,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(Sizes.smallRoundedCorner),
+                  ),
                 ),
-                onPressed: formCompleta()
-                ?(){
-                  //naviga a pagina della definizione requisiti singole giornate
-                  //navigateToRequirementsSubPage(widget.user, luoghiSelezionati, ALTRO DA AGGIUNGERE, widget.ip);
-                }
-                :(){
-                  //non fa nulla
-                },
+                onPressed: (!showSubforms) //se siamo nella prima sottopagina passa alla seconda
+                  ?formCompleta()
+                    ? () {
+                      setState(() {
+                        subformControllers = List.generate(numGiorni!, (_) => TextEditingController());
+                        showSubforms = true;
+                      });
+                    }
+                    : null
+                  : null, //passa alla prossima pagina, che devo ancora implementare
                 child: const Text('CONTINUA', style: FontStyles.buttonTextWhite),
               )
             ],
-            )
-        )
-      
+          ),
+        ) 
       ],
     ),
     );

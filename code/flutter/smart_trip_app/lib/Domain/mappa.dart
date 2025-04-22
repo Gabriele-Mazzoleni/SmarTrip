@@ -8,7 +8,7 @@ class Mappa{
   final double longAlloggio;
   final int numGiorni;
   final double velMedia;
-  final List<Giornata> giornate;
+  List<Giornata> giornate;
   final List<Luogo> luoghi;
 
 
