@@ -15,4 +15,16 @@ extension VelocitaSpostamentiExtension on VelocitaSpostamenti {
         return 'rapida';
     }
   }
+
+
+  double get valore{
+    switch (this) {
+      case VelocitaSpostamenti.rilassata:
+        return 1.0;
+      case VelocitaSpostamenti.media:
+        return 1.5;
+      case VelocitaSpostamenti.rapida:
+        return 2.0;
+    }
+  }
 }

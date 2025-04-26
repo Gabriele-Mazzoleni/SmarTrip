@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:smart_trip_app/Domain/mappa.dart';
 import 'package:smart_trip_app/Domain/user.dart';
 import 'package:smart_trip_app/Domain/luogo.dart';
 import 'package:smart_trip_app/Domain/velocita.dart';
-import 'package:smart_trip_app/Presentation/Controllers/requirements_page_controller.dart';
+//import 'package:smart_trip_app/Presentation/Controllers/requirements_page_controller.dart';
 import 'package:smart_trip_app/Presentation/Pages/location_page.dart';
+import 'package:smart_trip_app/Presentation/Pages/requirements_sub_page.dart';
 import 'package:smart_trip_app/Presentation/Styles/app_colors.dart';
 import 'package:smart_trip_app/Presentation/Styles/font_styles.dart';
 import 'package:smart_trip_app/Presentation/Styles/sizes.dart';
@@ -23,8 +24,6 @@ class RequirementsPage extends StatefulWidget {
 
 class _RequirementsPageState extends State<RequirementsPage>{
 
-  bool isLoading=false;
-
   //controller per i campi del form
   final TextEditingController _mapNameController = TextEditingController();
   final TextEditingController _latitudeController = TextEditingController();
@@ -40,27 +39,18 @@ class _RequirementsPageState extends State<RequirementsPage>{
     super.initState();
   }
 
-  String formattaDurata(int secondiTotali) {
-  final ore = secondiTotali ~/ 3600; // divisione intera
-  final minuti = (secondiTotali  ~/ 60) - (ore*60);
-
-  final parteOre = ore > 0 ? '$ore ${ore == 1 ? "ora" : "ore"}' : '';
-  final parteMinuti = minuti > 0 ? '$minuti ${minuti == 1 ? "minuto" : "minuti"}' : '';
-
-  if (parteOre.isNotEmpty && parteMinuti.isNotEmpty) {
-    return '$parteOre e $parteMinuti';
-  } else if (parteOre.isNotEmpty) {
-    return parteOre;
-  } else if (parteMinuti.isNotEmpty) {
-    return parteMinuti;
-  } else {
-    return '0 minuti';
+  bool formCompleta(){
+    return (numGiorni!=null && _mapNameController.text.isNotEmpty && _latitudeController.text.isNotEmpty && _longitudeController.text.isNotEmpty && selectedSpeed!=null);
   }
-}
 
-bool formCompleta(){
-  return (numGiorni!=null && _mapNameController.text.isNotEmpty && _latitudeController.text.isNotEmpty && _longitudeController.text.isNotEmpty && selectedSpeed!=null);
-}
+  void navigateToRequirementsSubPage(User user, Mappa mappaProv, String citta, String ip) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => RequirementsSubPage(user: user, mappa:mappaProv, city:citta ,ip:ip),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -269,8 +259,18 @@ bool formCompleta(){
                 ),
                 onPressed: formCompleta()
                 ?(){
+                  Mappa mappaProv= Mappa( 
+                    nomeUtente: widget.user.username, 
+                    idMappa: _mapNameController.text, 
+                    latAlloggio: double.parse(_latitudeController.text), 
+                    longAlloggio: double.parse(_longitudeController.text), 
+                    numGiorni: numGiorni!, 
+                    velMedia: selectedSpeed!.valore, 
+                    luoghi: widget.luoghiSelezionati, 
+                    giornate: [/*Per ora vuoti, li si definirà alla prossima pagina*/]);
+
                   //naviga a pagina della definizione requisiti singole giornate
-                  //navigateToRequirementsSubPage(widget.user, luoghiSelezionati, ALTRO DA AGGIUNGERE, widget.ip);
+                  navigateToRequirementsSubPage(widget.user, mappaProv,widget.city, widget.ip);
                 }
                 :(){
                   //non fa nulla

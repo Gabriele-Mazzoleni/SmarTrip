@@ -2,23 +2,15 @@ import 'package:flutter/material.dart';
 
 class Giornata{
 
-  final TimeOfDay oraInizio;
-  final bool devoPranzare;
-  final TimeOfDay oraPranzo;
-  final int tempoPranzo;
-  final int pausa;
-  final int tempoVisita;
+  TimeOfDay? oraInizio;
+  bool devoPranzare=false;
+  TimeOfDay? oraPranzo;
+  int? tempoPranzo;
+  int? pausa;
+  int? tempoVisita;
 
 
-  Giornata({
-    required this.oraInizio,
-    required this.devoPranzare,
-    required this.oraPranzo,
-    required this.tempoPranzo,
-    required this.pausa,
-    required this.tempoVisita
-  });
-
+  Giornata();
 
     //metodo di decoding
   Giornata.fromJSON(Map<String, dynamic> jsonMap) :

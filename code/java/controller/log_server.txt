@@ -7,22 +7,22 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v2.7.5)
 
-2025-04-22 10:43:40.737  INFO 27432 --- [           main] server.App                               : Starting App using Java 23 on PcGab with PID 27432 (C:\Dati\Unibg_anno_4\Progetto_PAC\SmarTrip\code\java\controller\target\classes started by lelem in C:\Dati\Unibg_anno_4\Progetto_PAC\SmarTrip\code\java\controller)
-2025-04-22 10:43:40.741  INFO 27432 --- [           main] server.App                               : No active profile set, falling back to 1 default profile: "default"
-2025-04-22 10:43:42.082  INFO 27432 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
-2025-04-22 10:43:42.102  INFO 27432 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2025-04-22 10:43:42.102  INFO 27432 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.68]
-2025-04-22 10:43:42.249  INFO 27432 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2025-04-22 10:43:42.250  INFO 27432 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1422 ms
-2025-04-22 10:43:42.782  INFO 27432 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
-2025-04-22 10:43:42.795  INFO 27432 --- [           main] server.App                               : Started App in 2.717 seconds (JVM running for 3.215)
+2025-04-25 11:46:14.313  INFO 15120 --- [           main] server.App                               : Starting App using Java 23 on PcGab with PID 15120 (C:\Dati\Unibg_anno_4\Progetto_PAC\SmarTrip\code\java\controller\target\classes started by lelem in C:\Dati\Unibg_anno_4\Progetto_PAC\SmarTrip\code\java\controller)
+2025-04-25 11:46:14.326  INFO 15120 --- [           main] server.App                               : No active profile set, falling back to 1 default profile: "default"
+2025-04-25 11:46:16.383  INFO 15120 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2025-04-25 11:46:16.410  INFO 15120 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-04-25 11:46:16.411  INFO 15120 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.68]
+2025-04-25 11:46:16.599  INFO 15120 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-04-25 11:46:16.600  INFO 15120 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2107 ms
+2025-04-25 11:46:17.228  INFO 15120 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
+2025-04-25 11:46:17.248  INFO 15120 --- [           main] server.App                               : Started App in 3.796 seconds (JVM running for 4.563)
 Server avviato correttamente
 Inserisci su app questo indirizzo: 
 192.168.1.22:8081
-2025-04-22 10:56:47.518  INFO 27432 --- [0.0-8081-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-04-22 10:56:47.519  INFO 27432 --- [0.0-8081-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2025-04-22 10:56:47.521  INFO 27432 --- [0.0-8081-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
-2025-04-22 10:56:48.613  INFO 27432 --- [0.0-8081-exec-2] org.jooq.Constants                       : 
+2025-04-25 12:40:21.135  INFO 15120 --- [0.0-8081-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-04-25 12:40:21.140  INFO 15120 --- [0.0-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-04-25 12:40:21.164  INFO 15120 --- [0.0-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 22 ms
+2025-04-25 12:40:23.419  INFO 15120 --- [0.0-8081-exec-1] org.jooq.Constants                       : 
                                       
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -42,13 +42,14 @@ Inserisci su app questo indirizzo:
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  Thank you for using jOOQ 3.18.7 (Build date: 2023-10-10T12:53:05Z)
                                       
-2025-04-22 10:56:48.619  INFO 27432 --- [0.0-8081-exec-2] org.jooq.Constants                       : 
+2025-04-25 12:40:23.435  INFO 15120 --- [0.0-8081-exec-1] org.jooq.Constants                       : 
 
-jOOQ tip of the day: A NoClassDefFoundError or ClassNotFoundException is often a sign that your jOOQ code is generated with a different version of jOOQ than runtime library you're using
+jOOQ tip of the day: jOOQ Queries extend Flow.Publisher, and can thus be used in reactive APIs. Blocking on JDBC by default, but if you configure an R2DBC ConnectionFactory, it's automatically non-blocking!
 
-2025-04-22 10:56:48.684  INFO 27432 --- [0.0-8081-exec-2] o.j.i.D.logVersionSupport                : Version                  : Database version is supported by dialect SQLITE: 3.39.4
+2025-04-25 12:40:23.574  INFO 15120 --- [0.0-8081-exec-1] o.j.i.D.logVersionSupport                : Version                  : Database version is supported by dialect SQLITE: 3.39.4
 Password corretta
 Città ottenute
 Luoghi ottenuti
-Luoghi ottenuti
+Password corretta
+Città ottenute
 Luoghi ottenuti
