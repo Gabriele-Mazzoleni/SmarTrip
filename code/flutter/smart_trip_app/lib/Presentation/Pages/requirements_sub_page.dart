@@ -4,6 +4,7 @@ import 'package:smart_trip_app/Domain/mappa.dart';
 import 'package:smart_trip_app/Domain/user.dart';
 import 'package:smart_trip_app/Presentation/Controllers/requirements_page_controller.dart';
 import 'package:smart_trip_app/Presentation/Pages/requirements_page.dart';
+import 'package:smart_trip_app/Presentation/Pages/trip_page.dart';
 import 'package:smart_trip_app/Presentation/Styles/app_colors.dart';
 import 'package:smart_trip_app/Presentation/Styles/font_styles.dart';
 import 'package:smart_trip_app/Presentation/Styles/sizes.dart';
@@ -31,9 +32,30 @@ class _RequirementsSubPageState extends State<RequirementsSubPage>{
     giornateForms = List.generate(widget.mappa.numGiorni, (_) => Giornata());
   }
 
+  void navigateToTripPage(User user, Mappa mappa, String citta, String ip) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => TripPage(user: user, mappa:mappa, city:citta ,ip:ip),
+      ),
+    );
+  }
 
 bool formCompleta(){
-  return false;
+    for (final giornata in giornateForms) {
+    if (giornata.oraInizio == null ||
+        giornata.pausa == null ||
+        giornata.tempoVisita == null) {
+      return false;
+    }
+
+    if (giornata.devoPranzare) {
+      if (giornata.oraPranzo == null || giornata.tempoPranzo == null) {
+        return false;
+      }
+    }
+  }
+  return true;
 }
 
  bool giornateDefinite=false;
@@ -123,12 +145,14 @@ bool formCompleta(){
                           ),
                           trailing: const Icon(Icons.access_time),
                           onTap: () async {
-                            final time = await showTimePicker(
+                            final time = await showCustomTimePicker(
                               context: context,
                               initialTime: TimeOfDay.now(),
                             );
                             if (time != null) {
-                              setState(() => formData.oraInizio = time);
+                              setState(() {
+                                formData.oraInizio = time;
+                              });
                             }
                           },
                         ),
@@ -137,6 +161,7 @@ bool formCompleta(){
                         SwitchListTile(
                           title: const Text('Devi pranzare?', style: FontStyles.signinText),
                           value: formData.devoPranzare,
+                          activeColor: AppColors.red,
                           onChanged: (val) {
                             setState(() => formData.devoPranzare = val);
                           },
@@ -153,13 +178,15 @@ bool formCompleta(){
                           ),
                           trailing: const Icon(Icons.access_time),
                           onTap: () async {
-                            final time = await showTimePicker(
+                            final time = await showCustomTimePicker(
                               context: context,
                               initialTime: TimeOfDay.now(),
-                            );
-                            if (time != null) {
-                              setState(() => formData.oraPranzo = time);
-                            }
+                              );
+                              if (time != null) {
+                                setState(() {
+                                  formData.oraPranzo = time;
+                                });
+                              }
                           },
                         ),
 
@@ -198,13 +225,13 @@ bool formCompleta(){
           TextField(
             keyboardType: TextInputType.number,
             decoration: const InputDecoration(
-              hintText: 'Tempo totale visita (in minuti)',
+              hintText: 'Tempo totale visita (in ore)',
               hintStyle: FontStyles.signinText,
               focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: AppColors.black),
               ),
             ),
-            onChanged: (val) => formData.tempoVisita = int.tryParse(val),
+            onChanged: (val) => formData.tempoVisita = int.tryParse(val*60), //l'utente fornisce il tempo in ore, serve traduzione in minuti
           ),
         ],
       ),
@@ -241,8 +268,8 @@ bool formCompleta(){
                 onPressed:formCompleta()
                     ? () {
                       setState(() {
-                        
-                        
+                        widget.mappa.giornate=giornateForms;
+                        navigateToTripPage(widget.user,widget.mappa,widget.city,widget.ip);
                       });
                     }
                     : (){
