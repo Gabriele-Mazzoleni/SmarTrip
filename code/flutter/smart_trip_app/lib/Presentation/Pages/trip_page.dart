@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:smart_trip_app/Domain/giornata.dart';
+import 'package:smart_trip_app/Domain/itinerario.dart';
 import 'package:smart_trip_app/Domain/mappa.dart';
 import 'package:smart_trip_app/Domain/user.dart';
 import 'package:smart_trip_app/Presentation/Controllers/trip_page_controller.dart';
@@ -12,9 +12,10 @@ class TripPage extends StatefulWidget {
   final User user;
   final String ip;
   final String city;
-  final Mappa mappa;
+  final Mappa  mappa;
+  final int newOrOld; //0 = mappa nuova, 1= mappa pre esistente
 
-  const TripPage({super.key,required this.user, required this.mappa, required this.city, required this.ip});
+  const TripPage({super.key,required this.user, required this.mappa, required this.city, required this.ip, required this.newOrOld});
 
   @override
   // ignore: library_private_types_in_public_api
@@ -22,10 +23,135 @@ class TripPage extends StatefulWidget {
 }
 
 class _TripPageState extends State<TripPage>{
+
+  late Itinerario itinerario;
+
+    @override
+  void initState() {
+    super.initState();
+    //_caricaItinerario();
+  }
+
+      Future<void> _caricaItinerario() async {
+    setState(() {
+      isLoading = true;
+    });
+    //potrei mettere un if qua: se passo 0 faccio mappa nuova, se faccio 1 mappa preesistente
+    itinerario= await ottieniItinerarioDaNuovaMappa(widget.mappa, widget.ip);
+    setState(() {
+      isLoading = false;
+    });
+  }
+
+  bool isLoading=false;
+
     @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //TODO
+      backgroundColor: AppColors.gray,
+    resizeToAvoidBottomInset: false,
+    body: Column(
+      children: [
+        //header della pagina
+        Container(
+          decoration: const BoxDecoration(
+            color: AppColors.red,
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(Sizes.smallRoundedCorner),
+              bottomRight: Radius.circular(Sizes.smallRoundedCorner),
+            ),
+          ),
+          padding: const EdgeInsets.all(20.0),
+          width: double.infinity,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  IconButton(
+                  onPressed: () {
+                          Navigator.of(context).pushAndRemoveUntil(
+                            MaterialPageRoute(
+                                builder: (context) => RequirementsSubPage(ip: widget.ip, user:widget.user, city: widget.city, mappa: widget.mappa,)),
+                            (Route<dynamic> route) => false,
+                          );
+                        },
+                  icon: const Icon(
+                    Icons.arrow_back,
+                    color: AppColors.white, size: Sizes.smallIconSize
+                    ),
+                ),
+                  //const Spacer(),
+                  const Text(
+                    'LA TUA TABELLA DI MARCIA',
+                    style: FontStyles.headerTitle,
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(width: Sizes.largePaddingSpace),
+                ],
+              ),
+              const SizedBox(height:Sizes.stdPaddingSpace),
+              const Text(
+                'In base alle location e ai requisiti da te inseriti, ecco una sequenza ottimale dei luoghi da visitare',
+                style: FontStyles.headerSubTitle,
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+        ),
+        //corpo della pagina
+        Expanded(
+          child: isLoading
+            ? const Center(
+                        child: CircularProgressIndicator(
+                          color: AppColors.red,
+                        ),
+                    )
+            : const Text("PAGINA IN COSTRUZIONE")
+
+        ),
+
+        //footer della pagina
+        /*
+        Container(
+          decoration: const BoxDecoration(
+            color: AppColors.black,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(Sizes.smallRoundedCorner),
+              topRight: Radius.circular(Sizes.smallRoundedCorner),
+            ),
+          ),
+          padding: const EdgeInsets.all(Sizes.paddingSpaceFooter),
+          width: double.infinity,
+          child: Column(
+            children: [
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: luoghiSelezionati.isNotEmpty
+                      ?AppColors.red
+                      :AppColors.gray,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(Sizes.smallRoundedCorner),
+                    ),
+                ),
+                onPressed: luoghiSelezionati.isNotEmpty
+                ?(){
+                  //naviga a pagina della definizione requisiti
+                  navigateToRequirementsPage(widget.user, widget.city, luoghiSelezionati, widget.ip);
+                }
+                :(){
+                  //non fa nulla
+                },
+                child: const Text('CONTINUA', style: FontStyles.buttonTextWhite),
+              )
+            ],
+            )
+        )
+        */
+      
+      ],
+    ),
     );
   }
 

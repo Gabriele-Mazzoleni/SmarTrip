@@ -36,7 +36,7 @@ class _RequirementsSubPageState extends State<RequirementsSubPage>{
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => TripPage(user: user, mappa:mappa, city:citta ,ip:ip),
+        builder: (context) => TripPage(user: user, mappa:mappa, city:citta ,ip:ip, newOrOld: 0,),
       ),
     );
   }
@@ -275,7 +275,12 @@ bool formCompleta(){
                     : (){
                       //se la form non è completa non faccio nulla
                     },
-                child: const Text('CONTINUA', style: FontStyles.buttonTextWhite),
+                child: Row(
+                  children: [
+                    const Text('CALCOLA ITINERARIO', style: FontStyles.buttonTextWhite),
+                    Image.asset('assets/appIcon.png', height: Sizes.smallIconSize),
+                  ],
+                ),
               )
             ],
           ),

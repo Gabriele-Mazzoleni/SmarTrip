@@ -11,16 +11,27 @@ class LuogoEsteso{
   });
 
   //metodo di decoding
-  LuogoEsteso.fromJSON(Map<String, dynamic> jsonMap) :
-    luogo=Luogo.fromJSON(jsonMap['luogo'] ?? ""),
-    oraArrivo=(jsonMap['orarioDiArrivo'] ?? "");
+  factory LuogoEsteso.fromJSON(Map<String, dynamic> jsonMap) {
+    final orarioStr = jsonMap['orarioDiArrivo'] as String? ?? "00:00";
+    final parts = orarioStr.split(':');
+    final hour = int.parse(parts[0]);
+    final minute = int.parse(parts[1]);
 
+    return LuogoEsteso(
+      oraArrivo: TimeOfDay(hour: hour, minute: minute),
+      luogo: Luogo.fromJSON(jsonMap['luogo']),
+    );
+  }
 
     //metodo di encoding
-    Map<String, dynamic> toJson() {
+  Map<String, dynamic> toJson() {
+    final hour = oraArrivo.hour.toString().padLeft(2, '0');
+    final minute = oraArrivo.minute.toString().padLeft(2, '0');
+    final orarioString = '$hour:$minute';
+
     return {
       'luogo': luogo.toJson(),
-      'orarioDiArrivo': oraArrivo,
+      'orarioDiArrivo': orarioString,
     };
   }
     

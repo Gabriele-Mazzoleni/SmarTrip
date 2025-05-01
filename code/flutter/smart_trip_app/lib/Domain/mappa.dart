@@ -23,4 +23,19 @@ class Mappa{
     required this.luoghi,
     });
   
+
+    //metodo di encoding
+    Map<String, dynamic> toJson() {
+    return {
+      'nomeMappa': idMappa,
+      'utente': nomeUtente,
+      'latA':latAlloggio,
+      'lonA':longAlloggio,
+      'nGiorni':numGiorni,
+      'velocitaMedia':velMedia,
+      'giorni':giornate.map((g)=>g.toJson()).toList(),
+      'luoghi':luoghi.map((l)=>l.toJson()).toList(),
+
+    };
+  }
 }

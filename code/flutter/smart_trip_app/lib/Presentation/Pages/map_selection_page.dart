@@ -3,7 +3,7 @@ import 'package:smart_trip_app/Domain/mappa.dart';
 import 'package:smart_trip_app/Domain/user.dart';
 import 'package:smart_trip_app/Presentation/Pages/city_selection_page.dart';
 import 'package:smart_trip_app/Presentation/Pages/login_page.dart';
-//import 'package:smart_trip_app/Presentation/Pages/trip_page.dart';
+import 'package:smart_trip_app/Presentation/Pages/trip_page.dart';
 //import 'package:smart_trip_app/Presentation/Controllers/map_selection_page_controller.dart';
 import 'package:smart_trip_app/Presentation/Styles/app_colors.dart';
 import 'package:smart_trip_app/Presentation/Styles/font_styles.dart';
@@ -41,13 +41,12 @@ class _MapSelectionPageState extends State<MapSelectionPage>{
     );
   }
 
-  //Trip page ancora non implementata
   /*
   void navigateToTripPage(user, ip, mappa) {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => TripPage(user: user, ip:ip, mappa:mappa),
+        builder: (context) => TripPage(user: user, ip:ip, mappa:mappa,),
       ),
     );
   }

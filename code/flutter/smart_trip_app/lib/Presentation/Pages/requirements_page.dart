@@ -3,7 +3,6 @@ import 'package:smart_trip_app/Domain/mappa.dart';
 import 'package:smart_trip_app/Domain/user.dart';
 import 'package:smart_trip_app/Domain/luogo.dart';
 import 'package:smart_trip_app/Domain/velocita.dart';
-//import 'package:smart_trip_app/Presentation/Controllers/requirements_page_controller.dart';
 import 'package:smart_trip_app/Presentation/Pages/location_page.dart';
 import 'package:smart_trip_app/Presentation/Pages/requirements_sub_page.dart';
 import 'package:smart_trip_app/Presentation/Styles/app_colors.dart';

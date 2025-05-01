@@ -64,6 +64,8 @@ flutter:
     - assets/appLogo_red_black.png
     - assets/appLogo_red_white.png
     - assets/login_graphic.png
+    - assets/appIcon.png
+    - assets/lineaTratteggiata.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
