@@ -36,7 +36,7 @@ class _RequirementsSubPageState extends State<RequirementsSubPage>{
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => TripPage(user: user, mappa:mappa, city:citta ,ip:ip, newOrOld: 0,),
+        builder: (context) => TripPage(user: user, mappa:mappa,ip:ip, newOrOld: 0, mapName: mappa.idMappa,),
       ),
     );
   }

@@ -3,7 +3,7 @@ import 'package:smart_trip_app/Domain/itinerario.dart';
 import 'package:smart_trip_app/Domain/mappa.dart';
 import 'package:smart_trip_app/Domain/user.dart';
 import 'package:smart_trip_app/Presentation/Controllers/trip_page_controller.dart';
-import 'package:smart_trip_app/Presentation/Pages/requirements_sub_page.dart';
+import 'package:smart_trip_app/Presentation/Pages/requirements_page.dart';
 import 'package:smart_trip_app/Presentation/Styles/app_colors.dart';
 import 'package:smart_trip_app/Presentation/Styles/font_styles.dart';
 import 'package:smart_trip_app/Presentation/Styles/sizes.dart';
@@ -11,11 +11,11 @@ import 'package:smart_trip_app/Presentation/Styles/sizes.dart';
 class TripPage extends StatefulWidget {
   final User user;
   final String ip;
-  final String city;
-  final Mappa  mappa;
+  final Mappa?  mappa;
+  final String? mapName;
   final int newOrOld; //0 = mappa nuova, 1= mappa pre esistente
 
-  const TripPage({super.key,required this.user, required this.mappa, required this.city, required this.ip, required this.newOrOld});
+  const TripPage({super.key,required this.user, required this.mappa, required this.mapName, required this.ip, required this.newOrOld});
 
   @override
   // ignore: library_private_types_in_public_api
@@ -29,15 +29,24 @@ class _TripPageState extends State<TripPage>{
     @override
   void initState() {
     super.initState();
-    //_caricaItinerario();
+    _caricaItinerario();
   }
 
       Future<void> _caricaItinerario() async {
     setState(() {
       isLoading = true;
     });
-    //potrei mettere un if qua: se passo 0 faccio mappa nuova, se faccio 1 mappa preesistente
-    itinerario= await ottieniItinerarioDaNuovaMappa(widget.mappa, widget.ip);
+    if (widget.newOrOld == 0 && widget.mappa != null) {
+      // Mappa nuova, generata da RequirementsSubPage
+      itinerario = await ottieniItinerarioDaNuovaMappa(widget.mappa!, widget.ip);
+    } else if (widget.newOrOld == 1 && widget.mapName != null) {
+      // Mappa preesistente, selezionata da MapSelectionPage
+      itinerario = await ottieniItinerarioDaVecchiaMappa(widget.ip, widget.mapName!,widget.user.username);
+    } else {
+    // Caso di errore o mancanza dati
+    throw Exception("Dati insufficienti per caricare l'itinerario");
+  }
+
     setState(() {
       isLoading = false;
     });
@@ -69,11 +78,11 @@ class _TripPageState extends State<TripPage>{
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  IconButton(
+                  IconButton( //questo va spostato, metto due pulsanti sotto, uno per requisiti, uno per mappe
                   onPressed: () {
                           Navigator.of(context).pushAndRemoveUntil(
                             MaterialPageRoute(
-                                builder: (context) => RequirementsSubPage(ip: widget.ip, user:widget.user, city: widget.city, mappa: widget.mappa,)),
+                                builder: (context) => RequirementsPage(ip: widget.ip, user:widget.user, city: getCityFromItineario(itinerario), luoghiSelezionati:getLuoghiFromItinerario(itinerario))),
                             (Route<dynamic> route) => false,
                           );
                         },

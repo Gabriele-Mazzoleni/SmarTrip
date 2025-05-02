@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:smart_trip_app/Domain/mappa.dart';
 import 'package:smart_trip_app/Domain/user.dart';
+import 'package:smart_trip_app/Presentation/Controllers/map_selection_page_controller.dart';
 import 'package:smart_trip_app/Presentation/Pages/city_selection_page.dart';
 import 'package:smart_trip_app/Presentation/Pages/login_page.dart';
 import 'package:smart_trip_app/Presentation/Pages/trip_page.dart';
-//import 'package:smart_trip_app/Presentation/Controllers/map_selection_page_controller.dart';
 import 'package:smart_trip_app/Presentation/Styles/app_colors.dart';
 import 'package:smart_trip_app/Presentation/Styles/font_styles.dart';
 import 'package:smart_trip_app/Presentation/Styles/sizes.dart';
@@ -22,9 +21,8 @@ class MapSelectionPage extends StatefulWidget {
 class _MapSelectionPageState extends State<MapSelectionPage>{
 
   bool isLoading=false;
-  late List<Mappa> mappeUtente=[];
-  //Mappa(nomeUtente: widget.user.username,idMappa: 'Bergamo', giorni: 3),Mappa(nomeUtente: widget.user.username,idMappa: 'Milano', giorni: 2)
-  Mappa? _selectedMappa;
+  late List<String> mappeUtente=[];
+  String? _selectedMappa;
 
     @override
   void initState() {
@@ -41,23 +39,23 @@ class _MapSelectionPageState extends State<MapSelectionPage>{
     );
   }
 
-  /*
+  
   void navigateToTripPage(user, ip, mappa) {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => TripPage(user: user, ip:ip, mappa:mappa,),
+        builder: (context) => TripPage(user: user, ip:ip, mapName:mappa ,newOrOld: 1, mappa: null),
       ),
     );
   }
-  */
+  
 
   Future<void> _caricaMappe(String mail) async {
     setState(() {
       isLoading = true;
     });
 
-    //mappeUtente= await retrieveUserMaps(widget.user.username,widget.ip);
+    mappeUtente= await retrieveUserMaps(widget.user.username,widget.ip);
 
     setState(() {
       isLoading = false;
@@ -65,7 +63,7 @@ class _MapSelectionPageState extends State<MapSelectionPage>{
   }
 
   //metodo per selezione/deselezione mappa
-  void _selezionaMappa(Mappa mappa) {
+  void _selezionaMappa(String mappa) {
     setState(() {
       _selectedMappa = (_selectedMappa == mappa) ? null : mappa; 
     });
@@ -175,13 +173,15 @@ class _MapSelectionPageState extends State<MapSelectionPage>{
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(
-                                            mappa.idMappa,
+                                            mappa,
                                             style: FontStyles.cardTitle,
                                           ),
+                                          /*
                                           Text(
                                             'Durata in giorni: ${mappa.numGiorni}',
                                             style: FontStyles.cardText,
                                           ),
+                                          */
                                         ],
                                       ),
                                     ),
@@ -206,9 +206,7 @@ class _MapSelectionPageState extends State<MapSelectionPage>{
                               ),
                               onPressed: _selectedMappa != null
                                   ? () {
-                                      // Azione di conferma (da definire)
-                                      //navigateToTripPage(_selectedMappa);
-                                      //print("Mappa selezionata: ${_selectedMappa!.idMappa}");
+                                      navigateToTripPage(widget.user, widget.ip, _selectedMappa);
                                     }
                                   : null,
                               child: const Text(
