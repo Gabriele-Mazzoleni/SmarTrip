@@ -44,5 +44,21 @@ class Luogo{
       'immagine': immagine
     };
   }
-    
+
+
+      @override
+String toString() {
+  return '''
+  Luogo(
+  nome: $nome,
+  latitudine: $latitudine,
+  longitudine: $longitudine,
+  città: $city,
+  indirizzo: $indirizzo,
+  tipo: $tipo,
+  tempoDiVisita: $tempoVisita
+)
+''';
+}
+
 }

@@ -38,4 +38,25 @@ class Mappa{
 
     };
   }
+
+  @override
+String toString() {
+  return '''
+  Mappa(
+  nomeUtente: $nomeUtente,
+  idMappa: $idMappa,
+  latAlloggio: $latAlloggio,
+  longAlloggio: $longAlloggio,
+  numGiorni: $numGiorni,
+  velMedia: $velMedia,
+  giornate: [
+    ${giornate.map((g) => g.toString()).join(',\n    ')}
+  ],
+  luoghi: [
+    ${luoghi.map((l) => l.toString()).join(',\n    ')}
+  ]
+)
+''';
+}
+
 }

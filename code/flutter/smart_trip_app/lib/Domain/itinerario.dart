@@ -1,3 +1,4 @@
+import 'package:smart_trip_app/Domain/luogo.dart';
 import 'package:smart_trip_app/Domain/luogo_esteso.dart';
 
 class Itinerario{
@@ -26,5 +27,38 @@ class Itinerario{
         ));
   }
 
+
+  String getCity() {
+    print('Contenuto di giorniViaggio:');
+    giorniViaggio.forEach((giorno, listaLuoghi) {
+    print('Giorno: $giorno');
+    for (var luogoEsteso in listaLuoghi) {
+      print(' - Luogo: ${luogoEsteso.luogo.nome}, Città: ${luogoEsteso.luogo.city}');
+    }
+    });
+    for (var listaLuoghi in giorniViaggio.values) {
+      for (var luogoEsteso in listaLuoghi) {
+        final city = luogoEsteso.luogo.city;
+        if (city.toLowerCase() != 'default') {
+          return city;
+        }
+      }
+    }
+    return "Città non trovata";
+  }
+
+  List<Luogo> getLuoghi(){
+    List<Luogo> luoghiSel=[];
+    for(var entry in giorniViaggio.entries){
+      //per ogni giornata estraggo la lista di luoghi estesi visitati
+      List<LuogoEsteso> luoghiEstesi=entry.value;
+
+      //inserisco tutti gli elementi delle liste estese in una lista di luoghi selezionati per tornare alla pagina requisiti
+      for (int j = 1; j < luoghiEstesi.length - 1; j++) {
+        luoghiSel.add(luoghiEstesi[j].luogo);
+      }
+    }
+    return luoghiSel;
+  }
   
 }

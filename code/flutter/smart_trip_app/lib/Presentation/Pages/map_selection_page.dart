@@ -50,12 +50,12 @@ class _MapSelectionPageState extends State<MapSelectionPage>{
   }
   
 
-  Future<void> _caricaMappe(String mail) async {
+  Future<void> _caricaMappe(String username) async {
     setState(() {
       isLoading = true;
     });
 
-    mappeUtente= await retrieveUserMaps(widget.user.username,widget.ip);
+    mappeUtente= await retrieveUserMaps(username,widget.ip);
 
     setState(() {
       isLoading = false;

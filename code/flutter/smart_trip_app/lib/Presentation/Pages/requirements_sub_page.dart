@@ -25,11 +25,20 @@ class RequirementsSubPage extends StatefulWidget {
 class _RequirementsSubPageState extends State<RequirementsSubPage>{
 
   late List<Giornata> giornateForms;
+
+  //textController per i campi delle form
+  late List<TextEditingController> tempoVisitaControllers;
+  late List<TextEditingController> pausaControllers;
+  late List<TextEditingController> tempoPranzoControllers;
   
   @override
   void initState() {
     super.initState();
-    giornateForms = List.generate(widget.mappa.numGiorni, (_) => Giornata());
+    final numGiorni = widget.mappa.numGiorni;
+    giornateForms = List.generate(numGiorni, (_) => Giornata());
+    tempoVisitaControllers = List.generate(numGiorni, (_) => TextEditingController());
+    pausaControllers = List.generate(numGiorni, (_) => TextEditingController());
+    tempoPranzoControllers = List.generate(numGiorni, (_) => TextEditingController());
   }
 
   void navigateToTripPage(User user, Mappa mappa, String citta, String ip) {
@@ -123,7 +132,11 @@ bool formCompleta(){
               ListView.builder(
               itemCount: widget.mappa.numGiorni,
               itemBuilder: (context, index) {
-                final formData = giornateForms[index];
+                final giornataFormData = giornateForms[index];
+                final pausaController = pausaControllers[index];
+                final tempoVisitaController = tempoVisitaControllers[index];
+                final tempoPranzoController = tempoPranzoControllers[index];
+                
                 return Card(
                   margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -138,8 +151,8 @@ bool formCompleta(){
                         // Orario inizio
                         ListTile(
                           title: Text(
-                            formData.oraInizio != null
-                            ? 'Partenza: ${formData.oraInizio!.format(context)}'
+                            giornataFormData.oraInizio != null
+                            ? 'Partenza: ${giornataFormData.oraInizio!.format(context)}'
                             : 'Seleziona orario di partenza',
                             style: FontStyles.signinText,
                           ),
@@ -151,7 +164,7 @@ bool formCompleta(){
                             );
                             if (time != null) {
                               setState(() {
-                                formData.oraInizio = time;
+                                giornataFormData.oraInizio = time;
                               });
                             }
                           },
@@ -160,19 +173,19 @@ bool formCompleta(){
                         // Devo pranzare
                         SwitchListTile(
                           title: const Text('Devi pranzare?', style: FontStyles.signinText),
-                          value: formData.devoPranzare,
+                          value: giornataFormData.devoPranzare,
                           activeColor: AppColors.red,
                           onChanged: (val) {
-                            setState(() => formData.devoPranzare = val);
+                            setState(() => giornataFormData.devoPranzare = val);
                           },
                         ),
 
                         // Ora pranzo
-                        if (formData.devoPranzare)
+                        if (giornataFormData.devoPranzare)
                         ListTile(
                           title: Text(
-                            formData.oraPranzo != null
-                            ? 'Ora pranzo: ${formData.oraPranzo!.format(context)}'
+                            giornataFormData.oraPranzo != null
+                            ? 'Ora pranzo: ${giornataFormData.oraPranzo!.format(context)}'
                              : 'Seleziona ora del pranzo',
                             style: FontStyles.signinText,
                           ),
@@ -184,15 +197,16 @@ bool formCompleta(){
                               );
                               if (time != null) {
                                 setState(() {
-                                  formData.oraPranzo = time;
+                                  giornataFormData.oraPranzo = time;
                                 });
                               }
                           },
                         ),
 
                         // Tempo pranzo
-          if (formData.devoPranzare)
+          if (giornataFormData.devoPranzare)
             TextField(
+              controller: tempoPranzoController,
               keyboardType: TextInputType.number,
               decoration: const InputDecoration(
                 hintText: 'Tempo pranzo (in minuti)',
@@ -201,13 +215,17 @@ bool formCompleta(){
                   borderSide: BorderSide(color: AppColors.black),
                 ),
               ),
-              onChanged: (val) => formData.tempoPranzo = int.tryParse(val),
+              onChanged: (val) {
+                final parsed = int.tryParse(val);
+                giornataFormData.tempoPranzo = parsed;
+              },
             ),
 
           const SizedBox(height: Sizes.smallPaddingSpace),
 
           // Pausa
           TextField(
+            controller:pausaController,
             keyboardType: TextInputType.number,
             decoration: const InputDecoration(
               hintText: 'Pausa tra visite (in minuti)',
@@ -216,13 +234,17 @@ bool formCompleta(){
                 borderSide: BorderSide(color: AppColors.black),
               ),
             ),
-            onChanged: (val) => formData.pausa = int.tryParse(val),
+            onChanged: (val) {
+              final parsed = int.tryParse(val);
+              giornataFormData.pausa = parsed;
+            },
           ),
 
           const SizedBox(height: Sizes.smallPaddingSpace),
 
           // Tempo visita
           TextField(
+            controller: tempoVisitaController,
             keyboardType: TextInputType.number,
             decoration: const InputDecoration(
               hintText: 'Tempo totale visita (in ore)',
@@ -231,7 +253,14 @@ bool formCompleta(){
                 borderSide: BorderSide(color: AppColors.black),
               ),
             ),
-            onChanged: (val) => formData.tempoVisita = int.tryParse(val*60), //l'utente fornisce il tempo in ore, serve traduzione in minuti
+            onChanged: (val) {
+              final parsed = double.tryParse(val);
+              if (parsed != null) {
+                giornataFormData.tempoVisita = (parsed * 60).toInt(); // ore → minuti
+              } else {
+                giornataFormData.tempoVisita = null;
+              }
+            }, //l'utente fornisce il tempo in ore, serve traduzione in minuti
           ),
         ],
       ),
@@ -267,17 +296,24 @@ bool formCompleta(){
                 ),
                 onPressed:formCompleta()
                     ? () {
-                      setState(() {
-                        widget.mappa.giornate=giornateForms;
-                        navigateToTripPage(widget.user,widget.mappa,widget.city,widget.ip);
-                      });
-                    }
+                        setState(() {
+                          for (var giornata in giornateForms) {
+                            if (!giornata.devoPranzare) {
+                              giornata.oraPranzo = const TimeOfDay(hour: 0, minute: 0);
+                              giornata.tempoPranzo = 0;
+                            }
+                          }
+                          widget.mappa.giornate = giornateForms;
+                        navigateToTripPage(widget.user, widget.mappa, widget.city, widget.ip);
+                        });
+                      }
                     : (){
                       //se la form non è completa non faccio nulla
                     },
                 child: Row(
                   children: [
                     const Text('CALCOLA ITINERARIO', style: FontStyles.buttonTextWhite),
+                    const Spacer(),
                     Image.asset('assets/appIcon.png', height: Sizes.smallIconSize),
                   ],
                 ),

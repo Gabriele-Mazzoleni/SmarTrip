@@ -1,8 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:smart_trip_app/Domain/itinerario.dart';
 import 'package:smart_trip_app/Domain/mappa.dart';
 import 'package:smart_trip_app/Domain/user.dart';
 import 'package:smart_trip_app/Presentation/Controllers/trip_page_controller.dart';
+import 'package:smart_trip_app/Presentation/Pages/map_selection_page.dart';
 import 'package:smart_trip_app/Presentation/Pages/requirements_page.dart';
 import 'package:smart_trip_app/Presentation/Styles/app_colors.dart';
 import 'package:smart_trip_app/Presentation/Styles/font_styles.dart';
@@ -72,36 +75,17 @@ class _TripPageState extends State<TripPage>{
           ),
           padding: const EdgeInsets.all(20.0),
           width: double.infinity,
-          child: Column(
+          child: const Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  IconButton( //questo va spostato, metto due pulsanti sotto, uno per requisiti, uno per mappe
-                  onPressed: () {
-                          Navigator.of(context).pushAndRemoveUntil(
-                            MaterialPageRoute(
-                                builder: (context) => RequirementsPage(ip: widget.ip, user:widget.user, city: getCityFromItineario(itinerario), luoghiSelezionati:getLuoghiFromItinerario(itinerario))),
-                            (Route<dynamic> route) => false,
-                          );
-                        },
-                  icon: const Icon(
-                    Icons.arrow_back,
-                    color: AppColors.white, size: Sizes.smallIconSize
-                    ),
-                ),
-                  //const Spacer(),
-                  const Text(
-                    'LA TUA TABELLA DI MARCIA',
-                    style: FontStyles.headerTitle,
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(width: Sizes.largePaddingSpace),
-                ],
+              Text(
+                'LA TUA TABELLA DI MARCIA',
+                style: FontStyles.headerTitle,
+                textAlign: TextAlign.center,
               ),
-              const SizedBox(height:Sizes.stdPaddingSpace),
-              const Text(
+              SizedBox(width: Sizes.largePaddingSpace),
+              SizedBox(height:Sizes.stdPaddingSpace),
+              Text(
                 'In base alle location e ai requisiti da te inseriti, ecco una sequenza ottimale dei luoghi da visitare',
                 style: FontStyles.headerSubTitle,
                 textAlign: TextAlign.center,
@@ -117,19 +101,19 @@ class _TripPageState extends State<TripPage>{
                           color: AppColors.red,
                         ),
                     )
-            : const Text("PAGINA IN COSTRUZIONE")
+            : SingleChildScrollView(
+              child: Text(
+                jsonEncode(widget.mappa.toString())
+              ),
+            )
 
         ),
 
         //footer della pagina
-        /*
+        
         Container(
           decoration: const BoxDecoration(
-            color: AppColors.black,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(Sizes.smallRoundedCorner),
-              topRight: Radius.circular(Sizes.smallRoundedCorner),
-            ),
+            color: AppColors.gray,
           ),
           padding: const EdgeInsets.all(Sizes.paddingSpaceFooter),
           width: double.infinity,
@@ -137,27 +121,45 @@ class _TripPageState extends State<TripPage>{
             children: [
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    backgroundColor: luoghiSelezionati.isNotEmpty
-                      ?AppColors.red
-                      :AppColors.gray,
+                    backgroundColor:AppColors.red,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(Sizes.smallRoundedCorner),
                     ),
                 ),
-                onPressed: luoghiSelezionati.isNotEmpty
-                ?(){
-                  //naviga a pagina della definizione requisiti
-                  navigateToRequirementsPage(widget.user, widget.city, luoghiSelezionati, widget.ip);
-                }
-                :(){
-                  //non fa nulla
+                onPressed: () {
+                    Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(
+                        builder: (context) => RequirementsPage(ip: widget.ip, 
+                                                              user:widget.user, 
+                                                              city: itinerario.getCity(), 
+                                                              luoghiSelezionati:itinerario.getLuoghi())),
+                      (Route<dynamic> route) => false,
+                    );
                 },
-                child: const Text('CONTINUA', style: FontStyles.buttonTextWhite),
+                child: const Text('Modifica Requisiti', style: FontStyles.buttonTextWhite),
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    backgroundColor:AppColors.black,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(Sizes.smallRoundedCorner),
+                    ),
+                ),
+                onPressed:(){
+                  //torna a pagina della selezione mappe
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(
+                        builder: (context) => MapSelectionPage(ip: widget.ip, 
+                                                              user:widget.user,)),
+                      (Route<dynamic> route) => false,
+                    );
+                },
+                child: const Text('Seleziona un altro itinerario', style: FontStyles.buttonTextWhite),
               )
             ],
             )
         )
-        */
+        
       
       ],
     ),

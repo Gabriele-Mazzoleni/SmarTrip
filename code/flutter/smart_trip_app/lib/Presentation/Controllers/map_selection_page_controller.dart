@@ -14,13 +14,14 @@ Future<List<String>> retrieveUserMaps(String userName,String indirizzo) async{
     }
   );
 
+  List<String> mapNames=[];
 
   if (response.statusCode >= 200 && response.statusCode<300) {
     final responseBody = jsonDecode(response.body);
-    final List<String> mapNames=List<String>.from(json.decode(responseBody));
+    mapNames=List<String>.from(responseBody);
     return mapNames;
     
   } else {
-    throw Exception('Invalid credentials');
+    return mapNames;
   }
 }

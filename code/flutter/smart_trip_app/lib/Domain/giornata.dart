@@ -59,4 +59,18 @@ class Giornata {
       'tempoVisita': tempoVisita,
     };
   }
+
+  @override
+String toString() {
+  return '''
+  Giornata(
+  oraInizio: $oraInizio,
+  devoPranzare: $devoPranzare,
+  oraPranzo: $oraPranzo,
+  tempoPranzo: $tempoPranzo,
+  pausa: $pausa,
+  tempoVisita: $tempoVisita
+)
+''';
+}
 }

@@ -1,19 +1,18 @@
 import 'dart:convert';
 import 'package:smart_trip_app/Domain/itinerario.dart';
-import 'package:smart_trip_app/Domain/luogo.dart';
 import 'package:smart_trip_app/Domain/mappa.dart';
 import 'package:http/http.dart' as http;
 
 Future<Itinerario> ottieniItinerarioDaNuovaMappa(Mappa m, String indirizzo) async {
   String apiUrl='http://$indirizzo/itinerari/add';
-
+  print(jsonEncode(m.toJson()));
   var url = Uri.parse(apiUrl);
      final http.Response response = await http.post(
     url,
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },
-    body: m.toJson(),
+    body: jsonEncode(m.toJson()),
   );
 
   if (response.statusCode >= 200 && response.statusCode<300) {
@@ -22,7 +21,7 @@ Future<Itinerario> ottieniItinerarioDaNuovaMappa(Mappa m, String indirizzo) asyn
     return itinerario;
     
   } else {
-    throw Exception('Error Itinerary computation');
+    throw Exception('Error during Itinerary computation');
   }
   
 }
@@ -48,13 +47,3 @@ String apiUrl='http://$indirizzo/itinerari/$mapName/$userName';
   }
 }
 
-
-String getCityFromItineario(Itinerario i){
-  
-  return '';
-}
-
-List<Luogo> getLuoghiFromItinerario(Itinerario i){
-  List<Luogo> luoghiSel=[];
-  return luoghiSel;
-}
