@@ -216,9 +216,13 @@ bool formCompleta(){
                 ),
               ),
               onChanged: (val) {
-                final parsed = int.tryParse(val);
-                giornataFormData.tempoPranzo = parsed;
-              },
+              final parsed = double.tryParse(val);
+              if (parsed != null) {
+                giornataFormData.tempoPranzo = (parsed * 60).toInt(); // minuti-> secondi
+              } else {
+                giornataFormData.tempoPranzo = null;
+              }
+            },
             ),
 
           const SizedBox(height: Sizes.smallPaddingSpace),
@@ -235,8 +239,12 @@ bool formCompleta(){
               ),
             ),
             onChanged: (val) {
-              final parsed = int.tryParse(val);
-              giornataFormData.pausa = parsed;
+              final parsed = double.tryParse(val);
+              if (parsed != null) {
+                giornataFormData.pausa = (parsed * 60).toInt(); // minuti-> secondi
+              } else {
+                giornataFormData.pausa = null;
+              }
             },
           ),
 
@@ -256,7 +264,7 @@ bool formCompleta(){
             onChanged: (val) {
               final parsed = double.tryParse(val);
               if (parsed != null) {
-                giornataFormData.tempoVisita = (parsed * 60).toInt(); // ore → minuti
+                giornataFormData.tempoVisita = (parsed * 3600).toInt(); // ore -> minuti-> secondi
               } else {
                 giornataFormData.tempoVisita = null;
               }
