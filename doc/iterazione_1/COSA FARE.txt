@@ -2,8 +2,7 @@ IT1
 
 
 PLANNING
-Toolchain, selezione tutte le componenti e tools
-
+Database
 
 DESIGN
 Java: UML vari che rappresentano struttura, Pattern sigleton e spiegazione database, ER database,
