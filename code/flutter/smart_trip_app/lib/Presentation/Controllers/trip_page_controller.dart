@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:smart_trip_app/Domain/itinerario.dart';
 import 'package:smart_trip_app/Domain/mappa.dart';
 import 'package:http/http.dart' as http;
@@ -45,5 +46,11 @@ String apiUrl='http://$indirizzo/itinerari/$mapName/$userName';
   } else {
     throw Exception('Error Itinerary computation');
   }
+}
+
+String formatTimeOfDay(TimeOfDay time) {
+  final hours = time.hour.toString().padLeft(2, '0');
+  final minutes = time.minute.toString().padLeft(2, '0');
+  return '$hours:$minutes';
 }
 

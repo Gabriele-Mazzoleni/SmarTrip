@@ -1,7 +1,6 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:smart_trip_app/Domain/itinerario.dart';
+import 'package:smart_trip_app/Domain/luogo_esteso.dart';
 import 'package:smart_trip_app/Domain/mappa.dart';
 import 'package:smart_trip_app/Domain/user.dart';
 import 'package:smart_trip_app/Presentation/Controllers/trip_page_controller.dart';
@@ -101,11 +100,68 @@ class _TripPageState extends State<TripPage>{
                           color: AppColors.red,
                         ),
                     )
-            : SingleChildScrollView(
-              child: Text(
-                jsonEncode(widget.mappa.toString())
-              ),
-            )
+            : PageView.builder(
+              itemCount:itinerario.giorniViaggio.keys.length,
+              itemBuilder: (context, pageIndex){
+                String giorno=itinerario.giorniViaggio.keys.elementAt(pageIndex);
+                List<LuogoEsteso> luoghi= itinerario.giorniViaggio[giorno]!;
+            
+                return Stack(
+                  children: [
+                    Positioned.fill(
+                      child: Image.asset(
+                        'assets/lineaTratteggiata.png',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children:[
+                        const SizedBox(height:Sizes.stdPaddingSpace),
+                        Container(
+                          decoration: const BoxDecoration(
+                            color: AppColors.red,
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(Sizes.smallRoundedCorner)
+                            ),
+                          ),
+                          padding: const EdgeInsets.all(Sizes.smallPaddingSpace),
+                          child: Text(
+                            "Giorno $giorno/${itinerario.giorniViaggio.keys.length}",
+                            style: FontStyles.headerTitle,
+                          ),
+                        ),
+                        Expanded(
+                          child: ListView.builder(
+                            itemCount: luoghi.length,
+                            itemBuilder: (context,index){
+                              LuogoEsteso luogoEst= luoghi[index];
+                              return Card(
+                                margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                                child: ListTile(
+                                  title: Text(luogoEst.luogo.nome, style:FontStyles.cardTitle),
+                                  subtitle: Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(luogoEst.luogo.indirizzo, style:FontStyles.cardText),
+                                        Text('Orario di arrivo prevista: ${formatTimeOfDay(luogoEst.oraArrivo)}', style:FontStyles.cardText),
+                                        Text('Durata media visita: ${luogoEst.luogo.tempoVisita/60} minuti', style:FontStyles.cardText),
+                                    ],),
+                                  )
+                                ),
+                              );
+                            }
+                          )
+                      )
+                    ]
+                  ),
+                  ]
+                  
+                );
+              }
+              )
 
         ),
 

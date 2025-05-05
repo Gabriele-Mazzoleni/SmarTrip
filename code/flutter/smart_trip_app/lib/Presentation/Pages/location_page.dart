@@ -151,7 +151,7 @@ class _LocationPageState extends State<LocationPage>{
                   return Card(
                     margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10), 
+                      borderRadius: BorderRadius.circular(Sizes.smallRoundedCorner), 
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(Sizes.smallPaddingSpace),
