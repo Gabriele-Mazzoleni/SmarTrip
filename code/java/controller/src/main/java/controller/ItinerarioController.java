@@ -53,7 +53,7 @@ public class ItinerarioController implements FunzioniItinerario{
 	@PostMapping("/mappe/{nomeUtente}")
 	public ResponseEntity<?> getNomiItinerarioByUtente(@PathVariable String nomeUtente) {
 		List<String> nomiMappe = service.ritornaNomiMappeDatoUtente(nomeUtente);
-	    if (nomiMappe.size() > 0) {
+	    if (nomiMappe != null) {
 	        System.out.println("Mappa ottenuta");
 	        return ResponseEntity.ok(nomiMappe);
 	    } else {
