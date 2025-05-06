@@ -84,7 +84,7 @@ public class QueryLuogo implements LuogoDB{
 	            }
 	        }
 	    } catch (SQLException e) {
-	        System.out.println("Errore durante il recupero delle città dal database");
+	        System.out.println("Errore durante il recupero delle citta' dal database");
 	    }
 	    return citta;
 	}

@@ -52,7 +52,7 @@ public class PopolaDB {
 		DatabaseManager.getIstanza().getQueryLuogo().inserisciLuogo("La Marianna", 45.706377641685286, 9.658217176604019,
 				"Bergamo", "Largo Colle Aperto, 4", "Ristoro", 2700,
 				"https://lh5.googleusercontent.com/p/AF1QipPbocYVM8Y9QBQQctaXIaq73cRA9SR5RzeVbbeO=w408-h724-k-no");
-		DatabaseManager.getIstanza().getQueryLuogo().inserisciLuogo("Circolino Città Alta", 45.70519839897728, 9.661652423418223,
+		DatabaseManager.getIstanza().getQueryLuogo().inserisciLuogo("Circolino Citta' Alta", 45.70519839897728, 9.661652423418223,
 				"Bergamo", "Vicolo Sant'Agata, 19", "Ristoro", 3600,
 				"https://lh5.googleusercontent.com/p/AF1QipNtrBmP9qS9i0mw-UO6k1xPcqi1L70Gs6rffGcC=w408-h272-k-no");
 		DatabaseManager.getIstanza().getQueryLuogo().inserisciLuogo("Burger King", 45.70950352529601, 9.681960125726125,

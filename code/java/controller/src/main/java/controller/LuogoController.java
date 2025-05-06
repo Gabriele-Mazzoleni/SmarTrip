@@ -33,10 +33,10 @@ public class LuogoController implements FunzioniLuogo{
 	public ResponseEntity<?> getAllCitta() { 
 		List<String> citta = service.ritornaCitta();
 	    if (citta.size() != 0) {
-	        System.out.println("Città ottenute");
+	        System.out.println("Citta' ottenute");
 	        return ResponseEntity.ok(citta);
 	    } else {
-	        System.out.println("Città non ottenute");
+	        System.out.println("Citta' non ottenute");
 	        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 	                .body(Collections.singletonMap("errore", false));
 	    }

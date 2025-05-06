@@ -87,7 +87,7 @@ public class ItinerarioServices {
 	              if(tempoTotale >= convertTimeToSeconds(giornoAttuale.getOrarioPranzo()) && devoPranzare) {
 	            	  if(tempoTotale + tempoPranzo < 84616) {
 		            	  devoPranzare = false;
-		            	  percorso.add(new LuogoEsteso(new Luogo("Ricerca ristorante",nodoCorrente[0].getLatitudine(),nodoCorrente[0].getLongitudine(),
+		            	  percorso.add(new LuogoEsteso(new Luogo("Ricerca Ristorante",nodoCorrente[0].getLatitudine(),nodoCorrente[0].getLongitudine(),
 		            			  nodoCorrente[0].getCitta(), nodoCorrente[0].getIndirizzo(), "Ristorante",
 		            			  tempoPranzo, nodoCorrente[0].getImmagine()), convertSecondsToTime(tempoTotale)));
 		            	  tempoTotale+= tempoPranzo;
