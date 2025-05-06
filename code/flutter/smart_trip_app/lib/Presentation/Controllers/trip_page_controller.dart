@@ -6,7 +6,6 @@ import 'package:http/http.dart' as http;
 
 Future<Itinerario> ottieniItinerarioDaNuovaMappa(Mappa m, String indirizzo) async {
   String apiUrl='http://$indirizzo/itinerari/add';
-  print(jsonEncode(m.toJson()));
   var url = Uri.parse(apiUrl);
      final http.Response response = await http.post(
     url,

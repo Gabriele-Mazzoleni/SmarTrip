@@ -90,7 +90,7 @@ class _RequirementsPageState extends State<RequirementsPage>{
                 ),
                   //const Spacer(),
                   const Text(
-                    'DEFINISCI I REQUISITI',
+                    'Definisci i requisiti',
                     style: FontStyles.headerTitle,
                     textAlign: TextAlign.center,
                   ),

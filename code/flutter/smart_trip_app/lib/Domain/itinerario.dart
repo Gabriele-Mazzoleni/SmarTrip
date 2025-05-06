@@ -29,13 +29,6 @@ class Itinerario{
 
 
   String getCity() {
-    print('Contenuto di giorniViaggio:');
-    giorniViaggio.forEach((giorno, listaLuoghi) {
-    print('Giorno: $giorno');
-    for (var luogoEsteso in listaLuoghi) {
-      print(' - Luogo: ${luogoEsteso.luogo.nome}, Città: ${luogoEsteso.luogo.city}');
-    }
-    });
     for (var listaLuoghi in giorniViaggio.values) {
       for (var luogoEsteso in listaLuoghi) {
         final city = luogoEsteso.luogo.city;

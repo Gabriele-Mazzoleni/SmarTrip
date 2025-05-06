@@ -118,7 +118,7 @@ class _LocationPageState extends State<LocationPage>{
                 ),
                   //const Spacer(),
                   const Text(
-                    'SELEZIONA I LUOGHI',
+                    'Seleziona i luoghi',
                     style: FontStyles.headerTitle,
                     textAlign: TextAlign.center,
                   ),
