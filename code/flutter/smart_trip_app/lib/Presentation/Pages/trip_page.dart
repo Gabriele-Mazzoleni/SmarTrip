@@ -78,7 +78,7 @@ class _TripPageState extends State<TripPage>{
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'LA TUA TABELLA DI MARCIA',
+                'La tua tabella di marcia',
                 style: FontStyles.headerTitle,
                 textAlign: TextAlign.center,
               ),

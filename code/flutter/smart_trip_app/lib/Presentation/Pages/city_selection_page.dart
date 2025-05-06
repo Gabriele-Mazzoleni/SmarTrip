@@ -96,7 +96,7 @@ class _CitySelectionPageState extends State<CitySelectionPage>{
                 ),
                   //const Spacer(),
                   const Text(
-                    'SELEZIONA LA CITTA\'',
+                    'Seleziona la città',
                     style: FontStyles.headerTitle,
                     textAlign: TextAlign.center,
                   ),
