@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:smart_trip_app/Domain/itinerario.dart';
+import 'package:smart_trip_app/Domain/luogo.dart';
 import 'package:smart_trip_app/Domain/mappa.dart';
 import 'package:http/http.dart' as http;
 
@@ -53,3 +54,26 @@ String formatTimeOfDay(TimeOfDay time) {
   return '$hours:$minutes';
 }
 
+Future<List<Luogo>> getListaRistoranti(String indirizzo, double lat, double long) async{
+    String apiUrl='http://$indirizzo/luoghi/$lat/$long/4';
+
+  var url = Uri.parse(apiUrl);
+
+   final http.Response response = await http.post(
+    url,
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    }
+  );
+
+  if (response.statusCode >= 200 && response.statusCode<300) {
+    //VA SISTEMATO, RISPOSTA JSON INCLUDE ANCHE DISTANZA (NON SO IN QUALE UNITA' DI MISURA)
+    final responseBody = jsonDecode(response.body);
+    var locations= List<Luogo>.from(responseBody.map((item) => Luogo.fromJSON(item)));
+
+    return locations;
+    
+  } else {
+    throw Exception('Error during location DB access');
+  }
+}

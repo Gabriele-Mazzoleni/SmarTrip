@@ -4,6 +4,7 @@ import 'package:smart_trip_app/Domain/luogo_esteso.dart';
 import 'package:smart_trip_app/Domain/mappa.dart';
 import 'package:smart_trip_app/Domain/user.dart';
 import 'package:smart_trip_app/Presentation/Controllers/trip_page_controller.dart';
+import 'package:smart_trip_app/Presentation/Pages/luogo_esteso_widget.dart';
 import 'package:smart_trip_app/Presentation/Pages/map_selection_page.dart';
 import 'package:smart_trip_app/Presentation/Pages/requirements_page.dart';
 import 'package:smart_trip_app/Presentation/Styles/app_colors.dart';
@@ -136,7 +137,8 @@ class _TripPageState extends State<TripPage>{
                             itemCount: luoghi.length,
                             itemBuilder: (context,index){
                               LuogoEsteso luogoEst= luoghi[index];
-                              return Card(
+                              return LuogoEstesoWidget(ip: widget.ip, luogoEst:luogoEst);
+                              /*Card(
                                 margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                                 child: ListTile(
                                   title: Text(luogoEst.luogo.nome, style:FontStyles.cardTitle),
@@ -151,7 +153,7 @@ class _TripPageState extends State<TripPage>{
                                     ],),
                                   )
                                 ),
-                              );
+                              );*/
                             }
                           )
                       )

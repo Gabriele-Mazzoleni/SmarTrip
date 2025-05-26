@@ -227,15 +227,6 @@ Future<void> login() async {
                   const SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: () {
-                      // TEMPORANEO, SOLO PER DEBUGGING!!!
-                      /*
-                      var user= User(
-                        username: 'Debugger',
-                        password: 'PW',
-                      );
-                      navigateToMapSelectionPage(user,widget.ip);
-                      */
-
                       login();
                     },
                     style: ElevatedButton.styleFrom(
