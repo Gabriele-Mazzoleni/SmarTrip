@@ -5,12 +5,10 @@
 
 **SmarTrip** è una soluzione software pensata per ottimizzare l'organizzazione di un viaggio: partendo dalle città e dai luoghi scelti dall'utente, l'app propone il miglior itinerario possibile.
 
----
 
 ## 🎯 Obiettivo 
 Offrire uno strumento innovativo, intuitivo e ottimizzato per pianificare i propri viaggi risparmiando tempo e migliorando l’esperienza utente grazie ad algoritmi di ottimizzazione e tecnologie moderne.
 
----
 
 ## 📁 Struttura 
 
@@ -19,7 +17,6 @@ Il repository è suddiviso in due macro-cartelle:
 - [`code`](code): contiene il codice Java per il server e il codice Flutter per l’app mobile.
 - [`doc`](doc): include tutta la documentazione, suddivisa per iterazioni.
 
----
 
 ## ⚙️ Compatibilità
 
@@ -32,7 +29,6 @@ Il repository è suddiviso in due macro-cartelle:
 - Sviluppata e testata su **Android**.
 - ❌ *Non testata su iOS*.
 
----
 
 ## 📦 Installazione e avvio
 
@@ -51,7 +47,6 @@ Scaricare il file `.zip` dal repository GitHub cliccando su **Code** → **Downl
 🚧 *Sezione in aggiornamento*  
 Questa sezione sarà completata una volta disponibile l'.apk per l’installazione diretta dell’app Android.
 
----
 
 ## 👨‍💻 Team di Sviluppo
 
