@@ -54,7 +54,7 @@ String formatTimeOfDay(TimeOfDay time) {
   return '$hours:$minutes';
 }
 
-Future<List<Luogo>> getListaRistoranti(String indirizzo, double lat, double long) async{
+Future<Map<Luogo,double>> getListaRistoranti(String indirizzo, double lat, double long) async{
     String apiUrl='http://$indirizzo/luoghi/$lat/$long/4';
 
   var url = Uri.parse(apiUrl);
@@ -67,11 +67,15 @@ Future<List<Luogo>> getListaRistoranti(String indirizzo, double lat, double long
   );
 
   if (response.statusCode >= 200 && response.statusCode<300) {
-    //VA SISTEMATO, RISPOSTA JSON INCLUDE ANCHE DISTANZA (NON SO IN QUALE UNITA' DI MISURA)
     final responseBody = jsonDecode(response.body);
-    var locations= List<Luogo>.from(responseBody.map((item) => Luogo.fromJSON(item)));
+    Map<Luogo, double> mappaRistoranti = {};
+        for (var item in responseBody) {
+      Luogo luogo = Luogo.fromJSON(item['luogo']);
+      double distanza = item['distanza'].toDouble();
+      mappaRistoranti[luogo] = distanza;
+    }
 
-    return locations;
+    return mappaRistoranti;
     
   } else {
     throw Exception('Error during location DB access');

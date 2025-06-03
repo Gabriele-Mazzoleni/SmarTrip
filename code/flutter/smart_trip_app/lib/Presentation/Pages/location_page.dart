@@ -191,6 +191,9 @@ class _LocationPageState extends State<LocationPage>{
                             child: Image.network(
                               luogo.immagine,
                               fit: BoxFit.fill,
+                              errorBuilder: (context, error, stackTrace) {
+                                return const Icon(Icons.broken_image, size: 80);
+                              },
                             ),
                           ),
                         ],

@@ -128,7 +128,7 @@ class _TripPageState extends State<TripPage>{
                           ),
                           padding: const EdgeInsets.all(Sizes.smallPaddingSpace),
                           child: Text(
-                            "Giorno $giorno/${itinerario.giorniViaggio.keys.length}",
+                            "Giorno $giorno|${itinerario.giorniViaggio.keys.length}",
                             style: FontStyles.headerTitle,
                           ),
                         ),
@@ -138,22 +138,6 @@ class _TripPageState extends State<TripPage>{
                             itemBuilder: (context,index){
                               LuogoEsteso luogoEst= luoghi[index];
                               return LuogoEstesoWidget(ip: widget.ip, luogoEst:luogoEst);
-                              /*Card(
-                                margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                                child: ListTile(
-                                  title: Text(luogoEst.luogo.nome, style:FontStyles.cardTitle),
-                                  subtitle: Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text(luogoEst.luogo.indirizzo, style:FontStyles.cardText),
-                                        Text('Orario di arrivo prevista: ${formatTimeOfDay(luogoEst.oraArrivo)}', style:FontStyles.cardText),
-                                        Text('Durata media visita: ${luogoEst.luogo.tempoVisita/60} minuti', style:FontStyles.cardText),
-                                    ],),
-                                  )
-                                ),
-                              );*/
                             }
                           )
                       )
