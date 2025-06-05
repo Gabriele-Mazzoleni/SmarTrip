@@ -54,7 +54,7 @@ public class App implements CommandLineRunner {
 
                 // Aggiunto supporto a interfacce Windows come "Wi-Fi" e "Ethernet"
                 if (!(name.startsWith("wlan") || name.startsWith("wl") || 
-                      displayName.contains("wi-fi") || displayName.contains("ethernet"))) {
+                      displayName.contains("wi-fi"))){
                     continue;
                 }
 
