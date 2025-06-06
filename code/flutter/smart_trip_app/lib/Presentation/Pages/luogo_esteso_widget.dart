@@ -6,6 +6,7 @@ import 'package:smart_trip_app/Presentation/Controllers/trip_page_controller.dar
 import 'package:smart_trip_app/Presentation/Styles/app_colors.dart';
 import 'package:smart_trip_app/Presentation/Styles/font_styles.dart';
 import 'package:smart_trip_app/Presentation/Styles/sizes.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class LuogoEstesoWidget extends StatefulWidget {
   final LuogoEsteso luogoEst;
@@ -146,14 +147,13 @@ Future<void> _showRestaurantSelectionModal(BuildContext context, double lat, dou
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             if (luogo.immagine.isNotEmpty)
-                              Image.network(
-                                luogo.immagine,
-                                height: 80,
-                                width: 120,
-                                fit: BoxFit.cover,
-                                errorBuilder: (context, error, stackTrace) {
-                                  return const Icon(Icons.broken_image, size: 80);
-                                },
+                              CachedNetworkImage(
+                                imageUrl: luogo.immagine,
+                                height:80,
+                                width:120,
+                                fit: BoxFit.fill,
+                                placeholder: (context, url) => CircularProgressIndicator(),
+                                errorWidget: (context, url, error) => Icon(Icons.broken_image, size: 80),
                               ),
                             const SizedBox(height: 8),
                             Text(luogo.nome, style: FontStyles.cardTitle),

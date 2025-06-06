@@ -1,0 +1,58 @@
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v2.7.5)
+
+2025-06-06 13:27:41.894  INFO 30564 --- [           main] server.App                               : Starting App using Java 17.0.15 on PcGab with PID 30564 (C:\Dati\Unibg_anno_4\Progetto_PAC\SmarTrip\code\java\controller\target\controller-0.0.1-SNAPSHOT.jar started by lelem in C:\Dati\Unibg_anno_4\Progetto_PAC\SmarTrip\code\java\controller)
+2025-06-06 13:27:41.900  INFO 30564 --- [           main] server.App                               : No active profile set, falling back to 1 default profile: "default"
+2025-06-06 13:27:42.952  INFO 30564 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2025-06-06 13:27:42.964  INFO 30564 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-06-06 13:27:42.965  INFO 30564 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.68]
+2025-06-06 13:27:43.055  INFO 30564 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-06-06 13:27:43.057  INFO 30564 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1096 ms
+2025-06-06 13:27:43.418  INFO 30564 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
+2025-06-06 13:27:43.431  INFO 30564 --- [           main] server.App                               : Started App in 1.962 seconds (JVM running for 2.428)
+Server avviato correttamente
+Inserisci su app questo indirizzo: 
+192.168.43.146:8081
+2025-06-06 13:28:05.042  INFO 30564 --- [0.0-8081-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-06-06 13:28:05.045  INFO 30564 --- [0.0-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-06-06 13:28:05.052  INFO 30564 --- [0.0-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2025-06-06 13:28:08.407  INFO 30564 --- [0.0-8081-exec-1] org.jooq.Constants                       : 
+                                      
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@  @@        @@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@        @@@@@@@@@@
+@@@@@@@@@@@@@@@@  @@  @@    @@@@@@@@@@
+@@@@@@@@@@  @@@@  @@  @@    @@@@@@@@@@
+@@@@@@@@@@        @@        @@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@        @@        @@@@@@@@@@
+@@@@@@@@@@    @@  @@  @@@@  @@@@@@@@@@
+@@@@@@@@@@    @@  @@  @@@@  @@@@@@@@@@
+@@@@@@@@@@        @@  @  @  @@@@@@@@@@
+@@@@@@@@@@        @@        @@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@  @@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  Thank you for using jOOQ 3.18.7 (Build date: 2023-10-10T12:53:05Z)
+                                      
+2025-06-06 13:28:08.432  INFO 30564 --- [0.0-8081-exec-1] org.jooq.Constants                       : 
+
+jOOQ tip of the day: Synthetic primary keys / foreign keys are very helpful when working with views: https://www.jooq.org/doc/latest/manual/code-generation/codegen-advanced/codegen-config-database/codegen-database-synthetic-objects/codegen-database-synthetic-fks/
+
+2025-06-06 13:28:08.557  INFO 30564 --- [0.0-8081-exec-1] o.j.i.D.logVersionSupport                : Version                  : Database version is supported by dialect SQLITE: 3.39.4
+Password errata o utente non trovato
+Utente inserito
+Mappa non ottenuta
+Citta' ottenute
+Luoghi ottenuti
+Itinerario inserito
+Itinerario inserito
+Ristoranti ottenuti
+Mappa ottenuta

@@ -7,6 +7,7 @@ import 'package:smart_trip_app/Presentation/Pages/requirements_page.dart';
 import 'package:smart_trip_app/Presentation/Styles/app_colors.dart';
 import 'package:smart_trip_app/Presentation/Styles/font_styles.dart';
 import 'package:smart_trip_app/Presentation/Styles/sizes.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class LocationPage extends StatefulWidget {
   final User user;
@@ -188,12 +189,11 @@ class _LocationPageState extends State<LocationPage>{
                           ),
                           const SizedBox(height: Sizes.smallPaddingSpace),
                           SizedBox(
-                            child: Image.network(
-                              luogo.immagine,
+                            child: CachedNetworkImage(
+                              imageUrl: luogo.immagine,
                               fit: BoxFit.fill,
-                              errorBuilder: (context, error, stackTrace) {
-                                return const Icon(Icons.broken_image, size: 80);
-                              },
+                              placeholder: (context, url) => CircularProgressIndicator(),
+                              errorWidget: (context, url, error) => Icon(Icons.broken_image, size: 80),
                             ),
                           ),
                         ],
