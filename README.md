@@ -44,8 +44,11 @@ Scaricare il file `.zip` dal repository GitHub cliccando su **Code** → **Downl
 
 ### 3. App mobile
 #### Installazione con .apk:
-🚧 *Sezione in aggiornamento*  
-Questa sezione sarà completata una volta disponibile l'.apk per l’installazione diretta dell’app Android.
+NOTA: l'applicazione è disponibile solo per dispositivi Android
+- scaricare il file 'app-release.apk' dalla cartella **code** -> **flutter** sul proprio dispositivo mobile.
+- Aprire il file, utilizzando il programma apposito per l'installazione pacchetti.
+- Acconsentire all'installazione dell'applicazione.
+- Avviare l'applicazione, verificando di essere collegati alla stessa rete wireless del dispositivo su cui è attivo il server.
 
 
 ## 👨‍💻 Team di Sviluppo
